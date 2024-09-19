@@ -12,7 +12,7 @@ public class BackInStockSubscriptionType : ExtendableGraphType<BackInStockSubscr
         Field(x => x.Id);
         Field(x => x.StoreId);
         Field(x => x.UserId);
-        Field(x => x.Triggered);
+        Field(x => x.Triggered, nullable: true);
         Field(x => x.IsActive);
         Field(x => x.ProductId);
     }

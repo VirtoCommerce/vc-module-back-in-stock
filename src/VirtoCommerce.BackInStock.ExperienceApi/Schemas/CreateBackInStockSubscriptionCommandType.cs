@@ -11,6 +11,6 @@ public class CreateBackInStockSubscriptionCommandType : InputObjectGraphType<Cre
         Field(x => x.StoreId);
         Field(x => x.ProductId);
         Field(x => x.IsActive);
-        Field(x => x.Triggered);
+        Field(x => x.Triggered, nullable: true);
     }
 }

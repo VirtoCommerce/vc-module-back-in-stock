@@ -28,6 +28,7 @@
     <ProjectReference Include="..\VirtoCommerce.BackInStock.ExperienceApi\VirtoCommerce.BackInStock.ExperienceApi.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Model\" />
     <Folder Include="Scripts\" />
   </ItemGroup>
 </Project>
