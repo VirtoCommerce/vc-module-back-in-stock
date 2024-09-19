@@ -13,24 +13,15 @@ using VirtoCommerce.Platform.Data.GenericCrud;
 
 namespace VirtoCommerce.BackInStock.Data.Services
 {
-    public class BackInStockSubscriptionService :
-        CrudService<BackInStockSubscription, BackInStockSubscriptionEntity, BackInStockSubscriptionChangingEvent,
-            BackInStockSubscriptionChangedEvent>,
-        IBackInStockSubscriptionService
+    public class BackInStockSubscriptionService(
+        Func<IBackInStockSubscriptionRepository> repositoryFactory,
+        IPlatformMemoryCache platformMemoryCache,
+        IEventPublisher eventPublisher)
+        :
+            CrudService<BackInStockSubscription, BackInStockSubscriptionEntity, BackInStockSubscriptionChangingEvent,
+                BackInStockSubscriptionChangedEvent>(repositoryFactory, platformMemoryCache, eventPublisher),
+            IBackInStockSubscriptionService
     {
-        private readonly Func<IBackInStockSubscriptionRepository> _repositoryFactory;
-        private readonly IEventPublisher _eventPublisher;
-
-        public BackInStockSubscriptionService(
-            Func<IBackInStockSubscriptionRepository> repositoryFactory,
-            IPlatformMemoryCache platformMemoryCache,
-            IEventPublisher eventPublisher)
-            : base(repositoryFactory, platformMemoryCache, eventPublisher)
-        {
-            _repositoryFactory = repositoryFactory;
-            _eventPublisher = eventPublisher;
-        }
-
         protected override Task<IList<BackInStockSubscriptionEntity>> LoadEntities(IRepository repository,
             IList<string> ids,
             string responseGroup)

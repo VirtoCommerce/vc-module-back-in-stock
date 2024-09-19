@@ -37,7 +37,7 @@ public class BackInStockAuthorizationHandler : AuthorizationHandler<BackInStockA
 
             switch (context.Resource)
             {
-                case CreateBackInStockSubscriptionCommand command:
+                case ActivateBackInStockSubscriptionCommand command:
                     var userManager = _userManagerFactory();
                     var currentUser = await userManager.FindByIdAsync(currentUserId);
                     var store = await _storeService.GetNoCloneAsync(command.StoreId);

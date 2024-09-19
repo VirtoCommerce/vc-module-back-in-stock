@@ -1,7 +1,5 @@
 ﻿using System;
-using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
-using VirtoCommerce.BackInStock.Data.Repositories;
 
 #nullable disable
 
@@ -51,7 +49,8 @@ namespace VirtoCommerce.BackInStock.Data.MySql.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_BackInStockSubscriptions_StoreId_UserId_ProductId",
                 table: "BackInStockSubscriptions",
-                columns: new[] { "StoreId", "UserId", "ProductId" });
+                columns: new[] { "StoreId", "UserId", "ProductId" },
+                unique: true);
         }
 
         /// <inheritdoc />

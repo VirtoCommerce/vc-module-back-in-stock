@@ -68,7 +68,8 @@ namespace VirtoCommerce.BackInStock.Data.SqlServer.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.HasIndex("StoreId", "UserId", "ProductId");
+                    b.HasIndex("StoreId", "UserId", "ProductId")
+                        .IsUnique();
 
                     b.ToTable("BackInStockSubscriptions", (string)null);
                 });

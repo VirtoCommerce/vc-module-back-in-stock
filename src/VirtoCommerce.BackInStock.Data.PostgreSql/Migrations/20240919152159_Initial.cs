@@ -39,7 +39,8 @@ namespace VirtoCommerce.BackInStock.Data.PostgreSql.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_BackInStockSubscriptions_StoreId_UserId_ProductId",
                 table: "BackInStockSubscriptions",
-                columns: new[] { "StoreId", "UserId", "ProductId" });
+                columns: new[] { "StoreId", "UserId", "ProductId" },
+                unique: true);
         }
 
         /// <inheritdoc />

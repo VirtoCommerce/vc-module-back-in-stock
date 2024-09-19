@@ -4,7 +4,7 @@ using VirtoCommerce.Xapi.Core.Infrastructure;
 
 namespace VirtoCommerce.BackInStock.ExperienceApi.Commands;
 
-public class CreateBackInStockSubscriptionCommand : ICommand<BackInStockSubscription>
+public class DeactivateBackInStockSubscriptionCommand : ICommand<BackInStockSubscription>
 {
     /// <summary>
     /// User id
@@ -20,14 +20,4 @@ public class CreateBackInStockSubscriptionCommand : ICommand<BackInStockSubscrip
     /// Store id
     /// </summary>
     public string StoreId { get; set; }
-
-    /// <summary>
-    /// Last triggered time
-    /// </summary>
-    public DateTime? Triggered { get; set; }
-
-    /// <summary>
-    /// Is subscription active
-    /// </summary>
-    public bool IsActive { get; set; }
 }

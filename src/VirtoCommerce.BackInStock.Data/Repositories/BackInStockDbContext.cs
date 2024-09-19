@@ -27,7 +27,7 @@ namespace VirtoCommerce.BackInStock.Data.Repositories
                 .ValueGeneratedOnAdd();
             modelBuilder.Entity<BackInStockSubscriptionEntity>()
                 .HasIndex(x => new { x.StoreId, x.UserId, x.ProductId })
-                .IsUnique(false);
+                .IsUnique();
             modelBuilder.Entity<BackInStockSubscriptionEntity>()
                 .HasIndex(x => new { x.ProductId })
                 .IsUnique(false);
