@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<module xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <id>VirtoCommerce.BackInStock</id>
+  <version>3.805.0</version>
+  <version-tag />
+  <platformVersion>3.841.0</platformVersion>
+  <dependencies>
+    <dependency id="VirtoCommerce.Xapi" version="3.800.0" />
+    <dependency id="VirtoCommerce.XCatalog" version="3.800.0" />
+    <dependency id="VirtoCommerce.ProfileExperienceApiModule" version="3.809.0" />
+    <dependency id="VirtoCommerce.Catalog" version="3.800.0" />
+    <dependency id="VirtoCommerce.Customer" version="3.811.0" />
+    <dependency id="VirtoCommerce.Notifications" version="3.800.0" />
+    <dependency id="VirtoCommerce.Orders" version="3.800.0" />
+    <dependency id="VirtoCommerce.Store" version="3.800.0" />
+  </dependencies>
+  <title>Rating and Reviews</title>
+  <description>Rating and Reviews</description>
+  <authors>
+    <author>Egidijus Mazeika</author>
+    <author>Andrew Nikutin</author>
+    <author>Evgeny Gusev</author>
+    <author>Aleksandr Vishniakov</author>
+  </authors>
+  <owners>
+    <owner>Virto Commerce</owner>
+  </owners>
+  <iconUrl>Modules/$(VirtoCommerce.BackInStock)/Content/logo.png</iconUrl>
+  <requireLicenseAcceptance>false</requireLicenseAcceptance>
+  <copyright>Copyright © 2011-2024 Virto Commerce. All rights reserved</copyright>
+  <tags>customer review</tags>
+  <assemblyFile>VirtoCommerce.BackInStock.Web.dll</assemblyFile>
+  <moduleType>VirtoCommerce.BackInStock.Web.Module, VirtoCommerce.BackInStock.Web</moduleType>
+  <useFullTypeNameInSwagger>false</useFullTypeNameInSwagger>
+</module>
