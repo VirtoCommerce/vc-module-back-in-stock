@@ -1,11 +1,8 @@
 using GraphQL.Server;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
-using VirtoCommerce.ProfileExperienceApiModule.Data.Aggregates.Vendor;
 using VirtoCommerce.Xapi.Core.Extensions;
 using VirtoCommerce.Xapi.Core.Infrastructure;
-using VirtoCommerce.Xapi.Core.Pipelines;
-using VirtoCommerce.XCatalog.Core.Models;
 
 namespace VirtoCommerce.BackInStock.ExperienceApi.Extensions;
 

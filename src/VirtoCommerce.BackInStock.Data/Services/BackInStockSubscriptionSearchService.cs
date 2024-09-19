@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
 using VirtoCommerce.BackInStock.Core.Models;
 using VirtoCommerce.BackInStock.Core.Services;
@@ -14,21 +13,17 @@ using VirtoCommerce.Platform.Data.GenericCrud;
 
 namespace VirtoCommerce.BackInStock.Data.Services;
 
-public class BackInStockSubscriptionSearchService :
-    SearchService<BackInStockSubscriptionSearchCriteria, BackInStockSubscriptionSearchResult, BackInStockSubscription,
-        BackInStockSubscriptionEntity>,
-    IBackInStockSubscriptionSearchService
+public class BackInStockSubscriptionSearchService(
+    Func<IBackInStockSubscriptionRepository> repositoryFactory,
+    IPlatformMemoryCache platformMemoryCache,
+    IBackInStockSubscriptionService crudService,
+    IOptions<CrudOptions> crudOptions)
+    :
+        SearchService<BackInStockSubscriptionSearchCriteria, BackInStockSubscriptionSearchResult,
+            BackInStockSubscription,
+            BackInStockSubscriptionEntity>(repositoryFactory, platformMemoryCache, crudService, crudOptions),
+        IBackInStockSubscriptionSearchService
 {
-    public BackInStockSubscriptionSearchService(
-        Func<BackInStockSubscriptionRepository> repositoryFactory,
-        IPlatformMemoryCache platformMemoryCache,
-        IBackInStockSubscriptionService crudService,
-        IOptions<CrudOptions> crudOptions)
-        : base(repositoryFactory, platformMemoryCache, crudService, crudOptions)
-
-    {
-    }
-
     protected override IQueryable<BackInStockSubscriptionEntity> BuildQuery(IRepository repository,
         BackInStockSubscriptionSearchCriteria criteria)
     {

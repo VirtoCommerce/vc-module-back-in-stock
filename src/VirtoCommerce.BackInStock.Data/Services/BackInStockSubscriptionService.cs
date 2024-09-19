@@ -6,7 +6,6 @@ using VirtoCommerce.BackInStock.Core.Models;
 using VirtoCommerce.BackInStock.Core.Services;
 using VirtoCommerce.BackInStock.Data.Models;
 using VirtoCommerce.BackInStock.Data.Repositories;
-using VirtoCommerce.Platform.Caching;
 using VirtoCommerce.Platform.Core.Caching;
 using VirtoCommerce.Platform.Core.Common;
 using VirtoCommerce.Platform.Core.Events;

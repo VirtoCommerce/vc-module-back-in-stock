@@ -60,6 +60,8 @@ namespace VirtoCommerce.BackInStock.Web
                 () => provider.CreateScope().ServiceProvider.GetRequiredService<IBackInStockSubscriptionRepository>());
 
             serviceCollection.AddTransient<IBackInStockSubscriptionService, BackInStockSubscriptionService>();
+            serviceCollection
+                .AddTransient<IBackInStockSubscriptionSearchService, BackInStockSubscriptionSearchService>();
             serviceCollection.AddTransient<InventoryChangedEventHandler>();
 
             // GraphQL

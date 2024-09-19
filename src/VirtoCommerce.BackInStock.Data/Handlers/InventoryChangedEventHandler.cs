@@ -12,7 +12,6 @@ using VirtoCommerce.CustomerModule.Core.Services;
 using VirtoCommerce.InventoryModule.Core.Events;
 using VirtoCommerce.NotificationsModule.Core.Extensions;
 using VirtoCommerce.NotificationsModule.Core.Services;
-using VirtoCommerce.OrdersModule.Core.Model;
 using VirtoCommerce.Platform.Core.Common;
 using VirtoCommerce.Platform.Core.Events;
 using VirtoCommerce.Platform.Core.Settings;

@@ -1,8 +1,0 @@
-angular.module('VirtoCommerce.BackInStock')
-.factory('VirtoCommerce.RatingApi', ['$resource', function ($resource) {
-    return $resource('api/rating', {},
-        {
-            calculateStore: { method: 'POST', url: 'api/rating/calculateStore' },
-            get: { method: 'POST', url: 'api/rating/entityRating', isArray: true }
-        });
-}]);
