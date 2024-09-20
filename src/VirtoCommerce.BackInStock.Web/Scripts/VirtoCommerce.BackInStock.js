@@ -28,9 +28,8 @@ angular.module(moduleName, [])
         }
     ])
     .run(['platformWebApp.mainMenuService', 'platformWebApp.widgetService', '$state',
-        'platformWebApp.authService', 'VirtoCommerce.BackInStock.entityTypesResolverService',
-        'virtoCommerce.catalogModule.items',
-        function (mainMenuService, widgetService, $state, authService, entityTypesResolverService, items) {
+        'platformWebApp.authService',
+        function (mainMenuService, widgetService, $state, authService) {
             //Register module in main menu
             var menuItem = {
                 path: 'browse/BackInStock',
