@@ -28,6 +28,39 @@ public class BackInStockSubscriptionSearchService(
         BackInStockSubscriptionSearchCriteria criteria)
     {
         var query = ((BackInStockSubscriptionRepository)repository).BackInStockSubscriptions;
+
+        if (criteria.ProductId != null)
+        {
+            query = query.Where(x => x.ProductId == criteria.ProductId);
+        }
+
+        if (criteria.UserId != null)
+        {
+            query = query.Where(x => x.UserId == criteria.UserId);
+        }
+
+        if (criteria.StoreId != null)
+        {
+            query = query.Where(x => x.StoreId == criteria.StoreId);
+        }
+
+        if (criteria.StartTriggeredDate != null)
+        {
+            query = query.Where(x => x.Triggered >= criteria.StartTriggeredDate);
+        }
+
+        if (criteria.EndTriggeredDate != null)
+        {
+            query = query.Where(x => x.Triggered <= criteria.EndTriggeredDate);
+        }
+
+        if (criteria.Keyword != null)
+        {
+            query = query.Where(x =>
+                x.UserId.Contains(criteria.Keyword) || x.ProductId.Contains(criteria.Keyword) ||
+                x.StoreId.Contains(criteria.Keyword));
+        }
+
         return query;
     }
 
@@ -39,6 +72,11 @@ public class BackInStockSubscriptionSearchService(
         {
             sortInfos =
             [
+                new SortInfo
+                {
+                    SortColumn = nameof(BackInStockSubscriptionEntity.CreatedDate),
+                    SortDirection = SortDirection.Descending
+                },
                 new SortInfo { SortColumn = nameof(BackInStockSubscriptionEntity.Id) },
             ];
         }
