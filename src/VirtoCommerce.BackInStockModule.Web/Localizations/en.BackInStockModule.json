@@ -1,0 +1,28 @@
+{
+  "BackInStockModule": {
+    "blades": {
+      "hello-world": {
+        "title": "Hello world blade"
+      }
+    }
+  },
+  "permissions": {
+    "BackInStockModule:access": "Open BackInStockModule menu",
+    "BackInStockModule:create": "Create BackInStockModule related data",
+    "BackInStockModule:read": "View BackInStockModule related data",
+    "BackInStockModule:update": "Update BackInStockModule related data",
+    "BackInStockModule:delete": "Delete BackInStockModule related data"
+  },
+  "settings": {
+    "BackInStockModule": {
+      "BackInStockModuleEnabled": {
+        "title": "BackInStockModule Enabled",
+        "description": "BackInStockModule Enabled setting"
+      },
+      "BackInStockModulePassword": {
+        "title": "BackInStockModule Password",
+        "description": "BackInStockModule Password setting"
+      }
+    }
+  }
+}
