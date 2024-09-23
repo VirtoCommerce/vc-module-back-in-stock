@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Hangfire;
+using Microsoft.Extensions.Logging;
 using VirtoCommerce.BackInStock.Core.BackgroundJobs;
 using VirtoCommerce.BackInStock.Core.Models;
 using VirtoCommerce.BackInStock.Core.Notifications;
@@ -27,61 +28,126 @@ public class BackInStockNotificationJobService(
     IMemberResolver memberResolver,
     IProductSearchService productSearchService,
     IStoreService storeService,
-    IBackInStockSubscriptionSearchService backInStockSubscriptionSearchService)
+    IBackInStockSubscriptionSearchService backInStockSubscriptionSearchService,
+    ILogger<BackInStockNotificationJobService> logger)
     : IBackInStockNotificationJobService
 {
     public void EnqueueProductBackInStockNotifications(IList<string> inStockProductsIds)
     {
-        BackgroundJob.Enqueue<BackInStockNotificationJobService>(x =>
-            x.TrackNewRecipientsRecurringJob(inStockProductsIds, JobCancellationToken.Null));
+        try
+        {
+            BackgroundJob.Enqueue(() =>
+                EnqueueBatchOfEmailNotificationsForProductIds(inStockProductsIds));
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Cannot enqueue back in stock notifications background job");
+            throw;
+        }
     }
 
-    [DisableConcurrentExecution(10)]
-    private async Task TrackNewRecipientsRecurringJob(IList<string> inStockProductsIds,
-        IJobCancellationToken cancellationToken)
+    private async Task EnqueueBatchOfEmailNotificationsForProductIds(IList<string> inStockProductsIds)
     {
         foreach (var productId in inStockProductsIds)
         {
-            var backInStockSubscriptionSearchResult =
-                await backInStockSubscriptionSearchService.SearchAsync(
-                    new BackInStockSubscriptionSearchCriteria()
-                    {
-                        ProductId = productId, IsActive = true, Skip = 0, Take = await GetBatchSize(),
-                    });
-
-            foreach (var subscription in backInStockSubscriptionSearchResult.Results)
+            try
             {
-                BackgroundJob.Enqueue<BackInStockNotificationJobService>(x =>
-                    x.SendBackInStockEmailNotificationAsync(subscription));
+                var subscriptions = await FetchAllBackInStockSubscriptionsForProduct(productId);
+                foreach (var subscription in subscriptions)
+                {
+                    BackgroundJob.Enqueue(() =>
+                        SendBackInStockEmailNotificationAsync(subscription));
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, $"Failed to enqueue batch of notification jobs for product id: {productId}");
+                throw;
             }
         }
     }
 
+    private async Task<IList<BackInStockSubscription>> FetchAllBackInStockSubscriptionsForProduct(string productId)
+    {
+        var allSubscriptions = new List<BackInStockSubscription>();
+        int totalCount, skip = 0;
+        do
+        {
+            var batchSize = await GetBatchSize();
+            var result = await backInStockSubscriptionSearchService.SearchAsync(
+                new BackInStockSubscriptionSearchCriteria
+                {
+                    ProductId = productId, IsActive = true, Skip = skip, Take = batchSize
+                });
+
+            allSubscriptions.AddRange(result.Results);
+            totalCount = result.TotalCount;
+            skip += batchSize;
+        }
+        while (allSubscriptions.Count < totalCount);
+
+        return allSubscriptions;
+    }
+
     private async Task SendBackInStockEmailNotificationAsync(BackInStockSubscription subscription)
+    {
+        try
+        {
+            var notification = await PrepareNotification(subscription);
+            if (notification != null)
+            {
+                await notificationSender.ScheduleSendNotificationAsync(notification);
+            }
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, $"Failed to send {nameof(BackInStockEmailNotification)} notification");
+            throw;
+        }
+    }
+
+    private async Task<BackInStockEmailNotification> PrepareNotification(BackInStockSubscription subscription)
     {
         var notification = await notificationSearchService.GetNotificationAsync(
                 nameof(BackInStockEmailNotification),
                 new TenantIdentity(subscription.StoreId, nameof(Store)))
             as BackInStockEmailNotification;
 
-        if (notification != null)
+        if (notification == null)
         {
-            var customer = await memberResolver.ResolveMemberByIdAsync(subscription.UserId);
-            var store = (await storeService.GetAsync(new List<string>() { subscription.StoreId }))
-                .FirstOrDefault();
-            var product = await productSearchService.SearchAsync(new ProductSearchCriteria()
-            {
-                ObjectIds = new List<string>() { subscription.ProductId }
-            });
-            //notification.Item =
-            notification.Customer = customer;
-            //notification.RequestId = parameters.RequestId;
-            //notification.LanguageCode = product.Results.FirstOrDefault().
-            notification.From = store.EmailWithName;
-            notification.To = customer.Emails.FirstOrDefault();
-
-            await notificationSender.ScheduleSendNotificationAsync(notification);
+            return null;
         }
+
+        var customer = await memberResolver.ResolveMemberByIdAsync(subscription.UserId);
+        if (customer == null || !customer.Emails.Any())
+        {
+            return null;
+        }
+
+        var store = (await storeService.GetAsync(new List<string> { subscription.StoreId }))
+            .FirstOrDefault();
+        if (store == null)
+        {
+            return null;
+        }
+
+        var product = (await productSearchService.SearchAsync(new ProductSearchCriteria
+        {
+            ObjectIds = new List<string> { subscription.ProductId }, Take = 1
+        })).Results.FirstOrDefault();
+
+        if (product == null)
+        {
+            return null;
+        }
+
+        notification.Item = product;
+        notification.Customer = customer;
+        notification.From = store.EmailWithName;
+        notification.To = customer.Emails.First();
+        notification.Type = nameof(BackInStockEmailNotification);
+
+        return notification;
     }
 
     private Task<int> GetBatchSize()

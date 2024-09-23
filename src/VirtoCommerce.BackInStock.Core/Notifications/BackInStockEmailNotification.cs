@@ -1,6 +1,6 @@
+using VirtoCommerce.CatalogModule.Core.Model;
 using VirtoCommerce.CustomerModule.Core.Model;
 using VirtoCommerce.NotificationsModule.Core.Model;
-using VirtoCommerce.OrdersModule.Core.Model;
 
 namespace VirtoCommerce.BackInStock.Core.Notifications
 {
@@ -10,8 +10,7 @@ namespace VirtoCommerce.BackInStock.Core.Notifications
         {
         }
 
-        public string RequestId { get; set; }
         public virtual Member Customer { get; set; }
-        public virtual LineItem Item { get; set; }
+        public virtual CatalogProduct Item { get; set; }
     }
 }
