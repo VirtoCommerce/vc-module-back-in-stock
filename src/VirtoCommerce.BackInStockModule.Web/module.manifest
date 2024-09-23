@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<module xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <id>VirtoCommerce.BackInStock</id>
-  <version>3.814.0</version>
-  <version-tag/>
-  <platformVersion>3.841.0</platformVersion>
+<module>
+  <id>VirtoCommerce.BackInStockModule</id>
+  <version>3.800.0</version>
+  <version-tag></version-tag>
+
+  <platformVersion>3.832.3</platformVersion>
   <dependencies>
     <dependency id="VirtoCommerce.Xapi" version="3.804.0"/>
     <dependency id="VirtoCommerce.XCatalog" version="3.807.0"/>
@@ -13,19 +14,26 @@
     <dependency id="VirtoCommerce.Notifications" version="3.808.0"/>
     <dependency id="VirtoCommerce.Inventory" version="3.800.0"/>
   </dependencies>
-  <title>Back In Stock</title>
-  <description>Back In Stock</description>
+
+  <title>VirtoCommerce BackInStockModule module</title>
+  <description>VirtoCommerce BackInStockModule module</description>
+
   <authors>
     <author>Mikhail Lyakhov</author>
   </authors>
   <owners>
-    <owner>Virto Commerce</owner>
+    <owner>VirtoCommerce</owner>
   </owners>
-  <iconUrl>Modules/$(VirtoCommerce.BackInStock)/Content/logo.png</iconUrl>
+
+  <projectUrl>https://github.com/VirtoCommerce/vc-module-back-in-stock-module</projectUrl>
+  <iconUrl>Modules/$(VirtoCommerce.BackInStockModule)/Content/logo.png</iconUrl>
   <requireLicenseAcceptance>false</requireLicenseAcceptance>
-  <copyright>Copyright © 2011-2024 Virto Commerce. All rights reserved</copyright>
-  <tags>back in stock</tags>
+
   <assemblyFile>VirtoCommerce.BackInStockModule.Web.dll</assemblyFile>
   <moduleType>VirtoCommerce.BackInStockModule.Web.Module, VirtoCommerce.BackInStockModule.Web</moduleType>
+
+  <releaseNotes>First version.</releaseNotes>
+  <copyright>Copyright © 2024 VirtoCommerce. All rights reserved</copyright>
+  <tags>extension module</tags>
   <useFullTypeNameInSwagger>false</useFullTypeNameInSwagger>
 </module>

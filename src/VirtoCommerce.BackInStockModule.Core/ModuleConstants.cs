@@ -42,7 +42,6 @@ namespace VirtoCommerce.BackInStockModule.Core
                     IsPublic = true,
                 };
 
-                
                 public static SettingDescriptor SubscriptionsJobBatchSize { get; } = new()
                 {
                     Name = "BackInStock.BatchSize",
@@ -51,7 +50,7 @@ namespace VirtoCommerce.BackInStockModule.Core
                     DefaultValue = 1000,
                 };
 
-                public static IEnumerable<SettingDescriptor> AllSettings
+                public static IEnumerable<SettingDescriptor> AllGeneralSettings
                 {
                     get
                     {
@@ -83,7 +82,7 @@ namespace VirtoCommerce.BackInStockModule.Core
             {
                 get
                 {
-                    return General.AllSettings;
+                    return General.AllGeneralSettings;
                 }
             }
         }
