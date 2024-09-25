@@ -30,6 +30,7 @@ public class ActivateBackInStockSubscriptionHandler(
         }
 
         var backInStockSubscription = mapper.Map<BackInStockSubscription>(request);
+        backInStockSubscription.IsActive = true;
         await backInStockSubscriptionService.SaveChangesAsync(new[] { backInStockSubscription });
         return backInStockSubscription;
     }

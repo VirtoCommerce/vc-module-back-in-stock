@@ -1,8 +1,12 @@
 {
-  "BackInStockModule": {
+  "VirtoCommerce.BackInStockModule": {
     "blades": {
-      "hello-world": {
-        "title": "Hello world blade"
+      "subscriptions": {
+        "title": "Customer subscriptions",
+        "no-subscriptions": "There are no subscriptions"
+      },
+      "product-detail": {
+        "description": "Product detail"
       }
     }
   },
@@ -14,7 +18,7 @@
     "BackInStockModule:delete": "Delete BackInStockModule related data"
   },
   "settings": {
-    "BackInStockModule": {
+    "VirtoCommerce.BackInStockModule": {
       "BackInStockModuleEnabled": {
         "title": "BackInStockModule Enabled",
         "description": "BackInStockModule Enabled setting"

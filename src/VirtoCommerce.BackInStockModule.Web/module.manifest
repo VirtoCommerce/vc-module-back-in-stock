@@ -15,8 +15,8 @@
     <dependency id="VirtoCommerce.Inventory" version="3.804.0"/>
   </dependencies>
 
-  <title>VirtoCommerce BackInStock Module</title>
-  <description>VirtoCommerce BackInStock Module</description>
+  <title>Back In Stock</title>
+  <description>Provides customer availability to subscripe for notification, when product will be back in stock.</description>
 
   <authors>
     <author>Mikhail Lyakhov</author>

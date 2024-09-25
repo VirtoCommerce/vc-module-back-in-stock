@@ -10,7 +10,7 @@ using VirtoCommerce.StoreModule.Core.Services;
 
 namespace VirtoCommerce.BackInStockModule.Web.Controllers.Api
 {
-    [Route("api/backInStock")]
+    [Route("api/back-in-stock-module/subscription")]
     [ApiController]
     public class BackInStockSubscriptionsController : Controller
     {
@@ -43,9 +43,9 @@ namespace VirtoCommerce.BackInStockModule.Web.Controllers.Api
         }
 
         /// <summary>
-        ///  Create new or update existing customer review
+        ///  Create new or update existing back in stock subscription
         /// </summary>
-        /// <param name="backInStock">Customer reviews</param>
+        /// <param name="backInStock">back in stock subscription</param>
         /// <returns></returns>
         [HttpPost]
         [Route("")]
@@ -58,7 +58,7 @@ namespace VirtoCommerce.BackInStockModule.Web.Controllers.Api
         }
 
         /// <summary>
-        /// Delete Customer Reviews by IDs
+        /// Delete back in stock subscription by IDs
         /// </summary>
         /// <param name="ids">IDs</param>
         /// <returns></returns>
