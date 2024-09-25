@@ -13,10 +13,10 @@ namespace VirtoCommerce.BackInStockModule.Core
                 public const string BackInStockSubscriptionUpdate = "backInStock:subscriptionUpdate";
                 public const string BackInStockSubscriptionDelete = "backInStock:subscriptionDelete";
 
-                public static string[] AllPermissions =
-                {
+                public static readonly string[] AllPermissions =
+                [
                     BackInStockSubscriptionRead, BackInStockSubscriptionUpdate, BackInStockSubscriptionDelete
-                };
+                ];
             }
         }
 

@@ -6,6 +6,7 @@ namespace VirtoCommerce.BackInStockModule.Core.Models
     public class BackInStockSubscriptionSearchCriteria : SearchCriteriaBase
     {
         public string UserId { get; set; }
+
         public string StoreId { get; set; }
 
         public string ProductId { get; set; }

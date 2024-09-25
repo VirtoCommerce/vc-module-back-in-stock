@@ -11,6 +11,7 @@ namespace VirtoCommerce.BackInStockModule.Core.Notifications
         }
 
         public virtual Member Customer { get; set; }
+
         public virtual CatalogProduct Item { get; set; }
     }
 }

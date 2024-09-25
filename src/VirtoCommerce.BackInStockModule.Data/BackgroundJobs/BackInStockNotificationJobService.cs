@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Hangfire;
 using Microsoft.Extensions.Logging;
-using VirtoCommerce.BackInStockModule.Core;
 using VirtoCommerce.BackInStockModule.Core.BackgroundJobs;
 using VirtoCommerce.BackInStockModule.Core.Models;
 using VirtoCommerce.BackInStockModule.Core.Notifications;
@@ -75,6 +74,7 @@ public class BackInStockNotificationJobService(
         do
         {
             var batchSize = await GetBatchSize();
+
             var result = await backInStockSubscriptionSearchService.SearchAsync(
                 new BackInStockSubscriptionSearchCriteria
                 {
@@ -153,6 +153,6 @@ public class BackInStockNotificationJobService(
 
     private Task<int> GetBatchSize()
     {
-        return settingsManager.GetValueAsync<int>(ModuleConstants.Settings.General.SubscriptionsJobBatchSize);
+        return settingsManager.GetValueAsync<int>(BackInStockSettings.SubscriptionsJobBatchSize);
     }
 }

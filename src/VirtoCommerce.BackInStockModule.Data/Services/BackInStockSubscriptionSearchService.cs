@@ -18,8 +18,7 @@ public class BackInStockSubscriptionSearchService(
     IPlatformMemoryCache platformMemoryCache,
     IBackInStockSubscriptionService crudService,
     IOptions<CrudOptions> crudOptions)
-    :
-        SearchService<BackInStockSubscriptionSearchCriteria, BackInStockSubscriptionSearchResult,
+    : SearchService<BackInStockSubscriptionSearchCriteria, BackInStockSubscriptionSearchResult,
             BackInStockSubscription,
             BackInStockSubscriptionEntity>(repositoryFactory, platformMemoryCache, crudService, crudOptions),
         IBackInStockSubscriptionSearchService
