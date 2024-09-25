@@ -1,16 +1,14 @@
-using System;
-using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using VirtoCommerce.BackInStockModule.Data.Repositories;
 
 namespace VirtoCommerce.BackInStockModule.Data.MySql
 {
-    public class MySqlDbContextFactory : IDesignTimeDbContextFactory<BackInStockDbContext>
+    public class MySqlDbContextFactory : IDesignTimeDbContextFactory<BackInStockModuleDbContext>
     {
-        public BackInStockDbContext CreateDbContext(string[] args)
+        public BackInStockModuleDbContext CreateDbContext(string[] args)
         {
-            var builder = new DbContextOptionsBuilder<BackInStockDbContext>();
+            var builder = new DbContextOptionsBuilder<BackInStockModuleDbContext>();
             var connectionString = args.Any() ? args[0] : "server=localhost;user=root;password=virto;database=VirtoCommerce3;";
             var serverVersion = args.Length >= 2 ? args[1] : null;
 
@@ -20,7 +18,7 @@ namespace VirtoCommerce.BackInStockModule.Data.MySql
                 db => db
                     .MigrationsAssembly(typeof(MySqlDbContextFactory).Assembly.GetName().Name));
 
-            return new BackInStockDbContext(builder.Options);
+            return new BackInStockModuleDbContext(builder.Options);
         }
 
         private static ServerVersion ResolveServerVersion(string? serverVersion, string connectionString)

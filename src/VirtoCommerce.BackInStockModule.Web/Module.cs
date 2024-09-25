@@ -7,8 +7,10 @@ using VirtoCommerce.Platform.Core.Modularity;
 using VirtoCommerce.Platform.Core.Security;
 using VirtoCommerce.Platform.Core.Settings;
 using VirtoCommerce.BackInStockModule.Core;
+using VirtoCommerce.BackInStockModule.Core.BackgroundJobs;
 using VirtoCommerce.BackInStockModule.Core.Notifications;
 using VirtoCommerce.BackInStockModule.Core.Services;
+using VirtoCommerce.BackInStockModule.Data.BackgroundJobs;
 using VirtoCommerce.BackInStockModule.Data.Handlers;
 using VirtoCommerce.BackInStockModule.Data.MySql;
 using VirtoCommerce.BackInStockModule.Data.PostgreSql;
@@ -29,7 +31,7 @@ public class Module : IModule, IHasConfiguration
 
     public void Initialize(IServiceCollection serviceCollection)
     {
-        serviceCollection.AddDbContext<BackInStockDbContext>(options =>
+        serviceCollection.AddDbContext<BackInStockModuleDbContext>(options =>
         {
             var databaseProvider = Configuration.GetValue("DatabaseProvider", "SqlServer");
             var connectionString = Configuration.GetConnectionString(ModuleInfo.Id) ??
@@ -52,13 +54,11 @@ public class Module : IModule, IHasConfiguration
         serviceCollection.AddTransient<IBackInStockSubscriptionRepository, BackInStockSubscriptionRepository>();
         serviceCollection.AddSingleton<Func<IBackInStockSubscriptionRepository>>(provider =>
             () => provider.CreateScope().ServiceProvider.GetRequiredService<IBackInStockSubscriptionRepository>());
-
         serviceCollection.AddTransient<IBackInStockSubscriptionService, BackInStockSubscriptionService>();
         serviceCollection
             .AddTransient<IBackInStockSubscriptionSearchService, BackInStockSubscriptionSearchService>();
-        serviceCollection.AddTransient<InventoryChangedEventHandler>();
-
-        // GraphQL
+        serviceCollection.AddSingleton<InventoryChangedEventHandler>();
+        serviceCollection.AddSingleton<IBackInStockNotificationJobService, BackInStockNotificationJobService>();
         serviceCollection.AddExperienceApi();
     }
 

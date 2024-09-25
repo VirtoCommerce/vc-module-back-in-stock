@@ -10,7 +10,7 @@ using VirtoCommerce.BackInStockModule.Data.Repositories;
 
 namespace VirtoCommerce.BackInStockModule.Data.PostgreSql.Migrations
 {
-    [DbContext(typeof(BackInStockDbContext))]
+    [DbContext(typeof(BackInStockModuleDbContext))]
     partial class BackInStockDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

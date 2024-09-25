@@ -1,5 +1,4 @@
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using VirtoCommerce.BackInStockModule.Core.BackgroundJobs;
 using VirtoCommerce.InventoryModule.Core.Events;

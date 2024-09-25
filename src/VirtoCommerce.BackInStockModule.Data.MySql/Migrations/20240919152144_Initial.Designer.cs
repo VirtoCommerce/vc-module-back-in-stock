@@ -11,7 +11,7 @@ using VirtoCommerce.BackInStockModule.Data.Repositories;
 
 namespace VirtoCommerce.BackInStockModule.Data.MySql.Migrations
 {
-    [DbContext(typeof(BackInStockDbContext))]
+    [DbContext(typeof(BackInStockModuleDbContext))]
     [Migration("20000000000000_UpdateBackInStockV2")]
     partial class Initial
     {
