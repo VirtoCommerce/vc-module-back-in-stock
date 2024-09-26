@@ -1,21 +1,12 @@
 angular.module('VirtoCommerce.BackInStockModule')
     .controller('VirtoCommerce.BackInStockModule.backInStockSubscriptionsWidgetController',
-        ['$scope', 'VirtoCommerce.BackInStockModule.subscriptions.webApi', 'platformWebApp.bladeNavigationService', 'uiGridConstants',
-            'platformWebApp.uiGridHelper', 'platformWebApp.bladeUtils',
-            function ($scope, subscriptionsApi, bladeNavigationService, uiGridConstants, uiGridHelper, bladeUtils) {
+        ['$scope', 'VirtoCommerce.BackInStockModule.subscriptions.webApi', 'platformWebApp.bladeNavigationService',
+            function ($scope, subscriptionsApi, bladeNavigationService) {
                 let blade = $scope.blade;
                 let filter = $scope.filter = blade.filter || {};
                 let customerId = "1eb2fa8ac6574541afdb525833dadb46";//$scope.blade.currentEntityId;
 
                 function init() {
-                    $scope.gridOptions = {};
-                    $scope.uiGridConstants = uiGridConstants;
-                    $scope.setGridOptions = function (gridOptions) {
-                        uiGridHelper.initialize($scope, gridOptions, function (gridApi) {
-                            uiGridHelper.bindRefreshOnSortChanged($scope);
-                        });
-                        bladeUtils.initializePagination($scope);
-                    };
                     $scope.loading = false;
                     $scope.subscriptions = null;
                     $scope.subscriptionsCount = 0;

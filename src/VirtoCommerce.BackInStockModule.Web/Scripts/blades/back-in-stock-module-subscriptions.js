@@ -1,8 +1,8 @@
 angular.module('VirtoCommerce.BackInStockModule')
     .controller('VirtoCommerce.BackInStockModule.backInStockSubscriptionsListController',
         ['$scope', 'VirtoCommerce.BackInStockModule.subscriptions.webApi', 'platformWebApp.bladeUtils', 'uiGridConstants',
-            'platformWebApp.uiGridHelper', 'platformWebApp.authService', 'VirtoCommerce.BackInStockModule.entityTypesResolverService',
-            function ($scope, subscriptionsApi, bladeUtils, uiGridConstants, uiGridHelper, authService, entityTypesResolverService) {
+            'platformWebApp.uiGridHelper', 'platformWebApp.authService', 'virtoCommerce.catalogModule.items',
+            function ($scope, subscriptionsApi, bladeUtils, uiGridConstants, uiGridHelper, authService, catalogItems) {
                 $scope.gridOptions = {};
                 $scope.uiGridConstants = uiGridConstants;
                 $scope.setGridOptions = function (gridOptions) {
@@ -11,7 +11,6 @@ angular.module('VirtoCommerce.BackInStockModule')
                     });
                     bladeUtils.initializePagination($scope);
                 };
-                $scope.entityTypesList = entityTypesResolverService.objects.map(x => x.entityType);
 
 
                 let blade = $scope.blade;
@@ -29,7 +28,7 @@ angular.module('VirtoCommerce.BackInStockModule')
                         }
                     }
                 ];
-                const bladeNavigationService = bladeUtils.bladeNavigationService;
+
                 const filter = $scope.filter = blade.filter || {};
                 filter.criteriaChanged = function () {
                     if ($scope.pageSettings.currentPage > 1) {
@@ -39,7 +38,6 @@ angular.module('VirtoCommerce.BackInStockModule')
                     }
                 };
 
-
                 blade.refresh = function () {
                     blade.isLoading = true;
                     subscriptionsApi.search(angular.extend(filter, {
@@ -48,29 +46,14 @@ angular.module('VirtoCommerce.BackInStockModule')
                         skip: ($scope.pageSettings.currentPage - 1) * $scope.pageSettings.itemsPerPageCount,
                         take: $scope.pageSettings.itemsPerPageCount
                     }), function (data) {
+                        data.results.forEach((item => {
+                            catalogItems.get({id: item.productId, respGroup: 1}, (catalogItem) => {
+                                item.productName = catalogItem.name
+                            });
+                        }));
                         blade.isLoading = false;
                         $scope.pageSettings.totalItems = data.totalCount;
                         blade.currentEntities = data.results;
                     });
-                }
-
-                blade.selectNode = function (data) {
-                    $scope.selectedNodeId = data.id;
-
-                    /*if (!authService.checkPermission('customerReviews:update')) {
-                        return;
-                    }*/
-
-                    const newBlade = {
-                        id: 'backInStockModuleSubscriptions',
-                        currentEntityId: data.id,
-                        currentEntity: angular.copy(data),
-                        title: 'Back in stock subscriptions',
-                        controller: 'VirtoCommerce.BackInStockModule.backInStockSubscriptionsController',
-                        template: 'Modules/$(VirtoCommerce.BackInStockModule)/Scripts/blades/back-in-stock-module-subscriptions.tpl.html',
-                        filter: {entityIds: [customerId], entityType: 'Customer'}
-                    };
-
-                    bladeNavigationService.showBlade(newBlade, blade);
                 }
             }]);
