@@ -2,11 +2,16 @@
   "VirtoCommerce.BackInStockModule": {
     "blades": {
       "subscriptions": {
-        "title": "Customer subscriptions",
+        "title": "Customer back in stock subscriptions",
         "no-subscriptions": "There are no subscriptions"
       },
       "product-detail": {
         "description": "Product detail"
+      }
+    },
+    "widgets" : {
+      "item-detail" : {
+        "title": "Back in stock subscriptions"
       }
     }
   },
