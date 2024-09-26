@@ -4,17 +4,11 @@ using System.Threading.Tasks;
 using VirtoCommerce.BackInStockModule.Data.Models;
 using VirtoCommerce.Platform.Core.Common;
 
-namespace VirtoCommerce.BackInStockModule.Data.Repositories
+namespace VirtoCommerce.BackInStockModule.Data.Repositories;
+
+public interface IBackInStockSubscriptionRepository : IRepository
 {
-    public interface IBackInStockSubscriptionRepository : IRepository
-    {
-        IQueryable<BackInStockSubscriptionEntity> BackInStockSubscriptions { get; }
+    IQueryable<BackInStockSubscriptionEntity> BackInStockSubscriptions { get; }
 
-        Task<IList<BackInStockSubscriptionEntity>> GetByIdsAsync(IList<string> ids);
-
-        Task<IList<BackInStockSubscriptionEntity>> GetActiveSubscriptionsByProductIds(IList<string> productIds,
-            bool tracking = true);
-
-        Task DeleteBackInStockSubscriptionsAsync(IList<string> ids);
-    }
+    Task<IList<BackInStockSubscriptionEntity>> GetByIdsAsync(IList<string> ids);
 }

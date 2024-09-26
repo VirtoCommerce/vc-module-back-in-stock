@@ -2,12 +2,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using VirtoCommerce.BackInStockModule.Data.Repositories;
 
-namespace VirtoCommerce.BackInStockModule.Data.PostgreSql
+namespace VirtoCommerce.BackInStockModule.Data.PostgreSql;
+
+public class PostgreSqlDbContextFactory : IDesignTimeDbContextFactory<BackInStockModuleDbContext>
 {
-    public class PostgreSqlDbContextFactory : IDesignTimeDbContextFactory<BackInStockModuleDbContext>
+    public BackInStockModuleDbContext CreateDbContext(string[] args)
     {
-        public BackInStockModuleDbContext CreateDbContext(string[] args)
-        {
             var builder = new DbContextOptionsBuilder<BackInStockModuleDbContext>();
             var connectionString = args.Any() ? args[0] : "User ID = postgres; Password = password; Host = localhost; Port = 5432; Database = virtocommerce3;";
 
@@ -17,5 +17,4 @@ namespace VirtoCommerce.BackInStockModule.Data.PostgreSql
 
             return new BackInStockModuleDbContext(builder.Options);
         }
-    }
 }

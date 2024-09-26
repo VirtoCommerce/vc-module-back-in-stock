@@ -23,8 +23,7 @@ public class BackInStockSubscriptionSearchService(
             BackInStockSubscriptionEntity>(repositoryFactory, platformMemoryCache, crudService, crudOptions),
         IBackInStockSubscriptionSearchService
 {
-    protected override IQueryable<BackInStockSubscriptionEntity> BuildQuery(IRepository repository,
-        BackInStockSubscriptionSearchCriteria criteria)
+    protected override IQueryable<BackInStockSubscriptionEntity> BuildQuery(IRepository repository, BackInStockSubscriptionSearchCriteria criteria)
     {
         var query = ((BackInStockSubscriptionRepository)repository).BackInStockSubscriptions;
 
@@ -56,8 +55,9 @@ public class BackInStockSubscriptionSearchService(
         if (criteria.Keyword != null)
         {
             query = query.Where(x =>
-                x.UserId.Contains(criteria.Keyword) || x.ProductId.Contains(criteria.Keyword) ||
-                x.StoreId.Contains(criteria.Keyword));
+                x.UserId.Contains(criteria.Keyword)
+                || x.ProductId.Contains(criteria.Keyword)
+                || x.StoreId.Contains(criteria.Keyword));
         }
 
         return query;
@@ -71,11 +71,7 @@ public class BackInStockSubscriptionSearchService(
         {
             sortInfos =
             [
-                new SortInfo
-                {
-                    SortColumn = nameof(BackInStockSubscriptionEntity.CreatedDate),
-                    SortDirection = SortDirection.Descending
-                },
+                new SortInfo { SortColumn = nameof(BackInStockSubscriptionEntity.CreatedDate), SortDirection = SortDirection.Descending },
                 new SortInfo { SortColumn = nameof(BackInStockSubscriptionEntity.Id) },
             ];
         }

@@ -8,8 +8,7 @@ using VirtoCommerce.BackInStockModule.Core.BackgroundJobs;
 using VirtoCommerce.BackInStockModule.Core.Models;
 using VirtoCommerce.BackInStockModule.Core.Notifications;
 using VirtoCommerce.BackInStockModule.Core.Services;
-using VirtoCommerce.CatalogModule.Core.Model.Search;
-using VirtoCommerce.CatalogModule.Core.Search;
+using VirtoCommerce.CatalogModule.Core.Services;
 using VirtoCommerce.CustomerModule.Core.Services;
 using VirtoCommerce.NotificationsModule.Core.Extensions;
 using VirtoCommerce.NotificationsModule.Core.Services;
@@ -26,18 +25,18 @@ public class BackInStockNotificationJobService(
     INotificationSearchService notificationSearchService,
     INotificationSender notificationSender,
     IMemberResolver memberResolver,
-    IProductSearchService productSearchService,
+    IItemService itemService,
     IStoreService storeService,
     IBackInStockSubscriptionSearchService backInStockSubscriptionSearchService,
     ILogger<BackInStockNotificationJobService> logger)
     : IBackInStockNotificationJobService
 {
-    public void EnqueueProductBackInStockNotifications(IList<string> inStockProductsIds)
+    public void EnqueueProductBackInStockNotifications(IList<string> productIds)
     {
         try
         {
             BackgroundJob.Enqueue(() =>
-                EnqueueBatchOfEmailNotificationsForProductIds(inStockProductsIds));
+                EnqueueBatchOfEmailNotificationsForProductIds(productIds));
         }
         catch (Exception ex)
         {
@@ -46,17 +45,28 @@ public class BackInStockNotificationJobService(
         }
     }
 
-    public async Task EnqueueBatchOfEmailNotificationsForProductIds(IList<string> inStockProductsIds)
+    public async Task EnqueueBatchOfEmailNotificationsForProductIds(IEnumerable<string> productIds)
     {
-        foreach (var productId in inStockProductsIds)
+        foreach (var productId in productIds)
         {
             try
             {
-                var subscriptions = await FetchAllBackInStockSubscriptionsForProduct(productId);
-                foreach (var subscription in subscriptions)
+                var searchCriteria = AbstractTypeFactory<BackInStockSubscriptionSearchCriteria>.TryCreateInstance();
+                searchCriteria.ProductId = productId;
+                searchCriteria.IsActive = true;
+                searchCriteria.Sort = $"{nameof(BackInStockSubscription.Triggered)};";
+                searchCriteria.Take = await GetBatchSize();
+
+                await foreach (var searchResult in backInStockSubscriptionSearchService.SearchBatchesAsync(
+                                   searchCriteria))
+                {
+                    searchResult.Results.Apply(EnqueueSubscription);
+                }
+
+                void EnqueueSubscription(BackInStockSubscription backInStockSubscription)
                 {
                     BackgroundJob.Enqueue(() =>
-                        SendBackInStockEmailNotificationAsync(subscription));
+                        SendBackInStockEmailNotificationAsync(backInStockSubscription));
                 }
             }
             catch (Exception ex)
@@ -65,29 +75,6 @@ public class BackInStockNotificationJobService(
                 throw;
             }
         }
-    }
-
-    private async Task<IList<BackInStockSubscription>> FetchAllBackInStockSubscriptionsForProduct(string productId)
-    {
-        var allSubscriptions = new List<BackInStockSubscription>();
-        int totalCount, skip = 0;
-        do
-        {
-            var batchSize = await GetBatchSize();
-
-            var result = await backInStockSubscriptionSearchService.SearchAsync(
-                new BackInStockSubscriptionSearchCriteria
-                {
-                    ProductId = productId, IsActive = true, Skip = skip, Take = batchSize
-                });
-
-            allSubscriptions.AddRange(result.Results);
-            totalCount = result.TotalCount;
-            skip += batchSize;
-        }
-        while (allSubscriptions.Count < totalCount);
-
-        return allSubscriptions;
     }
 
     public async Task SendBackInStockEmailNotificationAsync(BackInStockSubscription subscription)
@@ -125,18 +112,13 @@ public class BackInStockNotificationJobService(
             return null;
         }
 
-        var store = (await storeService.GetAsync(new List<string> { subscription.StoreId }))
-            .FirstOrDefault();
+        var store = (await storeService.GetAsync([subscription.StoreId])).FirstOrDefault();
         if (store == null)
         {
             return null;
         }
 
-        var product = (await productSearchService.SearchAsync(new ProductSearchCriteria
-        {
-            ObjectIds = new List<string> { subscription.ProductId }, Take = 1
-        })).Results.FirstOrDefault();
-
+        var product = await itemService.GetByIdAsync(subscription.ProductId);
         if (product == null)
         {
             return null;

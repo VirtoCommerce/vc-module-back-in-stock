@@ -1,14 +1,13 @@
 using Microsoft.EntityFrameworkCore;
 
-namespace VirtoCommerce.BackInStockModule.Data.PostgreSql
+namespace VirtoCommerce.BackInStockModule.Data.PostgreSql;
+
+public static class DbContextOptionsBuilderExtensions
 {
-    public static class DbContextOptionsBuilderExtensions
-    {
-        /// <summary>
-        /// Configures the context to use PostgreSql.
-        /// </summary>
-        public static DbContextOptionsBuilder UsePostgreSqlDatabase(this DbContextOptionsBuilder builder, string connectionString) =>
-            builder.UseNpgsql(connectionString, db => db
-                .MigrationsAssembly(typeof(PostgreSqlDbContextFactory).Assembly.GetName().Name));
-    }
+    /// <summary>
+    /// Configures the context to use PostgreSql.
+    /// </summary>
+    public static DbContextOptionsBuilder UsePostgreSqlDatabase(this DbContextOptionsBuilder builder, string connectionString) =>
+        builder.UseNpgsql(connectionString, db => db
+            .MigrationsAssembly(typeof(PostgreSqlDbContextFactory).Assembly.GetName().Name));
 }

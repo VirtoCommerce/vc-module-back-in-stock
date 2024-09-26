@@ -4,5 +4,5 @@ namespace VirtoCommerce.BackInStockModule.Core.BackgroundJobs;
 
 public interface IBackInStockNotificationJobService
 {
-    void EnqueueProductBackInStockNotifications(IList<string> inStockProductsIds);
+    void EnqueueProductBackInStockNotifications(IList<string> productIds);
 }

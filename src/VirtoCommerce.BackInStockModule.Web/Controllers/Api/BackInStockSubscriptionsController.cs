@@ -8,68 +8,67 @@ using VirtoCommerce.BackInStockModule.Core.Services;
 using VirtoCommerce.Platform.Core.Common;
 using VirtoCommerce.StoreModule.Core.Services;
 
-namespace VirtoCommerce.BackInStockModule.Web.Controllers.Api
-{
-    [Route("api/back-in-stock-module/subscription")]
-    [ApiController]
-    public class BackInStockSubscriptionsController : Controller
-    {
-        private readonly IBackInStockSubscriptionSearchService _backInStockSubscriptionSearchService;
-        private readonly IBackInStockSubscriptionService _backInStockSubscriptionService;
-        private readonly IStoreService _storeService;
+namespace VirtoCommerce.BackInStockModule.Web.Controllers.Api;
 
-        public BackInStockSubscriptionsController(
-            IBackInStockSubscriptionSearchService backInStockSubscriptionSearchService,
-            IBackInStockSubscriptionService backInStockSubscriptionService,
-            IStoreService storeService)
-        {
+[Route("api/back-in-stock-module/subscription")]
+[ApiController]
+public class BackInStockSubscriptionsController : Controller
+{
+    private readonly IBackInStockSubscriptionSearchService _backInStockSubscriptionSearchService;
+    private readonly IBackInStockSubscriptionService _backInStockSubscriptionService;
+    private readonly IStoreService _storeService;
+
+    public BackInStockSubscriptionsController(
+        IBackInStockSubscriptionSearchService backInStockSubscriptionSearchService,
+        IBackInStockSubscriptionService backInStockSubscriptionService,
+        IStoreService storeService)
+    {
             _backInStockSubscriptionSearchService = backInStockSubscriptionSearchService;
             _backInStockSubscriptionService = backInStockSubscriptionService;
             _storeService = storeService;
         }
 
-        /// <summary>
-        /// Return customers back in stock subscriptions search results
-        /// </summary>
-        [HttpPost]
-        [Route("search")]
-        [Authorize(ModuleConstants.Security.Permissions.BackInStockSubscriptionRead)]
-        public async Task<ActionResult<BackInStockSubscriptionSearchResult>> SearchBackInStock(
-            [FromBody] BackInStockSubscriptionSearchCriteria criteria)
-        {
+    /// <summary>
+    /// Return customers back in stock subscriptions search results
+    /// </summary>
+    [HttpPost]
+    [Route("search")]
+    [Authorize(ModuleConstants.Security.Permissions.BackInStockSubscriptionRead)]
+    public async Task<ActionResult<BackInStockSubscriptionSearchResult>> SearchBackInStock(
+        [FromBody] BackInStockSubscriptionSearchCriteria criteria)
+    {
             var backInStockSubscriptionSearchResult =
                 await _backInStockSubscriptionSearchService.SearchNoCloneAsync(criteria);
             return Ok(backInStockSubscriptionSearchResult);
         }
 
-        /// <summary>
-        ///  Create new or update existing back in stock subscription
-        /// </summary>
-        /// <param name="backInStock">back in stock subscription</param>
-        /// <returns></returns>
-        [HttpPost]
-        [Route("")]
-        [Authorize(ModuleConstants.Security.Permissions.BackInStockSubscriptionUpdate)]
-        [ProducesResponseType(typeof(void), StatusCodes.Status204NoContent)]
-        public async Task<ActionResult> Update([FromBody] BackInStockSubscription[] backInStock)
-        {
+    /// <summary>
+    ///  Create new or update existing back in stock subscription
+    /// </summary>
+    /// <param name="backInStock">back in stock subscription</param>
+    /// <returns></returns>
+    [HttpPost]
+    [Route("")]
+    [Authorize(ModuleConstants.Security.Permissions.BackInStockSubscriptionUpdate)]
+    [ProducesResponseType(typeof(void), StatusCodes.Status204NoContent)]
+    public async Task<ActionResult> Update([FromBody] BackInStockSubscription[] backInStock)
+    {
             await _backInStockSubscriptionService.SaveChangesAsync(backInStock);
             return NoContent();
         }
 
-        /// <summary>
-        /// Delete back in stock subscription by IDs
-        /// </summary>
-        /// <param name="ids">IDs</param>
-        /// <returns></returns>
-        [HttpDelete]
-        [Route("")]
-        [Authorize(ModuleConstants.Security.Permissions.BackInStockSubscriptionDelete)]
-        [ProducesResponseType(typeof(void), StatusCodes.Status204NoContent)]
-        public async Task<ActionResult> Delete([FromQuery] string[] ids)
-        {
+    /// <summary>
+    /// Delete back in stock subscription by IDs
+    /// </summary>
+    /// <param name="ids">IDs</param>
+    /// <returns></returns>
+    [HttpDelete]
+    [Route("")]
+    [Authorize(ModuleConstants.Security.Permissions.BackInStockSubscriptionDelete)]
+    [ProducesResponseType(typeof(void), StatusCodes.Status204NoContent)]
+    public async Task<ActionResult> Delete([FromQuery] string[] ids)
+    {
             await _backInStockSubscriptionService.DeleteAsync(ids);
             return NoContent();
         }
-    }
 }
