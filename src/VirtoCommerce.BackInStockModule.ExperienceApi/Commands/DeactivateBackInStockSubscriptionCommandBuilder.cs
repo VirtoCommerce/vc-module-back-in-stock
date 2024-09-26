@@ -10,7 +10,7 @@ public class DeactivateBackInStockSubscriptionCommandBuilder(
     IMediator mediator,
     IAuthorizationService authorizationService)
     : CommandBuilder<DeactivateBackInStockSubscriptionCommand,
-        BackInStockSubscription, DeactivateBackInStockSubscriptionCommandType, BackInStockSubscriptionType>(mediator,
+        BackInStockSubscription, DeactivateBackInStockSubscriptionCommandType, BackInStockSubscriptionCommandType>(mediator,
         authorizationService)
 {
     protected override string Name => "deactivateBackInStockSubscription";

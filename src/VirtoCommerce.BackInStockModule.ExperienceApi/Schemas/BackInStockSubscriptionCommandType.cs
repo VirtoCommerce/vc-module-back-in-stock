@@ -3,11 +3,11 @@ using VirtoCommerce.Xapi.Core.Schemas;
 
 namespace VirtoCommerce.BackInStockModule.ExperienceApi.Schemas;
 
-public class BackInStockSubscriptionType : ExtendableGraphType<BackInStockSubscription>
+public class BackInStockSubscriptionCommandType : ExtendableGraphType<BackInStockSubscription>
 {
-    public BackInStockSubscriptionType()
+    public BackInStockSubscriptionCommandType()
     {
-        Name = "BackInStockSubscription";
+        Name = "BackInStockSubscriptionCommand";
 
         Field(x => x.Id);
         Field(x => x.StoreId);

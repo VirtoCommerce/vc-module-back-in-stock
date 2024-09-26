@@ -46,7 +46,7 @@ public class BackInStockNotificationJobService(
         }
     }
 
-    private async Task EnqueueBatchOfEmailNotificationsForProductIds(IList<string> inStockProductsIds)
+    public async Task EnqueueBatchOfEmailNotificationsForProductIds(IList<string> inStockProductsIds)
     {
         foreach (var productId in inStockProductsIds)
         {
@@ -90,7 +90,7 @@ public class BackInStockNotificationJobService(
         return allSubscriptions;
     }
 
-    private async Task SendBackInStockEmailNotificationAsync(BackInStockSubscription subscription)
+    public async Task SendBackInStockEmailNotificationAsync(BackInStockSubscription subscription)
     {
         try
         {

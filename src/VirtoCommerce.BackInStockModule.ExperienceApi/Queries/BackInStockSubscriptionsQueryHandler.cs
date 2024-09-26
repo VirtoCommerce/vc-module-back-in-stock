@@ -36,9 +36,9 @@ public class BackInStockQueryHandler : IQueryHandler<BackInStockSubscriptionsQue
     protected virtual BackInStockSubscriptionSearchCriteria GetSearchCriteria(BackInStockSubscriptionsQuery request)
     {
         var criteria = request.GetSearchCriteria<BackInStockSubscriptionSearchCriteria>();
-        criteria.StoreId = request.StoreId;
-        criteria.UserId = request.UserId;
-        criteria.ProductId = request.ProductId;
+        criteria.StoreId = string.IsNullOrEmpty(request.StoreId) ? null : request.StoreId;
+        criteria.UserId = string.IsNullOrEmpty(request.UserId) ? null : request.UserId;
+        criteria.ProductId = string.IsNullOrEmpty(request.ProductId) ? null : request.ProductId;
         criteria.IsActive = request.IsActive;
 
         if (!string.IsNullOrEmpty(request.Filter))

@@ -11,7 +11,7 @@ namespace VirtoCommerce.BackInStockModule.Core.Models
 
         public string ProductId { get; set; }
 
-        public bool IsActive { get; set; }
+        public bool? IsActive { get; set; }
 
         public DateTime? StartTriggeredDate { get; set; }
 

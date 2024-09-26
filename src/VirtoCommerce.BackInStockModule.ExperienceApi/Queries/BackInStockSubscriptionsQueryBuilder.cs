@@ -8,7 +8,7 @@ namespace VirtoCommerce.BackInStockModule.ExperienceApi.Queries;
 
 public class BackInStockSubscriptionsQueryBuilder(IMediator mediator, IAuthorizationService authorizationService)
     : SearchQueryBuilder<BackInStockSubscriptionsQuery, BackInStockSubscriptionSearchResult, BackInStockSubscription,
-        BackInStockSubscriptionType>(mediator, authorizationService)
+        BackInStockSubscriptionQueryType>(mediator, authorizationService)
 {
     protected override string Name => "backInStockSubscription";
 }
