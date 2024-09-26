@@ -1,7 +1,7 @@
 angular.module('VirtoCommerce.BackInStockModule')
-    .controller('VirtoCommerce.BackInStockModule.backInStockSubscriptionsController',
+    .controller('VirtoCommerce.BackInStockModule.backInStockSubscriptionsListController',
         ['$scope', 'VirtoCommerce.BackInStockModule.subscriptions.webApi', 'platformWebApp.bladeUtils', 'uiGridConstants',
-            'platformWebApp.uiGridHelper', 'platformWebApp.authService', 'VirtoCommerce.CustomerReviews.entityTypesResolverService',
+            'platformWebApp.uiGridHelper', 'platformWebApp.authService', 'VirtoCommerce.BackInStockModule.entityTypesResolverService',
             function ($scope, subscriptionsApi, bladeUtils, uiGridConstants, uiGridHelper, authService, entityTypesResolverService) {
                 $scope.gridOptions = {};
                 $scope.uiGridConstants = uiGridConstants;

@@ -1,5 +1,5 @@
 angular.module('VirtoCommerce.BackInStockModule')
-    .controller('VirtoCommerce.BackInStockModule.backInStockSubscriptionsController',
+    .controller('VirtoCommerce.BackInStockModule.backInStockSubscriptionsWidgetController',
         ['$scope', 'VirtoCommerce.BackInStockModule.subscriptions.webApi', 'platformWebApp.bladeNavigationService', 'uiGridConstants',
             'platformWebApp.uiGridHelper', 'platformWebApp.bladeUtils',
             function ($scope, subscriptionsApi, bladeNavigationService, uiGridConstants, uiGridHelper, bladeUtils) {
@@ -52,7 +52,7 @@ angular.module('VirtoCommerce.BackInStockModule')
                     let newBlade = {
                         id: 'backInStockModuleSubscriptions',
                         title: 'VirtoCommerce.BackInStockModule.blades.subscriptions.title',
-                        controller: 'VirtoCommerce.BackInStockModule.backInStockSubscriptionsController',
+                        controller: 'VirtoCommerce.BackInStockModule.backInStockSubscriptionsListController',
                         template: 'Modules/$(VirtoCommerce.BackInStockModule)/Scripts/blades/back-in-stock-module-subscriptions.tpl.html',
                         filter: {entityIds: [customerId], entityType: 'Customer'}
                     };

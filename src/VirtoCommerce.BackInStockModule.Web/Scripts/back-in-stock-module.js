@@ -13,7 +13,7 @@ angular.module(moduleName, [])
         'virtoCommerce.catalogModule.items',
         function ($state, widgetService, authService, entityTypesResolverService, catalogItems) {
             let customerBackInStockSubscriptionsWidget = {
-                controller: 'VirtoCommerce.BackInStockModule.backInStockSubscriptionsController',
+                controller: 'VirtoCommerce.BackInStockModule.backInStockSubscriptionsWidgetController',
                 template: 'Modules/$(VirtoCommerce.BackInStockModule)/Scripts/widgets/back-in-stock-widget.tpl.html',
                 isVisible: true,
             };
