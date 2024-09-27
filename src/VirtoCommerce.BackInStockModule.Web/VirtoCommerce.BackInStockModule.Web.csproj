@@ -10,5 +10,8 @@
   <ItemGroup>
     <ProjectReference Include="..\VirtoCommerce.BackInStockModule.Core\VirtoCommerce.BackInStockModule.Core.csproj" />
     <ProjectReference Include="..\VirtoCommerce.BackInStockModule.Data\VirtoCommerce.BackInStockModule.Data.csproj" />
+    <ProjectReference Include="..\VirtoCommerce.BackInStockModule.Data.MySql\VirtoCommerce.BackInStockModule.Data.MySql.csproj" />
+    <ProjectReference Include="..\VirtoCommerce.BackInStockModule.Data.PostgreSql\VirtoCommerce.BackInStockModule.Data.PostgreSql.csproj" />
+    <ProjectReference Include="..\VirtoCommerce.BackInStockModule.Data.SqlServer\VirtoCommerce.BackInStockModule.Data.SqlServer.csproj" />
   </ItemGroup>
 </Project>

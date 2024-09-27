@@ -1,7 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
+using VirtoCommerce.BackInStockModule.Data.Repositories;
 
-namespace VirtoCommerce.BackInStockModule.Data.Repositories;
+namespace VirtoCommerce.BackInStockModule.Data.SqlServer;
 
 public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<BackInStockModuleDbContext>
 {
