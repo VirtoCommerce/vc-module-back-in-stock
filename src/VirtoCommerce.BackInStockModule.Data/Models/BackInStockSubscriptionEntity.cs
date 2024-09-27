@@ -6,7 +6,7 @@ using VirtoCommerce.Platform.Core.Domain;
 
 namespace VirtoCommerce.BackInStockModule.Data.Models;
 
-public sealed class BackInStockSubscriptionEntity : AuditableEntity,
+public class BackInStockSubscriptionEntity : AuditableEntity,
     IDataEntity<BackInStockSubscriptionEntity, BackInStockSubscription>
 {
     [StringLength(128)]
