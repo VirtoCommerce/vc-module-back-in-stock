@@ -9,15 +9,19 @@ public static class ModuleConstants
     {
         public static class Permissions
         {
-            public const string BackInStockSubscriptionRead = "backInStock:subscriptionRead";
-            public const string BackInStockSubscriptionUpdate = "backInStock:subscriptionUpdate";
-            public const string BackInStockSubscriptionDelete = "backInStock:subscriptionDelete";
+            public const string Access = "BackInStockModule:subscription:access";
+            public const string Create = "BackInStockModule:subscription:create";
+            public const string Read = "BackInStockModule:subscription:read";
+            public const string Update = "BackInStockModule:subscription:update";
+            public const string Delete = "BackInStockModule:subscription:delete";
 
-            public static readonly string[] AllPermissions =
+            public static string[] AllPermissions { get; } =
             [
-                BackInStockSubscriptionRead,
-                BackInStockSubscriptionUpdate,
-                BackInStockSubscriptionDelete,
+                Access,
+                Create,
+                Read,
+                Update,
+                Delete,
             ];
         }
     }
@@ -26,19 +30,19 @@ public static class ModuleConstants
     {
         public static class General
         {
-            public static readonly SettingDescriptor BackInStockEnabled = new()
+            public static SettingDescriptor BackInStockEnabled { get; } = new()
             {
                 Name = "BackInStock.BackInStockEnabled",
-                GroupName = "Store|Back In Stock",
+                GroupName = "Back In Stock|General",
                 ValueType = SettingValueType.Boolean,
                 DefaultValue = false,
                 IsPublic = true,
             };
 
-            public static readonly SettingDescriptor BackInStockEnabledForAnonymous = new()
+            public static SettingDescriptor BackInStockEnabledForAnonymous { get; } = new()
             {
                 Name = "BackInStock.BackInStockEnabledForAnonymous",
-                GroupName = "Store|Back In Stock",
+                GroupName = "Back In Stock|General",
                 ValueType = SettingValueType.Boolean,
                 DefaultValue = false,
                 IsPublic = true,

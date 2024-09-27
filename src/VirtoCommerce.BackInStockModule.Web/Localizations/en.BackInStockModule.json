@@ -9,18 +9,18 @@
         "description": "Product detail"
       }
     },
-    "widgets" : {
-      "item-detail" : {
+    "widgets": {
+      "item-detail": {
         "title": "Back in stock subscriptions"
       }
     }
   },
   "permissions": {
-    "BackInStockModule:access": "Open BackInStockModule menu",
-    "BackInStockModule:create": "Create BackInStockModule related data",
-    "BackInStockModule:read": "View BackInStockModule related data",
-    "BackInStockModule:update": "Update BackInStockModule related data",
-    "BackInStockModule:delete": "Delete BackInStockModule related data"
+    "BackInStockModule:subscription:access": "Open BackInStockModule menu",
+    "BackInStockModule:subscription:create": "Create BackInStockModule related data",
+    "BackInStockModule:subscription:read": "View BackInStockModule related data",
+    "BackInStockModule:subscription:update": "Update BackInStockModule related data",
+    "BackInStockModule:subscription:delete": "Delete BackInStockModule related data"
   },
   "settings": {
     "VirtoCommerce.BackInStockModule": {

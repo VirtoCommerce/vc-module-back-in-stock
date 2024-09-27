@@ -15,8 +15,4 @@
     <ProjectReference Include="..\VirtoCommerce.BackInStockModule.Data\VirtoCommerce.BackInStockModule.Data.csproj" />
     <ProjectReference Include="..\VirtoCommerce.BackInStockModule.ExperienceApi\VirtoCommerce.BackInStockModule.ExperienceApi.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Content\css\" />
-    <Folder Include="Content\help\" />
-  </ItemGroup>
 </Project>

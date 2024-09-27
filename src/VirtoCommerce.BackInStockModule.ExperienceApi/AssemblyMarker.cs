@@ -1,6 +1,5 @@
-﻿namespace VirtoCommerce.BackInStockModule.ExperienceApi;
+namespace VirtoCommerce.BackInStockModule.ExperienceApi;
 
 public class AssemblyMarker
 {
-
 }

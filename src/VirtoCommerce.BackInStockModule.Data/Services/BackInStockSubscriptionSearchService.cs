@@ -18,9 +18,8 @@ public class BackInStockSubscriptionSearchService(
     IPlatformMemoryCache platformMemoryCache,
     IBackInStockSubscriptionService crudService,
     IOptions<CrudOptions> crudOptions)
-    : SearchService<BackInStockSubscriptionSearchCriteria, BackInStockSubscriptionSearchResult,
-            BackInStockSubscription,
-            BackInStockSubscriptionEntity>(repositoryFactory, platformMemoryCache, crudService, crudOptions),
+    : SearchService<BackInStockSubscriptionSearchCriteria, BackInStockSubscriptionSearchResult, BackInStockSubscription, BackInStockSubscriptionEntity>
+        (repositoryFactory, platformMemoryCache, crudService, crudOptions),
         IBackInStockSubscriptionSearchService
 {
     protected override IQueryable<BackInStockSubscriptionEntity> BuildQuery(IRepository repository, BackInStockSubscriptionSearchCriteria criteria)
@@ -55,9 +54,9 @@ public class BackInStockSubscriptionSearchService(
         if (criteria.Keyword != null)
         {
             query = query.Where(x =>
-                x.UserId.Contains(criteria.Keyword)
-                || x.ProductId.Contains(criteria.Keyword)
-                || x.StoreId.Contains(criteria.Keyword));
+                x.UserId.Contains(criteria.Keyword) ||
+                x.ProductId.Contains(criteria.Keyword) ||
+                x.StoreId.Contains(criteria.Keyword));
         }
 
         return query;

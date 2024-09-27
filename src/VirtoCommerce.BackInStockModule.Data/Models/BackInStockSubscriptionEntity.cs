@@ -6,8 +6,7 @@ using VirtoCommerce.Platform.Core.Domain;
 
 namespace VirtoCommerce.BackInStockModule.Data.Models;
 
-public class BackInStockSubscriptionEntity : AuditableEntity,
-    IDataEntity<BackInStockSubscriptionEntity, BackInStockSubscription>
+public class BackInStockSubscriptionEntity : AuditableEntity, IDataEntity<BackInStockSubscriptionEntity, BackInStockSubscription>
 {
     [StringLength(128)]
     [Required]
@@ -44,8 +43,7 @@ public class BackInStockSubscriptionEntity : AuditableEntity,
         return model;
     }
 
-    public BackInStockSubscriptionEntity FromModel(BackInStockSubscription model,
-        PrimaryKeyResolvingMap pkMap)
+    public BackInStockSubscriptionEntity FromModel(BackInStockSubscription model, PrimaryKeyResolvingMap pkMap)
     {
         ArgumentNullException.ThrowIfNull(model);
 

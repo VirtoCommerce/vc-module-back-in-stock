@@ -19,8 +19,7 @@ public class BackInStockAuthorizationHandler : AuthorizationHandler<BackInStockA
     private readonly Func<UserManager<ApplicationUser>> _userManagerFactory;
     private readonly IStoreService _storeService;
 
-    public BackInStockAuthorizationHandler(Func<UserManager<ApplicationUser>> userManagerFactory,
-        IStoreService storeService)
+    public BackInStockAuthorizationHandler(Func<UserManager<ApplicationUser>> userManagerFactory, IStoreService storeService)
     {
         _userManagerFactory = userManagerFactory;
         _storeService = storeService;

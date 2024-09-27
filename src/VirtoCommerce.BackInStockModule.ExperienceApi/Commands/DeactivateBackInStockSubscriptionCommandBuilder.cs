@@ -9,9 +9,8 @@ namespace VirtoCommerce.BackInStockModule.ExperienceApi.Commands;
 public class DeactivateBackInStockSubscriptionCommandBuilder(
     IMediator mediator,
     IAuthorizationService authorizationService)
-    : CommandBuilder<DeactivateBackInStockSubscriptionCommand,
-        BackInStockSubscription, DeactivateBackInStockSubscriptionCommandType, BackInStockSubscriptionType>(mediator,
-        authorizationService)
+    : CommandBuilder<DeactivateBackInStockSubscriptionCommand, BackInStockSubscription, DeactivateBackInStockSubscriptionCommandType,
+        BackInStockSubscriptionType>(mediator, authorizationService)
 {
     protected override string Name => "deactivateBackInStockSubscription";
 }

@@ -10,6 +10,7 @@ namespace VirtoCommerce.BackInStockModule.ExperienceApi.Queries;
 public class BackInStockSubscriptionsQuery : SearchQuery<BackInStockSubscriptionSearchResult>
 {
     public string UserId { get; set; }
+
     public string StoreId { get; set; }
 
     public string ProductId { get; set; }
@@ -29,8 +30,8 @@ public class BackInStockSubscriptionsQuery : SearchQuery<BackInStockSubscription
             yield return argument;
         }
 
-        yield return Argument<StringGraphType>(nameof(StoreId));
         yield return Argument<StringGraphType>(nameof(UserId));
+        yield return Argument<StringGraphType>(nameof(StoreId));
         yield return Argument<StringGraphType>(nameof(ProductId));
         yield return Argument<BooleanGraphType>(nameof(IsActive));
         yield return Argument<DateTimeGraphType>(nameof(StartTriggeredDate));
@@ -42,9 +43,9 @@ public class BackInStockSubscriptionsQuery : SearchQuery<BackInStockSubscription
     {
         base.Map(context);
 
+        UserId = context.GetArgument<string>(nameof(UserId));
         StoreId = context.GetArgument<string>(nameof(StoreId));
         ProductId = context.GetArgument<string>(nameof(ProductId));
-        UserId = context.GetArgument<string>(nameof(UserId));
         IsActive = context.GetArgument<bool?>(nameof(IsActive));
         StartTriggeredDate = context.GetArgument<DateTime?>(nameof(StartTriggeredDate));
         EndTriggeredDate = context.GetArgument<DateTime?>(nameof(EndTriggeredDate));

@@ -7,8 +7,7 @@ using VirtoCommerce.Platform.Data.Infrastructure;
 
 namespace VirtoCommerce.BackInStockModule.Data.Repositories;
 
-public class BackInStockSubscriptionRepository
-    : DbContextRepositoryBase<BackInStockModuleDbContext>, IBackInStockSubscriptionRepository
+public class BackInStockSubscriptionRepository : DbContextRepositoryBase<BackInStockModuleDbContext>, IBackInStockSubscriptionRepository
 {
     public BackInStockSubscriptionRepository(BackInStockModuleDbContext moduleDbContext)
         : base(moduleDbContext)

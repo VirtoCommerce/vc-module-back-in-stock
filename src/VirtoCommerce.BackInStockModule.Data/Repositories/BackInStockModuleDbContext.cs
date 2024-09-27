@@ -21,11 +21,8 @@ public class BackInStockModuleDbContext : DbContextBase
     {
         base.OnModelCreating(modelBuilder);
 
-        modelBuilder.Entity<BackInStockSubscriptionEntity>().HasKey(x => x.Id);
-        modelBuilder.Entity<BackInStockSubscriptionEntity>()
-            .ToTable("BackInStockSubscriptions");
-        modelBuilder.Entity<BackInStockSubscriptionEntity>().Property(x => x.Id).HasMaxLength(128)
-            .ValueGeneratedOnAdd();
+        modelBuilder.Entity<BackInStockSubscriptionEntity>().ToTable("BackInStockSubscriptions").HasKey(x => x.Id);
+        modelBuilder.Entity<BackInStockSubscriptionEntity>().Property(x => x.Id).HasMaxLength(128).ValueGeneratedOnAdd();
         modelBuilder.Entity<BackInStockSubscriptionEntity>()
             .HasIndex(x => new { x.StoreId, x.UserId, x.ProductId })
             .IsUnique();

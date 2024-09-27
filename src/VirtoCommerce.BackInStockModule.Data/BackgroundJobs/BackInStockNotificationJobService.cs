@@ -44,7 +44,7 @@ public class BackInStockNotificationJobService(
         }
     }
 
-    public async Task EnqueueBatchOfEmailNotificationsForProductIds(IEnumerable<string> productIds)
+    public async Task EnqueueBatchOfEmailNotificationsForProductIds(IList<string> productIds)
     {
         foreach (var productId in productIds)
         {
@@ -53,7 +53,7 @@ public class BackInStockNotificationJobService(
                 var searchCriteria = AbstractTypeFactory<BackInStockSubscriptionSearchCriteria>.TryCreateInstance();
                 searchCriteria.ProductId = productId;
                 searchCriteria.IsActive = true;
-                searchCriteria.Sort = $"{nameof(BackInStockSubscription.Triggered)};";
+                searchCriteria.Sort = nameof(BackInStockSubscription.Triggered);
                 searchCriteria.Take = await GetBatchSize();
 
                 await foreach (var searchResult in backInStockSubscriptionSearchService.SearchBatchesAsync(searchCriteria))
@@ -66,7 +66,7 @@ public class BackInStockNotificationJobService(
             }
             catch (Exception ex)
             {
-                logger.LogError(ex, $"Failed to enqueue batch of notification jobs for product id: {productId}");
+                logger.LogError(ex, "Failed to enqueue batch of notification jobs for product id: {productId}", productId);
                 throw;
             }
         }
@@ -107,7 +107,7 @@ public class BackInStockNotificationJobService(
             return null;
         }
 
-        var store = (await storeService.GetAsync([subscription.StoreId])).FirstOrDefault();
+        var store = await storeService.GetByIdAsync(subscription.StoreId);
         if (store == null)
         {
             return null;

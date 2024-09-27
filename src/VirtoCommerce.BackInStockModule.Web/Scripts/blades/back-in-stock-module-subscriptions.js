@@ -47,7 +47,7 @@ angular.module('VirtoCommerce.BackInStockModule')
                         take: $scope.pageSettings.itemsPerPageCount
                     }), function (data) {
                         data.results.forEach((item => {
-                            catalogItems.get({id: item.productId, respGroup: 1}, (catalogItem) => {
+                            catalogItems.get({ id: item.productId, respGroup: 1 }, (catalogItem) => {
                                 item.productName = catalogItem.name
                             });
                         }));

@@ -9,19 +9,19 @@ using VirtoCommerce.Platform.Core.Common;
 
 namespace VirtoCommerce.BackInStockModule.Web.Controllers.Api;
 
-[Route("api/back-in-stock-module/subscription")]
+[Route("api/back-in-stock/subscriptions")]
 [ApiController]
 public class BackInStockSubscriptionsController : Controller
 {
-    private readonly IBackInStockSubscriptionSearchService _backInStockSubscriptionSearchService;
-    private readonly IBackInStockSubscriptionService _backInStockSubscriptionService;
+    private readonly IBackInStockSubscriptionSearchService _searchService;
+    private readonly IBackInStockSubscriptionService _crudService;
 
     public BackInStockSubscriptionsController(
-        IBackInStockSubscriptionSearchService backInStockSubscriptionSearchService,
-        IBackInStockSubscriptionService backInStockSubscriptionService)
+        IBackInStockSubscriptionSearchService searchService,
+        IBackInStockSubscriptionService crudService)
     {
-            _backInStockSubscriptionSearchService = backInStockSubscriptionSearchService;
-            _backInStockSubscriptionService = backInStockSubscriptionService;
+        _searchService = searchService;
+        _crudService = crudService;
     }
 
     /// <summary>
@@ -29,29 +29,27 @@ public class BackInStockSubscriptionsController : Controller
     /// </summary>
     [HttpPost]
     [Route("search")]
-    [Authorize(ModuleConstants.Security.Permissions.BackInStockSubscriptionRead)]
-    public async Task<ActionResult<BackInStockSubscriptionSearchResult>> SearchBackInStock(
-        [FromBody] BackInStockSubscriptionSearchCriteria criteria)
+    [Authorize(ModuleConstants.Security.Permissions.Read)]
+    public async Task<ActionResult<BackInStockSubscriptionSearchResult>> Search([FromBody] BackInStockSubscriptionSearchCriteria criteria)
     {
-            var backInStockSubscriptionSearchResult =
-                await _backInStockSubscriptionSearchService.SearchNoCloneAsync(criteria);
-            return Ok(backInStockSubscriptionSearchResult);
-        }
+        var result = await _searchService.SearchNoCloneAsync(criteria);
+        return Ok(result);
+    }
 
     /// <summary>
     ///  Create new or update existing back in stock subscription
     /// </summary>
-    /// <param name="backInStock">back in stock subscription</param>
+    /// <param name="subscriptions">back in stock subscription</param>
     /// <returns></returns>
     [HttpPost]
     [Route("")]
-    [Authorize(ModuleConstants.Security.Permissions.BackInStockSubscriptionUpdate)]
+    [Authorize(ModuleConstants.Security.Permissions.Update)]
     [ProducesResponseType(typeof(void), StatusCodes.Status204NoContent)]
-    public async Task<ActionResult> Update([FromBody] BackInStockSubscription[] backInStock)
+    public async Task<ActionResult> Update([FromBody] BackInStockSubscription[] subscriptions)
     {
-            await _backInStockSubscriptionService.SaveChangesAsync(backInStock);
-            return NoContent();
-        }
+        await _crudService.SaveChangesAsync(subscriptions);
+        return NoContent();
+    }
 
     /// <summary>
     /// Delete back in stock subscription by IDs
@@ -60,11 +58,11 @@ public class BackInStockSubscriptionsController : Controller
     /// <returns></returns>
     [HttpDelete]
     [Route("")]
-    [Authorize(ModuleConstants.Security.Permissions.BackInStockSubscriptionDelete)]
+    [Authorize(ModuleConstants.Security.Permissions.Delete)]
     [ProducesResponseType(typeof(void), StatusCodes.Status204NoContent)]
     public async Task<ActionResult> Delete([FromQuery] string[] ids)
     {
-            await _backInStockSubscriptionService.DeleteAsync(ids);
-            return NoContent();
-        }
+        await _crudService.DeleteAsync(ids);
+        return NoContent();
+    }
 }

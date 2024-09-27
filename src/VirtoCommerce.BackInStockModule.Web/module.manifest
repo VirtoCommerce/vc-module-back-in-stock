@@ -4,25 +4,25 @@
   <version>3.800.0</version>
   <version-tag></version-tag>
 
-  <platformVersion>3.832.3</platformVersion>
+  <platformVersion>3.852.0</platformVersion>
   <dependencies>
-    <dependency id="VirtoCommerce.Xapi" version="3.804.0"/>
-    <dependency id="VirtoCommerce.XCatalog" version="3.810.0"/>
-    <dependency id="VirtoCommerce.Catalog" version="3.820.0"/>
-    <dependency id="VirtoCommerce.Customer" version="3.815.0"/>
-    <dependency id="VirtoCommerce.Store" version="3.806.0"/>
-    <dependency id="VirtoCommerce.Notifications" version="3.808.0"/>
+    <dependency id="VirtoCommerce.Catalog" version="3.821.0"/>
+    <dependency id="VirtoCommerce.Customer" version="3.816.0"/>
     <dependency id="VirtoCommerce.Inventory" version="3.804.0"/>
+    <dependency id="VirtoCommerce.Notifications" version="3.808.0"/>
+    <dependency id="VirtoCommerce.Store" version="3.808.0"/>
+    <dependency id="VirtoCommerce.Xapi" version="3.807.0"/>
+    <dependency id="VirtoCommerce.XCatalog" version="3.812.0"/>
   </dependencies>
 
   <title>Back In Stock</title>
-  <description>Provides customer availability to subscripe for notification, when product will be back in stock.</description>
+  <description>Provides customer ability to subscribe for notification, when product is back in stock.</description>
 
   <authors>
     <author>Mikhail Lyakhov</author>
   </authors>
   <owners>
-    <owner>VirtoCommerce</owner>
+    <owner>Virto Commerce</owner>
   </owners>
 
   <projectUrl>https://github.com/VirtoCommerce/vc-module-back-in-stock</projectUrl>
@@ -33,7 +33,7 @@
   <moduleType>VirtoCommerce.BackInStockModule.Web.Module, VirtoCommerce.BackInStockModule.Web</moduleType>
 
   <releaseNotes>First version.</releaseNotes>
-  <copyright>Copyright © 2024 VirtoCommerce. All rights reserved</copyright>
+  <copyright>Copyright © 2024 Virto Commerce. All rights reserved</copyright>
   <tags>extension module</tags>
   <useFullTypeNameInSwagger>false</useFullTypeNameInSwagger>
 </module>

@@ -8,7 +8,7 @@ namespace VirtoCommerce.BackInStockModule.ExperienceApi.Extensions;
 public static class FilterExtensions
 {
     public static T Get<T>(this IList<IFilter> filters, string fieldName)
-        where T: INamedFilter
+        where T : INamedFilter
     {
         return filters.OfType<T>().FirstOrDefault(x => x.FieldName.EqualsInvariant(fieldName));
     }

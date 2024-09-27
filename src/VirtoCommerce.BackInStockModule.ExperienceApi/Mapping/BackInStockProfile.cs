@@ -8,6 +8,6 @@ public class BackInStockProfile : Profile
 {
     public BackInStockProfile()
     {
-            CreateMap<ActivateBackInStockSubscriptionCommand, BackInStockSubscription>();
-        }
+        CreateMap<ActivateBackInStockSubscriptionCommand, BackInStockSubscription>();
+    }
 }

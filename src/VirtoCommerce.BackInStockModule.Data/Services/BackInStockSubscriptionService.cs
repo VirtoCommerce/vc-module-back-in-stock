@@ -17,9 +17,8 @@ public class BackInStockSubscriptionService(
     Func<IBackInStockSubscriptionRepository> repositoryFactory,
     IPlatformMemoryCache platformMemoryCache,
     IEventPublisher eventPublisher)
-    :
-        CrudService<BackInStockSubscription, BackInStockSubscriptionEntity, BackInStockSubscriptionChangingEvent,
-            BackInStockSubscriptionChangedEvent>(repositoryFactory, platformMemoryCache, eventPublisher),
+    : CrudService<BackInStockSubscription, BackInStockSubscriptionEntity, BackInStockSubscriptionChangingEvent, BackInStockSubscriptionChangedEvent>
+        (repositoryFactory, platformMemoryCache, eventPublisher),
         IBackInStockSubscriptionService
 {
     protected override Task<IList<BackInStockSubscriptionEntity>> LoadEntities(IRepository repository, IList<string> ids, string responseGroup)
