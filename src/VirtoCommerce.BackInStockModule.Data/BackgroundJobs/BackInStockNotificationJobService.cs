@@ -35,8 +35,7 @@ public class BackInStockNotificationJobService(
     {
         try
         {
-            BackgroundJob.Enqueue(() =>
-                EnqueueBatchOfEmailNotificationsForProductIds(productIds));
+            BackgroundJob.Enqueue(() => EnqueueBatchOfEmailNotificationsForProductIds(productIds));
         }
         catch (Exception ex)
         {
@@ -57,16 +56,12 @@ public class BackInStockNotificationJobService(
                 searchCriteria.Sort = $"{nameof(BackInStockSubscription.Triggered)};";
                 searchCriteria.Take = await GetBatchSize();
 
-                await foreach (var searchResult in backInStockSubscriptionSearchService.SearchBatchesAsync(
-                                   searchCriteria))
+                await foreach (var searchResult in backInStockSubscriptionSearchService.SearchBatchesAsync(searchCriteria))
                 {
-                    searchResult.Results.Apply(EnqueueSubscription);
-                }
-
-                void EnqueueSubscription(BackInStockSubscription backInStockSubscription)
-                {
-                    BackgroundJob.Enqueue(() =>
-                        SendBackInStockEmailNotificationAsync(backInStockSubscription));
+                    foreach (var backInStockSubscription in searchResult.Results)
+                    {
+                        await SendBackInStockEmailNotificationAsync(backInStockSubscription);
+                    }
                 }
             }
             catch (Exception ex)

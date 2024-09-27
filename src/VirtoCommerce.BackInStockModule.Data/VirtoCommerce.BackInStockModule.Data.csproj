@@ -1,13 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <noWarn>1591</noWarn>
-    <IsPackable>True</IsPackable>
-    <PublishRepositoryUrl>true</PublishRepositoryUrl>
-    <EmbedUntrackedSources>true</EmbedUntrackedSources>
-    <IncludeSymbols>true</IncludeSymbols>
-    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-    <RootNamespace>VirtoCommerce.BackInStockModule.Data</RootNamespace>
   </PropertyGroup>
   <PropertyGroup>
     <!-- Project is not a test project -->

@@ -4,7 +4,7 @@ angular.module('VirtoCommerce.BackInStockModule')
             function ($scope, subscriptionsApi, bladeNavigationService) {
                 let blade = $scope.blade;
                 let filter = $scope.filter = blade.filter || {};
-                let customerId = "1eb2fa8ac6574541afdb525833dadb46";//$scope.blade.currentEntityId;
+                let customerId = $scope.blade.currentEntityId;
 
                 function init() {
                     $scope.loading = false;

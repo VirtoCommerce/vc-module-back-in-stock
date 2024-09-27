@@ -21,6 +21,9 @@ using VirtoCommerce.BackInStockModule.ExperienceApi.Extensions;
 using VirtoCommerce.InventoryModule.Core.Events;
 using VirtoCommerce.NotificationsModule.Core.Services;
 using VirtoCommerce.Platform.Core.Events;
+using VirtoCommerce.Platform.Data.MySql.Extensions;
+using VirtoCommerce.Platform.Data.PostgreSql.Extensions;
+using VirtoCommerce.Platform.Data.SqlServer.Extensions;
 
 namespace VirtoCommerce.BackInStockModule.Web;
 
@@ -34,19 +37,18 @@ public class Module : IModule, IHasConfiguration
         serviceCollection.AddDbContext<BackInStockModuleDbContext>(options =>
         {
             var databaseProvider = Configuration.GetValue("DatabaseProvider", "SqlServer");
-            var connectionString = Configuration.GetConnectionString(ModuleInfo.Id) ??
-                                   Configuration.GetConnectionString("VirtoCommerce");
+            var connectionString = Configuration.GetConnectionString(ModuleInfo.Id) ?? Configuration.GetConnectionString("VirtoCommerce");
 
             switch (databaseProvider)
             {
                 case "MySql":
-                    options.UseMySqlDatabase(connectionString);
+                    options.UseMySqlDatabase(connectionString, typeof(MySqlDataAssemblyMarker), Configuration);
                     break;
                 case "PostgreSql":
-                    options.UsePostgreSqlDatabase(connectionString);
+                    options.UsePostgreSqlDatabase(connectionString, typeof(PostgreSqlDataAssemblyMarker), Configuration);
                     break;
                 default:
-                    options.UseSqlServerDatabase(connectionString);
+                    options.UseSqlServerDatabase(connectionString, typeof(SqlServerDataAssemblyMarker), Configuration);
                     break;
             }
         });

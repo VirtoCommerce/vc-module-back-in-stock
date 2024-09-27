@@ -36,18 +36,13 @@ public class BackInStockModuleDbContext : DbContextBase
         switch (Database.ProviderName)
         {
             case "Pomelo.EntityFrameworkCore.MySql":
-                modelBuilder.ApplyConfigurationsFromAssembly(
-                    Assembly.Load("VirtoCommerce.BackInStockModule.Data.MySql"));
+                modelBuilder.ApplyConfigurationsFromAssembly(Assembly.Load("VirtoCommerce.BackInStockModule.Data.MySql"));
                 break;
-
             case "Npgsql.EntityFrameworkCore.PostgreSQL":
-                modelBuilder.ApplyConfigurationsFromAssembly(
-                    Assembly.Load("VirtoCommerce.BackInStockModule.Data.PostgreSql"));
+                modelBuilder.ApplyConfigurationsFromAssembly(Assembly.Load("VirtoCommerce.BackInStockModule.Data.PostgreSql"));
                 break;
-
             case "Microsoft.EntityFrameworkCore.SqlServer":
-                modelBuilder.ApplyConfigurationsFromAssembly(
-                    Assembly.Load("VirtoCommerce.BackInStockModule.Data.SqlServer"));
+                modelBuilder.ApplyConfigurationsFromAssembly(Assembly.Load("VirtoCommerce.BackInStockModule.Data.SqlServer"));
                 break;
         }
     }
