@@ -10,5 +10,5 @@ public class BackInStockSubscriptionsQueryBuilder(IMediator mediator, IAuthoriza
     : SearchQueryBuilder<BackInStockSubscriptionsQuery, BackInStockSubscriptionSearchResult, BackInStockSubscription,
         BackInStockSubscriptionQueryType>(mediator, authorizationService)
 {
-    protected override string Name => "backInStockSubscription";
+    protected override string Name => "getBackInStockSubscriptions";
 }

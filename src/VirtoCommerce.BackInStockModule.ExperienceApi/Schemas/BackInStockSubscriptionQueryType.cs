@@ -7,8 +7,6 @@ public class BackInStockSubscriptionQueryType : ExtendableGraphType<BackInStockS
 {
     public BackInStockSubscriptionQueryType()
     {
-        Name = "BackInStockSubscriptionQuery";
-
         Field(x => x.Id, nullable: true);
         Field(x => x.StoreId, nullable: true);
         Field(x => x.UserId, nullable: true);
