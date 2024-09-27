@@ -6,7 +6,6 @@ using VirtoCommerce.BackInStockModule.Core;
 using VirtoCommerce.BackInStockModule.Core.Models;
 using VirtoCommerce.BackInStockModule.Core.Services;
 using VirtoCommerce.Platform.Core.Common;
-using VirtoCommerce.StoreModule.Core.Services;
 
 namespace VirtoCommerce.BackInStockModule.Web.Controllers.Api;
 
@@ -16,17 +15,14 @@ public class BackInStockSubscriptionsController : Controller
 {
     private readonly IBackInStockSubscriptionSearchService _backInStockSubscriptionSearchService;
     private readonly IBackInStockSubscriptionService _backInStockSubscriptionService;
-    private readonly IStoreService _storeService;
 
     public BackInStockSubscriptionsController(
         IBackInStockSubscriptionSearchService backInStockSubscriptionSearchService,
-        IBackInStockSubscriptionService backInStockSubscriptionService,
-        IStoreService storeService)
+        IBackInStockSubscriptionService backInStockSubscriptionService)
     {
             _backInStockSubscriptionSearchService = backInStockSubscriptionSearchService;
             _backInStockSubscriptionService = backInStockSubscriptionService;
-            _storeService = storeService;
-        }
+    }
 
     /// <summary>
     /// Return customers back in stock subscriptions search results

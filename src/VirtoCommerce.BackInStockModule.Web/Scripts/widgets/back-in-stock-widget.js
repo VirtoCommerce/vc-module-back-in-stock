@@ -45,7 +45,7 @@ angular.module('VirtoCommerce.BackInStockModule')
                         title: 'VirtoCommerce.BackInStockModule.blades.subscriptions.title',
                         controller: 'VirtoCommerce.BackInStockModule.backInStockSubscriptionsListController',
                         template: 'Modules/$(VirtoCommerce.BackInStockModule)/Scripts/blades/back-in-stock-module-subscriptions.tpl.html',
-                        filter: {entityIds: [customerId], entityType: 'Customer'}
+                        filter: {userId: customerId}
                     };
 
                     bladeNavigationService.showBlade(newBlade, blade);
