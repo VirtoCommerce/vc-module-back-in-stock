@@ -16,8 +16,6 @@ angular.module('VirtoCommerce.BackInStockModule')
                 let blade = $scope.blade;
                 blade.title = 'Back In Stock';
                 blade.headIcon = 'fa fa-comments';
-                blade.headIcon = 'fa fa-comments';
-                blade.title = 'Rating and Reviews';
 
                 blade.toolbarCommands = [
                     {
