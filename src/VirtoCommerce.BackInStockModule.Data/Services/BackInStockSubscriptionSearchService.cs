@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
 using VirtoCommerce.BackInStockModule.Core.Models;
 using VirtoCommerce.BackInStockModule.Core.Services;
@@ -9,6 +10,8 @@ using VirtoCommerce.BackInStockModule.Data.Repositories;
 using VirtoCommerce.Platform.Core.Caching;
 using VirtoCommerce.Platform.Core.Common;
 using VirtoCommerce.Platform.Core.GenericCrud;
+using VirtoCommerce.Platform.Core.Security;
+using VirtoCommerce.Platform.Core.Security.Search;
 using VirtoCommerce.Platform.Data.GenericCrud;
 
 namespace VirtoCommerce.BackInStockModule.Data.Services;
@@ -17,7 +20,8 @@ public class BackInStockSubscriptionSearchService(
     Func<IBackInStockSubscriptionRepository> repositoryFactory,
     IPlatformMemoryCache platformMemoryCache,
     IBackInStockSubscriptionService crudService,
-    IOptions<CrudOptions> crudOptions)
+    IOptions<CrudOptions> crudOptions,
+    IUserSearchService userSearchService)
     : SearchService<BackInStockSubscriptionSearchCriteria, BackInStockSubscriptionSearchResult, BackInStockSubscription, BackInStockSubscriptionEntity>
         (repositoryFactory, platformMemoryCache, crudService, crudOptions),
         IBackInStockSubscriptionSearchService
@@ -34,6 +38,15 @@ public class BackInStockSubscriptionSearchService(
         if (criteria.UserId != null)
         {
             query = query.Where(x => x.UserId == criteria.UserId);
+        }
+
+        if (criteria.MemberId != null)
+        {
+            var user = (userSearchService.SearchUsersAsync(new UserSearchCriteria() { MemberId = criteria.MemberId })).Result.Users.First();
+            if (user != null)
+            {
+                query = query.Where(x => x.UserId == user.Id.ToString());
+            }
         }
 
         if (criteria.StoreId != null)

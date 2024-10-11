@@ -17,4 +17,6 @@ public class BackInStockSubscriptionSearchCriteria : SearchCriteriaBase
     public DateTime? StartTriggeredDate { get; set; }
 
     public DateTime? EndTriggeredDate { get; set; }
+
+    public string MemberId { get; set; } = null;
 }

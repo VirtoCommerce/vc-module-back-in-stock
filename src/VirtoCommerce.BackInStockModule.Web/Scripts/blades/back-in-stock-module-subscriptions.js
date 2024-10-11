@@ -43,12 +43,16 @@ angular.module('VirtoCommerce.BackInStockModule')
                         sort: uiGridHelper.getSortExpression($scope),
                         skip: ($scope.pageSettings.currentPage - 1) * $scope.pageSettings.itemsPerPageCount,
                         take: $scope.pageSettings.itemsPerPageCount
-                    }), function (data) {
-                        data.results.forEach((item => {
-                            catalogItems.get({ id: item.productId, respGroup: 1 }, (catalogItem) => {
-                                item.productName = catalogItem.name
+                    }), async function (data) {
+                        const catalogItemPromises = data.results.map(async (item) => {
+                            const catalogItem = await new Promise((resolve) => {
+                                catalogItems.get({id: item.productId, respGroup: 1}, (catalogItem) => {
+                                    resolve(catalogItem);
+                                });
                             });
-                        }));
+                            item.productName = catalogItem.name;
+                        });
+                        await Promise.all(catalogItemPromises);
                         blade.isLoading = false;
                         $scope.pageSettings.totalItems = data.totalCount;
                         blade.currentEntities = data.results;

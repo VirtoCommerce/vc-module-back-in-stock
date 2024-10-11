@@ -12,7 +12,7 @@ angular.module('VirtoCommerce.BackInStockModule')
                     $scope.subscriptionsCount = 0;
 
                     subscriptionsApi.search(angular.extend(filter, {
-                        userId: customerId,
+                        memberId: customerId,
                         skip: 0,
                         take: 100,
                     }), function (data) {
@@ -25,7 +25,7 @@ angular.module('VirtoCommerce.BackInStockModule')
                 function refresh() {
                     $scope.loading = true;
                     subscriptionsApi.search(angular.extend(filter, {
-                        userId: customerId,
+                        memberId: customerId,
                         skip: 0,
                         take: 100,
                     }), function (data) {
@@ -45,7 +45,7 @@ angular.module('VirtoCommerce.BackInStockModule')
                         title: 'VirtoCommerce.BackInStockModule.blades.subscriptions.title',
                         controller: 'VirtoCommerce.BackInStockModule.backInStockSubscriptionsListController',
                         template: 'Modules/$(VirtoCommerce.BackInStockModule)/Scripts/blades/back-in-stock-module-subscriptions.tpl.html',
-                        filter: { userId: customerId }
+                        filter: { memberId: customerId }
                     };
 
                     bladeNavigationService.showBlade(newBlade, blade);
