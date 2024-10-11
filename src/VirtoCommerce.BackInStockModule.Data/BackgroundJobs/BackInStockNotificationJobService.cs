@@ -51,7 +51,7 @@ public class BackInStockNotificationJobService(
             try
             {
                 var searchCriteria = AbstractTypeFactory<BackInStockSubscriptionSearchCriteria>.TryCreateInstance();
-                searchCriteria.ProductId = productId;
+                searchCriteria.ProductIds = [productId];
                 searchCriteria.IsActive = true;
                 searchCriteria.Sort = nameof(BackInStockSubscription.Triggered);
                 searchCriteria.Take = await GetBatchSize();

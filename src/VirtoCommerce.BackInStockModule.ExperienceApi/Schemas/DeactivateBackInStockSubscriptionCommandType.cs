@@ -8,7 +8,6 @@ public class
 {
     public DeactivateBackInStockSubscriptionCommandType()
     {
-        Field(x => x.UserId);
         Field(x => x.StoreId);
         Field(x => x.ProductId);
     }

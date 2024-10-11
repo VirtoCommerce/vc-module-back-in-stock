@@ -51,6 +51,7 @@ public static class ModuleConstants
             public static SettingDescriptor SubscriptionsJobBatchSize { get; } = new()
             {
                 Name = "BackInStock.BatchSize",
+                DisplayName = "Notifications to schedule batch size",
                 GroupName = "Back In Stock|General",
                 ValueType = SettingValueType.Integer,
                 DefaultValue = 1000,

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using VirtoCommerce.Platform.Core.Common;
 
 namespace VirtoCommerce.BackInStockModule.Core.Models;
@@ -9,7 +10,7 @@ public class BackInStockSubscriptionSearchCriteria : SearchCriteriaBase
 
     public string StoreId { get; set; }
 
-    public string ProductId { get; set; }
+    public IList<string> ProductIds { get; set; }
 
     public bool? IsActive { get; set; }
 

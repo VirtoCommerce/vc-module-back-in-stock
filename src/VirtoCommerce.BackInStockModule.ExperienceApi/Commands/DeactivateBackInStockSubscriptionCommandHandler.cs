@@ -16,7 +16,7 @@ public class DeactivateBackInStockSubscriptionCommandHandler(
     public async Task<BackInStockSubscription> Handle(DeactivateBackInStockSubscriptionCommand request, CancellationToken cancellationToken)
     {
         var searchCriteria = AbstractTypeFactory<BackInStockSubscriptionSearchCriteria>.TryCreateInstance();
-        searchCriteria.ProductId = request.ProductId;
+        searchCriteria.ProductIds = [request.ProductId];
         searchCriteria.StoreId = request.StoreId;
         searchCriteria.UserId = request.UserId;
         searchCriteria.Take = 1;

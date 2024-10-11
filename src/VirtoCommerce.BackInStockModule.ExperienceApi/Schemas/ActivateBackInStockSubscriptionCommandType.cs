@@ -7,7 +7,6 @@ public class ActivateBackInStockSubscriptionCommandType : InputObjectGraphType<A
 {
     public ActivateBackInStockSubscriptionCommandType()
     {
-        Field(x => x.UserId);
         Field(x => x.StoreId);
         Field(x => x.ProductId);
     }

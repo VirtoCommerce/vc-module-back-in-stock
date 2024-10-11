@@ -38,7 +38,7 @@ public class BackInStockQueryHandler : IQueryHandler<BackInStockSubscriptionsQue
         var criteria = request.GetSearchCriteria<BackInStockSubscriptionSearchCriteria>();
         criteria.StoreId = request.StoreId.EmptyToNull();
         criteria.UserId = request.UserId.EmptyToNull();
-        criteria.ProductId = request.ProductId.EmptyToNull();
+        criteria.ProductIds = request.ProductIds.IsNullOrEmpty() ? null : request.ProductIds;
         criteria.IsActive = request.IsActive;
 
         if (!string.IsNullOrEmpty(request.Filter))

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -18,7 +19,7 @@ public class ActivateBackInStockSubscriptionCommandHandler(
     public async Task<BackInStockSubscription> Handle(ActivateBackInStockSubscriptionCommand request, CancellationToken cancellationToken)
     {
         var searchCriteria = AbstractTypeFactory<BackInStockSubscriptionSearchCriteria>.TryCreateInstance();
-        searchCriteria.ProductId = request.ProductId;
+        searchCriteria.ProductIds = [request.ProductId];
         searchCriteria.StoreId = request.StoreId;
         searchCriteria.UserId = request.UserId;
         searchCriteria.Take = 1;

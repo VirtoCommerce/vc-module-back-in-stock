@@ -26,9 +26,9 @@ public class BackInStockSubscriptionSearchService(
     {
         var query = ((BackInStockSubscriptionRepository)repository).BackInStockSubscriptions;
 
-        if (criteria.ProductId != null)
+        if (criteria.ProductIds != null)
         {
-            query = query.Where(x => x.ProductId == criteria.ProductId);
+            query = query.Where(x => criteria.ProductIds.Contains(x.ProductId));
         }
 
         if (criteria.UserId != null)

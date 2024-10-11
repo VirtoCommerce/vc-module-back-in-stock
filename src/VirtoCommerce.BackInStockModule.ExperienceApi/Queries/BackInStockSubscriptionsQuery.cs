@@ -13,7 +13,7 @@ public class BackInStockSubscriptionsQuery : SearchQuery<BackInStockSubscription
 
     public string StoreId { get; set; }
 
-    public string ProductId { get; set; }
+    public IList<string> ProductIds { get; set; }
 
     public bool? IsActive { get; set; }
 
@@ -32,7 +32,7 @@ public class BackInStockSubscriptionsQuery : SearchQuery<BackInStockSubscription
 
         yield return Argument<StringGraphType>(nameof(UserId));
         yield return Argument<StringGraphType>(nameof(StoreId));
-        yield return Argument<StringGraphType>(nameof(ProductId));
+        yield return Argument<ListGraphType<StringGraphType>>(nameof(ProductIds));
         yield return Argument<BooleanGraphType>(nameof(IsActive));
         yield return Argument<DateTimeGraphType>(nameof(StartTriggeredDate));
         yield return Argument<DateTimeGraphType>(nameof(EndTriggeredDate));
@@ -45,7 +45,7 @@ public class BackInStockSubscriptionsQuery : SearchQuery<BackInStockSubscription
 
         UserId = context.GetArgument<string>(nameof(UserId));
         StoreId = context.GetArgument<string>(nameof(StoreId));
-        ProductId = context.GetArgument<string>(nameof(ProductId));
+        ProductIds = context.GetArgument<IList<string>>(nameof(ProductIds));
         IsActive = context.GetArgument<bool?>(nameof(IsActive));
         StartTriggeredDate = context.GetArgument<DateTime?>(nameof(StartTriggeredDate));
         EndTriggeredDate = context.GetArgument<DateTime?>(nameof(EndTriggeredDate));
