@@ -1,5 +1,6 @@
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
+using VirtoCommerce.BackInStockModule.Data.Models;
 using VirtoCommerce.Platform.Data.Infrastructure;
 
 namespace VirtoCommerce.BackInStockModule.Data.Repositories;
@@ -20,8 +21,14 @@ public class BackInStockModuleDbContext : DbContextBase
     {
         base.OnModelCreating(modelBuilder);
 
-        //modelBuilder.Entity<BackInStockModuleEntity>().ToTable("BackInStockModule").HasKey(x => x.Id);
-        //modelBuilder.Entity<BackInStockModuleEntity>().Property(x => x.Id).HasMaxLength(128).ValueGeneratedOnAdd();
+        modelBuilder.Entity<BackInStockSubscriptionEntity>().ToTable("BackInStockSubscriptions").HasKey(x => x.Id);
+        modelBuilder.Entity<BackInStockSubscriptionEntity>().Property(x => x.Id).HasMaxLength(128).ValueGeneratedOnAdd();
+        modelBuilder.Entity<BackInStockSubscriptionEntity>()
+            .HasIndex(x => new { x.StoreId, x.UserId, x.ProductId })
+            .IsUnique();
+        modelBuilder.Entity<BackInStockSubscriptionEntity>()
+            .HasIndex(x => new { x.ProductId })
+            .IsUnique(false);
 
         switch (Database.ProviderName)
         {

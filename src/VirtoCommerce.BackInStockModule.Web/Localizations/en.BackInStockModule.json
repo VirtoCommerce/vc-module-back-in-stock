@@ -1,20 +1,29 @@
 {
-  "BackInStockModule": {
+  "VirtoCommerce.BackInStockModule": {
     "blades": {
-      "hello-world": {
-        "title": "Hello world blade"
+      "subscriptions": {
+        "title": "Customer back in stock subscriptions",
+        "no-subscriptions": "There are no subscriptions"
+      },
+      "product-detail": {
+        "description": "Product detail"
+      }
+    },
+    "widgets": {
+      "item-detail": {
+        "title": "Back in stock subscriptions"
       }
     }
   },
   "permissions": {
-    "BackInStockModule:access": "Open BackInStockModule menu",
-    "BackInStockModule:create": "Create BackInStockModule related data",
-    "BackInStockModule:read": "View BackInStockModule related data",
-    "BackInStockModule:update": "Update BackInStockModule related data",
-    "BackInStockModule:delete": "Delete BackInStockModule related data"
+    "BackInStockModule:subscription:access": "Open BackInStockModule menu",
+    "BackInStockModule:subscription:create": "Create BackInStockModule related data",
+    "BackInStockModule:subscription:read": "View BackInStockModule related data",
+    "BackInStockModule:subscription:update": "Update BackInStockModule related data",
+    "BackInStockModule:subscription:delete": "Delete BackInStockModule related data"
   },
   "settings": {
-    "BackInStockModule": {
+    "VirtoCommerce.BackInStockModule": {
       "BackInStockModuleEnabled": {
         "title": "BackInStockModule Enabled",
         "description": "BackInStockModule Enabled setting"

@@ -9,20 +9,20 @@ public static class ModuleConstants
     {
         public static class Permissions
         {
-            public const string Access = "BackInStockModule:access";
-            public const string Create = "BackInStockModule:create";
-            public const string Read = "BackInStockModule:read";
-            public const string Update = "BackInStockModule:update";
-            public const string Delete = "BackInStockModule:delete";
+            public const string Access = "BackInStockModule:subscription:access";
+            public const string Create = "BackInStockModule:subscription:create";
+            public const string Read = "BackInStockModule:subscription:read";
+            public const string Update = "BackInStockModule:subscription:update";
+            public const string Delete = "BackInStockModule:subscription:delete";
 
             public static string[] AllPermissions { get; } =
-            {
+            [
                 Access,
                 Create,
                 Read,
                 Update,
                 Delete,
-            };
+            ];
         }
     }
 
@@ -30,28 +30,40 @@ public static class ModuleConstants
     {
         public static class General
         {
-            public static SettingDescriptor BackInStockModuleEnabled { get; } = new()
+            public static SettingDescriptor BackInStockEnabled { get; } = new()
             {
-                Name = "BackInStockModule.BackInStockModuleEnabled",
-                GroupName = "BackInStockModule|General",
+                Name = "BackInStock.BackInStockEnabled",
+                GroupName = "Back In Stock|General",
                 ValueType = SettingValueType.Boolean,
                 DefaultValue = false,
+                IsPublic = true,
             };
 
-            public static SettingDescriptor BackInStockModulePassword { get; } = new()
+            public static SettingDescriptor BackInStockEnabledForAnonymous { get; } = new()
             {
-                Name = "BackInStockModule.BackInStockModulePassword",
-                GroupName = "BackInStockModule|Advanced",
-                ValueType = SettingValueType.SecureString,
-                DefaultValue = "qwerty",
+                Name = "BackInStock.BackInStockEnabledForAnonymous",
+                GroupName = "Back In Stock|General",
+                ValueType = SettingValueType.Boolean,
+                DefaultValue = false,
+                IsPublic = true,
+            };
+
+            public static SettingDescriptor SubscriptionsJobBatchSize { get; } = new()
+            {
+                Name = "BackInStock.BatchSize",
+                DisplayName = "Notifications to schedule batch size",
+                GroupName = "Back In Stock|General",
+                ValueType = SettingValueType.Integer,
+                DefaultValue = 1000,
             };
 
             public static IEnumerable<SettingDescriptor> AllGeneralSettings
             {
                 get
                 {
-                    yield return BackInStockModuleEnabled;
-                    yield return BackInStockModulePassword;
+                    yield return BackInStockEnabled;
+                    yield return BackInStockEnabledForAnonymous;
+                    yield return SubscriptionsJobBatchSize;
                 }
             }
         }
