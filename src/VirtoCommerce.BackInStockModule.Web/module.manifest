@@ -19,7 +19,7 @@
     <owner>VirtoCommerce</owner>
   </owners>
 
-  <projectUrl>https://github.com/VirtoCommerce/vc-module-back-in-stock-module</projectUrl>
+  <projectUrl>https://github.com/VirtoCommerce/vc-module-back-in-stock</projectUrl>
   <iconUrl>Modules/$(VirtoCommerce.BackInStockModule)/Content/logo.png</iconUrl>
   <requireLicenseAcceptance>false</requireLicenseAcceptance>
 
