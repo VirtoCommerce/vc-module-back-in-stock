@@ -1,0 +1,37 @@
+{
+  "BackInStock": {
+    "blades": {
+      "subscriptions": {
+        "title": "Customer back in stock subscriptions",
+        "no-subscriptions": "There are no subscriptions"
+      },
+      "product-detail": {
+        "description": "Product detail"
+      }
+    },
+    "widgets": {
+      "item-detail": {
+        "title": "Back in stock subscriptions"
+      }
+    }
+  },
+  "permissions": {
+    "BackInStock:subscription:access": "Open BackInStock menu",
+    "BackInStock:subscription:create": "Create BackInStock related data",
+    "BackInStock:subscription:read": "View BackInStock related data",
+    "BackInStock:subscription:update": "Update BackInStock related data",
+    "BackInStock:subscription:delete": "Delete BackInStock related data"
+  },
+  "settings": {
+    "BackInStock": {
+      "BackInStockEnabled": {
+        "title": "BackInStock Enabled",
+        "description": "BackInStock Enabled setting"
+      },
+      "BackInStockPassword": {
+        "title": "BackInStock Password",
+        "description": "BackInStock Password setting"
+      }
+    }
+  }
+}

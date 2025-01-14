@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+  </PropertyGroup>
+  <PropertyGroup>
+    <!-- Project is not a test project -->
+    <SonarQubeTestProject>false</SonarQubeTestProject>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="VirtoCommerce.Xapi.Core" Version="3.807.0" />
+    <PackageReference Include="VirtoCommerce.XCatalog.Core" Version="3.812.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\VirtoCommerce.BackInStock.Core\VirtoCommerce.BackInStock.Core.csproj" />
+  </ItemGroup>
+</Project>

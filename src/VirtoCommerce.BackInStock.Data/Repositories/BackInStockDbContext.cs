@@ -1,0 +1,46 @@
+using System.Reflection;
+using Microsoft.EntityFrameworkCore;
+using VirtoCommerce.BackInStock.Data.Models;
+using VirtoCommerce.Platform.Data.Infrastructure;
+
+namespace VirtoCommerce.BackInStock.Data.Repositories;
+
+public class BackInStockDbContext : DbContextBase
+{
+    public BackInStockDbContext(DbContextOptions<BackInStockDbContext> options)
+        : base(options)
+    {
+    }
+
+    protected BackInStockDbContext(DbContextOptions options)
+        : base(options)
+    {
+    }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+
+        modelBuilder.Entity<BackInStockSubscriptionEntity>().ToTable("BackInStockSubscriptions").HasKey(x => x.Id);
+        modelBuilder.Entity<BackInStockSubscriptionEntity>().Property(x => x.Id).HasMaxLength(128).ValueGeneratedOnAdd();
+        modelBuilder.Entity<BackInStockSubscriptionEntity>()
+            .HasIndex(x => new { x.StoreId, x.UserId, x.ProductId })
+            .IsUnique();
+        modelBuilder.Entity<BackInStockSubscriptionEntity>()
+            .HasIndex(x => new { x.ProductId })
+            .IsUnique(false);
+
+        switch (Database.ProviderName)
+        {
+            case "Pomelo.EntityFrameworkCore.MySql":
+                modelBuilder.ApplyConfigurationsFromAssembly(Assembly.Load("VirtoCommerce.BackInStock.Data.MySql"));
+                break;
+            case "Npgsql.EntityFrameworkCore.PostgreSQL":
+                modelBuilder.ApplyConfigurationsFromAssembly(Assembly.Load("VirtoCommerce.BackInStock.Data.PostgreSql"));
+                break;
+            case "Microsoft.EntityFrameworkCore.SqlServer":
+                modelBuilder.ApplyConfigurationsFromAssembly(Assembly.Load("VirtoCommerce.BackInStock.Data.SqlServer"));
+                break;
+        }
+    }
+}
