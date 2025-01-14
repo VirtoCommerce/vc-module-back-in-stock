@@ -1,0 +1,28 @@
+{
+  "BackInStock": {
+    "blades": {
+      "hello-world": {
+        "title": "Hello world blade"
+      }
+    }
+  },
+  "permissions": {
+    "BackInStock:access": "Open BackInStock menu",
+    "BackInStock:create": "Create BackInStock related data",
+    "BackInStock:read": "View BackInStock related data",
+    "BackInStock:update": "Update BackInStock related data",
+    "BackInStock:delete": "Delete BackInStock related data"
+  },
+  "settings": {
+    "BackInStock": {
+      "BackInStockEnabled": {
+        "title": "BackInStock Enabled",
+        "description": "BackInStock Enabled setting"
+      },
+      "BackInStockPassword": {
+        "title": "BackInStock Password",
+        "description": "BackInStock Password setting"
+      }
+    }
+  }
+}

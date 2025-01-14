@@ -1,4 +1,4 @@
-# BackInStockModule
+# BackInStock
 
 ## Overview
 
