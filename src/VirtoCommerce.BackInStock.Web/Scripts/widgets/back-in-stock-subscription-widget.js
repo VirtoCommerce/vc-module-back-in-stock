@@ -2,29 +2,20 @@ angular.module('VirtoCommerce.BackInStock')
     .controller('VirtoCommerce.BackInStock.subscriptionWidgetController', [
         '$scope', 'platformWebApp.bladeNavigationService', 'VirtoCommerce.BackInStock.subscriptionApi',
         function ($scope, bladeNavigationService, subscriptionApi) {
-            let blade = $scope.blade;
-            let filter = $scope.filter = blade.filter || {};
-            let customerId = $scope.blade.currentEntityId;
-
-            function init() {
-                $scope.subscriptions = null;
-                $scope.subscriptionsCount = 0;
-
-                refresh();
-            }
+            const blade = $scope.blade;
+            const memberId = blade.currentEntityId;
+            $scope.subscriptionsCount = 0;
 
             function refresh() {
                 $scope.loading = true;
 
-                const criteria = angular.extend(filter, {
-                    memberId: customerId,
-                    skip: 0,
-                    take: 100,
-                });
+                const criteria = {
+                    memberId: memberId,
+                    take: 0,
+                };
 
                 subscriptionApi.search(criteria, function (data) {
-                    $scope.subscriptions = data?.results ?? null;
-                    $scope.subscriptionsCount = $scope.subscriptions == null ? 0 : data.totalCount;
+                    $scope.subscriptionsCount = data.totalCount;
                     $scope.loading = false;
                 });
             }
@@ -34,11 +25,11 @@ angular.module('VirtoCommerce.BackInStock')
                     return;
                 }
 
-                let newBlade = {
+                const newBlade = {
                     id: 'backInStockSubscriptions',
                     controller: 'VirtoCommerce.BackInStock.subscriptionListController',
                     template: 'Modules/$(VirtoCommerce.BackInStock)/Scripts/blades/back-in-stock-subscription-list.html',
-                    filter: { memberId: customerId }
+                    memberId: memberId
                 };
 
                 bladeNavigationService.showBlade(newBlade, blade);
@@ -49,7 +40,5 @@ angular.module('VirtoCommerce.BackInStock')
                     refresh();
                 }
             });
-
-            init();
         }
     ]);

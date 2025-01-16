@@ -2,7 +2,7 @@ angular.module('VirtoCommerce.BackInStock')
     .controller('VirtoCommerce.BackInStock.subscriptionListController', [
         '$scope', 'uiGridConstants', 'platformWebApp.uiGridHelper', 'platformWebApp.bladeUtils', 'VirtoCommerce.BackInStock.subscriptionApi',
         function ($scope, uiGridConstants, uiGridHelper, bladeUtils, subscriptionApi) {
-            let blade = $scope.blade;
+            const blade = $scope.blade;
             blade.title = 'BackInStock.blades.subscriptions.title';
             blade.headIcon = 'fa fa-comments';
 
@@ -10,6 +10,7 @@ angular.module('VirtoCommerce.BackInStock')
                 blade.isLoading = true;
 
                 const criteria = angular.extend(filter, {
+                    memberId: blade.memberId,
                     sort: uiGridHelper.getSortExpression($scope),
                     skip: ($scope.pageSettings.currentPage - 1) * $scope.pageSettings.itemsPerPageCount,
                     take: $scope.pageSettings.itemsPerPageCount
