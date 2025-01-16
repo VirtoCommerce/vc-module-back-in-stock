@@ -6,21 +6,23 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace VirtoCommerce.BackInStock.Data.PostgreSql.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class AddBackInStockSubscription : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "BackInStockSubscriptions",
+                name: "BackInStockSubscription",
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false),
-                    UserId = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false),
                     StoreId = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false),
                     ProductId = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false),
-                    Triggered = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    ProductName = table.Column<string>(type: "character varying(1024)", maxLength: 1024, nullable: true),
+                    UserId = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false),
+                    MemberId = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: true),
                     IsActive = table.Column<bool>(type: "boolean", nullable: false),
+                    SentDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     CreatedBy = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true),
@@ -28,18 +30,23 @@ namespace VirtoCommerce.BackInStock.Data.PostgreSql.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_BackInStockSubscriptions", x => x.Id);
+                    table.PrimaryKey("PK_BackInStockSubscription", x => x.Id);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_BackInStockSubscriptions_ProductId",
-                table: "BackInStockSubscriptions",
-                column: "ProductId");
+                name: "IX_BackInStockSubscription_MemberId",
+                table: "BackInStockSubscription",
+                column: "MemberId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_BackInStockSubscriptions_StoreId_UserId_ProductId",
-                table: "BackInStockSubscriptions",
-                columns: new[] { "StoreId", "UserId", "ProductId" },
+                name: "IX_BackInStockSubscription_ProductId_IsActive",
+                table: "BackInStockSubscription",
+                columns: new[] { "ProductId", "IsActive" });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BackInStockSubscription_UserId_ProductId_StoreId_IsActive",
+                table: "BackInStockSubscription",
+                columns: new[] { "UserId", "ProductId", "StoreId", "IsActive" },
                 unique: true);
         }
 
@@ -47,7 +54,7 @@ namespace VirtoCommerce.BackInStock.Data.PostgreSql.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "BackInStockSubscriptions");
+                name: "BackInStockSubscription");
         }
     }
 }

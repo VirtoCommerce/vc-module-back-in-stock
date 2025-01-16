@@ -39,7 +39,7 @@ public class BackInStockNotificationJobService(
         }
         catch (Exception ex)
         {
-            logger.LogError(ex, "Cannot enqueue back in stock notifications background job");
+            logger.LogError(ex, "Failed to enqueue back in stock notifications background job");
             throw;
         }
     }
@@ -53,26 +53,26 @@ public class BackInStockNotificationJobService(
                 var searchCriteria = AbstractTypeFactory<BackInStockSubscriptionSearchCriteria>.TryCreateInstance();
                 searchCriteria.ProductIds = [productId];
                 searchCriteria.IsActive = true;
-                searchCriteria.Sort = nameof(BackInStockSubscription.Triggered);
+                searchCriteria.Sort = nameof(BackInStockSubscription.SentDate);
                 searchCriteria.Take = await GetBatchSize();
 
                 await foreach (var searchResult in backInStockSubscriptionSearchService.SearchBatchesAsync(searchCriteria))
                 {
                     foreach (var backInStockSubscription in searchResult.Results)
                     {
-                        await SendBackInStockEmailNotificationAsync(backInStockSubscription);
+                        await ScheduleNotificationAsync(backInStockSubscription);
                     }
                 }
             }
             catch (Exception ex)
             {
-                logger.LogError(ex, "Failed to enqueue batch of notification jobs for product id: {productId}", productId);
+                logger.LogError(ex, "Failed to send notifications for product {ProductId}", productId);
                 throw;
             }
         }
     }
 
-    public async Task SendBackInStockEmailNotificationAsync(BackInStockSubscription subscription)
+    private async Task ScheduleNotificationAsync(BackInStockSubscription subscription)
     {
         try
         {
@@ -84,25 +84,21 @@ public class BackInStockNotificationJobService(
         }
         catch (Exception ex)
         {
-            logger.LogError(ex, $"Failed to send {nameof(BackInStockEmailNotification)} notification");
+            logger.LogError(ex, "Failed to send notification {NotificationType}", nameof(BackInStockEmailNotification));
             throw;
         }
     }
 
     private async Task<BackInStockEmailNotification> PrepareNotification(BackInStockSubscription subscription)
     {
-        var notification = await notificationSearchService.GetNotificationAsync(
-                nameof(BackInStockEmailNotification),
-                new TenantIdentity(subscription.StoreId, nameof(Store)))
-            as BackInStockEmailNotification;
-
+        var notification = await notificationSearchService.GetNotificationAsync<BackInStockEmailNotification>(new TenantIdentity(subscription.StoreId, nameof(Store)));
         if (notification == null)
         {
             return null;
         }
 
         var customer = await memberResolver.ResolveMemberByIdAsync(subscription.UserId);
-        if (customer == null || !customer.Emails.Any())
+        if (customer == null || customer.Emails.Count == 0)
         {
             return null;
         }
@@ -119,11 +115,10 @@ public class BackInStockNotificationJobService(
             return null;
         }
 
-        notification.Item = product;
+        notification.Product = product;
         notification.Customer = customer;
         notification.From = store.EmailWithName;
         notification.To = customer.Emails.First();
-        notification.Type = nameof(BackInStockEmailNotification);
 
         return notification;
     }

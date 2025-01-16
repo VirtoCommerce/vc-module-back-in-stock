@@ -9,29 +9,33 @@ using VirtoCommerce.BackInStock.Data.Repositories;
 using VirtoCommerce.Platform.Core.Caching;
 using VirtoCommerce.Platform.Core.Common;
 using VirtoCommerce.Platform.Core.GenericCrud;
-using VirtoCommerce.Platform.Core.Security;
-using VirtoCommerce.Platform.Core.Security.Search;
 using VirtoCommerce.Platform.Data.GenericCrud;
 
 namespace VirtoCommerce.BackInStock.Data.Services;
 
 public class BackInStockSubscriptionSearchService(
-    Func<IBackInStockSubscriptionRepository> repositoryFactory,
+    Func<IBackInStockRepository> repositoryFactory,
     IPlatformMemoryCache platformMemoryCache,
     IBackInStockSubscriptionService crudService,
-    IOptions<CrudOptions> crudOptions,
-    IUserSearchService userSearchService)
+    IOptions<CrudOptions> crudOptions)
     : SearchService<BackInStockSubscriptionSearchCriteria, BackInStockSubscriptionSearchResult, BackInStockSubscription, BackInStockSubscriptionEntity>
         (repositoryFactory, platformMemoryCache, crudService, crudOptions),
         IBackInStockSubscriptionSearchService
 {
     protected override IQueryable<BackInStockSubscriptionEntity> BuildQuery(IRepository repository, BackInStockSubscriptionSearchCriteria criteria)
     {
-        var query = ((BackInStockSubscriptionRepository)repository).BackInStockSubscriptions;
+        var query = ((IBackInStockRepository)repository).BackInStockSubscriptions;
+
+        if (criteria.StoreId != null)
+        {
+            query = query.Where(x => x.StoreId == criteria.StoreId);
+        }
 
         if (criteria.ProductIds != null)
         {
-            query = query.Where(x => criteria.ProductIds.Contains(x.ProductId));
+            query = criteria.ProductIds.Count == 1
+                ? query.Where(x => x.ProductId == criteria.ProductIds.First())
+                : query.Where(x => criteria.ProductIds.Contains(x.ProductId));
         }
 
         if (criteria.UserId != null)
@@ -41,26 +45,22 @@ public class BackInStockSubscriptionSearchService(
 
         if (criteria.MemberId != null)
         {
-            var user = (userSearchService.SearchUsersAsync(new UserSearchCriteria() { MemberId = criteria.MemberId })).Result.Users.First();
-            if (user != null)
-            {
-                query = query.Where(x => x.UserId == user.Id.ToString());
-            }
+            query = query.Where(x => x.MemberId == criteria.MemberId);
         }
 
-        if (criteria.StoreId != null)
+        if (criteria.IsActive != null)
         {
-            query = query.Where(x => x.StoreId == criteria.StoreId);
+            query = query.Where(x => x.IsActive == criteria.IsActive);
         }
 
-        if (criteria.StartTriggeredDate != null)
+        if (criteria.StartSentDate != null)
         {
-            query = query.Where(x => x.Triggered >= criteria.StartTriggeredDate);
+            query = query.Where(x => x.SentDate >= criteria.StartSentDate);
         }
 
-        if (criteria.EndTriggeredDate != null)
+        if (criteria.EndSentDate != null)
         {
-            query = query.Where(x => x.Triggered <= criteria.EndTriggeredDate);
+            query = query.Where(x => x.SentDate <= criteria.EndSentDate);
         }
 
         if (criteria.Keyword != null)

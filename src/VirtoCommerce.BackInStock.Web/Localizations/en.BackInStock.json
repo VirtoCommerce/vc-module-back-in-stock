@@ -2,15 +2,12 @@
   "BackInStock": {
     "blades": {
       "subscriptions": {
-        "title": "Customer back in stock subscriptions",
+        "title": "Back in stock subscriptions",
         "no-subscriptions": "There are no subscriptions"
-      },
-      "product-detail": {
-        "description": "Product detail"
       }
     },
     "widgets": {
-      "item-detail": {
+      "subscriptions": {
         "title": "Back in stock subscriptions"
       }
     }
@@ -24,13 +21,13 @@
   },
   "settings": {
     "BackInStock": {
-      "BackInStockEnabled": {
-        "title": "BackInStock Enabled",
-        "description": "BackInStock Enabled setting"
+      "Enabled": {
+        "title": "Enabled",
+        "description": ""
       },
-      "BackInStockPassword": {
-        "title": "BackInStock Password",
-        "description": "BackInStock Password setting"
+      "JobBatchSize": {
+        "title": "Job batch size",
+        "description": ""
       }
     }
   }

@@ -4,6 +4,7 @@ using GraphQL;
 using GraphQL.Types;
 using VirtoCommerce.BackInStock.Core.Models;
 using VirtoCommerce.Xapi.Core.BaseQueries;
+using VirtoCommerce.Xapi.Core.Extensions;
 
 namespace VirtoCommerce.BackInStock.ExperienceApi.Queries;
 
@@ -17,11 +18,9 @@ public class BackInStockSubscriptionsQuery : SearchQuery<BackInStockSubscription
 
     public bool? IsActive { get; set; }
 
-    public DateTime? StartTriggeredDate { get; set; }
+    public DateTime? StartSentDate { get; set; }
 
-    public DateTime? EndTriggeredDate { get; set; }
-
-    public string Filter { get; set; }
+    public DateTime? EndSentDate { get; set; }
 
     public override IEnumerable<QueryArgument> GetArguments()
     {
@@ -30,25 +29,23 @@ public class BackInStockSubscriptionsQuery : SearchQuery<BackInStockSubscription
             yield return argument;
         }
 
-        yield return Argument<StringGraphType>(nameof(UserId));
         yield return Argument<StringGraphType>(nameof(StoreId));
         yield return Argument<ListGraphType<StringGraphType>>(nameof(ProductIds));
         yield return Argument<BooleanGraphType>(nameof(IsActive));
-        yield return Argument<DateTimeGraphType>(nameof(StartTriggeredDate));
-        yield return Argument<DateTimeGraphType>(nameof(EndTriggeredDate));
-        yield return Argument<StringGraphType>(nameof(Filter));
+        yield return Argument<DateTimeGraphType>(nameof(StartSentDate));
+        yield return Argument<DateTimeGraphType>(nameof(EndSentDate));
     }
 
     public override void Map(IResolveFieldContext context)
     {
         base.Map(context);
 
-        UserId = context.GetArgument<string>(nameof(UserId));
+        UserId = context.GetCurrentUserId();
+
         StoreId = context.GetArgument<string>(nameof(StoreId));
         ProductIds = context.GetArgument<IList<string>>(nameof(ProductIds));
         IsActive = context.GetArgument<bool?>(nameof(IsActive));
-        StartTriggeredDate = context.GetArgument<DateTime?>(nameof(StartTriggeredDate));
-        EndTriggeredDate = context.GetArgument<DateTime?>(nameof(EndTriggeredDate));
-        Filter = context.GetArgument<string>(nameof(Filter));
+        StartSentDate = context.GetArgument<DateTime?>(nameof(StartSentDate));
+        EndSentDate = context.GetArgument<DateTime?>(nameof(EndSentDate));
     }
 }

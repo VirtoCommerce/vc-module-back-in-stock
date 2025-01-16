@@ -11,12 +11,15 @@ public class InventoryChangedEventHandler(IBackInStockNotificationJobService bac
 {
     public Task Handle(InventoryChangedEvent inventoryChangedEvent)
     {
-        var inStockProducts = inventoryChangedEvent.ChangedEntries
-            .Where(x => x.OldEntry.InStockQuantity == 0 && x.NewEntry.InStockQuantity > 0)
+        var backInStockProductIds = inventoryChangedEvent.ChangedEntries
+            .Where(x => x.OldEntry.InStockQuantity == 0 && x.NewEntry.InStockQuantity > 0 && !string.IsNullOrEmpty(x.NewEntry.ProductId))
             .Select(x => x.NewEntry.ProductId)
             .ToList();
 
-        backInStockNotificationJobService.EnqueueProductBackInStockNotifications(inStockProducts);
+        if (backInStockProductIds.Count > 0)
+        {
+            backInStockNotificationJobService.EnqueueProductBackInStockNotifications(backInStockProductIds);
+        }
 
         return Task.CompletedTask;
     }

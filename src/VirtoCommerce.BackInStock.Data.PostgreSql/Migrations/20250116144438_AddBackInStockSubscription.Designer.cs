@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using VirtoCommerce.BackInStock.Data.Repositories;
@@ -11,9 +12,11 @@ using VirtoCommerce.BackInStock.Data.Repositories;
 namespace VirtoCommerce.BackInStock.Data.PostgreSql.Migrations
 {
     [DbContext(typeof(BackInStockDbContext))]
-    partial class BackInStockDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250116144438_AddBackInStockSubscription")]
+    partial class AddBackInStockSubscription
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

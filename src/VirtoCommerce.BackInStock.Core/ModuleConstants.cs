@@ -32,16 +32,7 @@ public static class ModuleConstants
         {
             public static SettingDescriptor BackInStockEnabled { get; } = new()
             {
-                Name = "BackInStock.BackInStockEnabled",
-                GroupName = "Back In Stock|General",
-                ValueType = SettingValueType.Boolean,
-                DefaultValue = false,
-                IsPublic = true,
-            };
-
-            public static SettingDescriptor BackInStockEnabledForAnonymous { get; } = new()
-            {
-                Name = "BackInStock.BackInStockEnabledForAnonymous",
+                Name = "BackInStock.Enabled",
                 GroupName = "Back In Stock|General",
                 ValueType = SettingValueType.Boolean,
                 DefaultValue = false,
@@ -50,8 +41,7 @@ public static class ModuleConstants
 
             public static SettingDescriptor SubscriptionsJobBatchSize { get; } = new()
             {
-                Name = "BackInStock.BatchSize",
-                DisplayName = "Notifications to schedule batch size",
+                Name = "BackInStock.JobBatchSize",
                 GroupName = "Back In Stock|General",
                 ValueType = SettingValueType.Integer,
                 DefaultValue = 1000,
@@ -62,7 +52,6 @@ public static class ModuleConstants
                 get
                 {
                     yield return BackInStockEnabled;
-                    yield return BackInStockEnabledForAnonymous;
                     yield return SubscriptionsJobBatchSize;
                 }
             }

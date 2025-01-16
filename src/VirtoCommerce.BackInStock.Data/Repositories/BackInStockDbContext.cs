@@ -21,14 +21,11 @@ public class BackInStockDbContext : DbContextBase
     {
         base.OnModelCreating(modelBuilder);
 
-        modelBuilder.Entity<BackInStockSubscriptionEntity>().ToTable("BackInStockSubscriptions").HasKey(x => x.Id);
-        modelBuilder.Entity<BackInStockSubscriptionEntity>().Property(x => x.Id).HasMaxLength(128).ValueGeneratedOnAdd();
-        modelBuilder.Entity<BackInStockSubscriptionEntity>()
-            .HasIndex(x => new { x.StoreId, x.UserId, x.ProductId })
-            .IsUnique();
-        modelBuilder.Entity<BackInStockSubscriptionEntity>()
-            .HasIndex(x => new { x.ProductId })
-            .IsUnique(false);
+        modelBuilder.Entity<BackInStockSubscriptionEntity>().ToTable("BackInStockSubscription").HasKey(x => x.Id);
+        modelBuilder.Entity<BackInStockSubscriptionEntity>().Property(x => x.Id).HasMaxLength(IdLength).ValueGeneratedOnAdd();
+        modelBuilder.Entity<BackInStockSubscriptionEntity>().HasIndex(x => new { x.UserId, x.ProductId, x.StoreId, x.IsActive }).IsUnique();
+        modelBuilder.Entity<BackInStockSubscriptionEntity>().HasIndex(x => new { x.MemberId }).IsUnique(false);
+        modelBuilder.Entity<BackInStockSubscriptionEntity>().HasIndex(x => new { x.ProductId, x.IsActive }).IsUnique(false);
 
         switch (Database.ProviderName)
         {

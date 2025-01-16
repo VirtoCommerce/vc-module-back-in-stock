@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using VirtoCommerce.BackInStock.Core.Models;
 using VirtoCommerce.BackInStock.Core.Services;
 using VirtoCommerce.BackInStock.ExperienceApi.Extensions;
-using VirtoCommerce.Platform.Core.Common;
 using VirtoCommerce.SearchModule.Core.Model;
 using VirtoCommerce.SearchModule.Core.Services;
 using VirtoCommerce.Xapi.Core.Index;
@@ -12,23 +11,15 @@ using VirtoCommerce.Xapi.Core.Infrastructure;
 
 namespace VirtoCommerce.BackInStock.ExperienceApi.Queries;
 
-public class BackInStockQueryHandler : IQueryHandler<BackInStockSubscriptionsQuery, BackInStockSubscriptionSearchResult>
+public class BackInStockQueryHandler(
+    IBackInStockSubscriptionSearchService searchService,
+    ISearchPhraseParser phraseParser)
+    : IQueryHandler<BackInStockSubscriptionsQuery, BackInStockSubscriptionSearchResult>
 {
-    private readonly IBackInStockSubscriptionSearchService _searchService;
-    private readonly ISearchPhraseParser _phraseParser;
-
-    public BackInStockQueryHandler(
-        IBackInStockSubscriptionSearchService searchService,
-        ISearchPhraseParser phraseParser)
-    {
-        _searchService = searchService;
-        _phraseParser = phraseParser;
-    }
-
     public virtual async Task<BackInStockSubscriptionSearchResult> Handle(BackInStockSubscriptionsQuery request, CancellationToken cancellationToken)
     {
         var criteria = GetSearchCriteria(request);
-        var result = await _searchService.SearchAsync(criteria);
+        var result = await searchService.SearchAsync(criteria);
 
         return result;
     }
@@ -36,14 +27,14 @@ public class BackInStockQueryHandler : IQueryHandler<BackInStockSubscriptionsQue
     protected virtual BackInStockSubscriptionSearchCriteria GetSearchCriteria(BackInStockSubscriptionsQuery request)
     {
         var criteria = request.GetSearchCriteria<BackInStockSubscriptionSearchCriteria>();
-        criteria.StoreId = request.StoreId.EmptyToNull();
-        criteria.UserId = request.UserId.EmptyToNull();
-        criteria.ProductIds = request.ProductIds.IsNullOrEmpty() ? null : request.ProductIds;
+        criteria.StoreId = request.StoreId;
+        criteria.ProductIds = request.ProductIds;
+        criteria.UserId = request.UserId;
         criteria.IsActive = request.IsActive;
 
-        if (!string.IsNullOrEmpty(request.Filter))
+        if (!string.IsNullOrEmpty(request.Keyword))
         {
-            var parseResult = _phraseParser.Parse(request.Filter);
+            var parseResult = phraseParser.Parse(request.Keyword);
 
             criteria.Keyword = parseResult.Keyword;
 
@@ -53,10 +44,10 @@ public class BackInStockQueryHandler : IQueryHandler<BackInStockSubscriptionsQue
                 term.MapTo(criteria);
             }
 
-            // Custom ModifiedDate filter
+            // Custom DateTime range filter
             parseResult.Filters
-                .Get<RangeFilter>("Triggered")
-                .MapTo(x => criteria.StartTriggeredDate = x, x => criteria.EndTriggeredDate = x);
+                .Get<RangeFilter>(nameof(BackInStockSubscription.SentDate))
+                .MapTo(x => criteria.StartSentDate = x, x => criteria.EndSentDate = x);
         }
 
         return criteria;

@@ -6,20 +6,12 @@ if (AppDependencies !== undefined) {
 }
 
 angular.module(moduleName, [])
-    .run(['$state',
-        'platformWebApp.widgetService',
-        'platformWebApp.authService',
-        function ($state, widgetService, authService) {
-            let customerBackInStockSubscriptionsWidget = {
-                controller: 'VirtoCommerce.BackInStock.backInStockSubscriptionsWidgetController',
-                template: 'Modules/$(VirtoCommerce.BackInStock)/Scripts/widgets/back-in-stock-widget.html',
+    .run(['platformWebApp.widgetService',
+        function (widgetService) {
+            widgetService.registerWidget({
+                controller: 'VirtoCommerce.BackInStock.subscriptionWidgetController',
+                template: 'Modules/$(VirtoCommerce.BackInStock)/Scripts/widgets/back-in-stock-subscription-widget.html',
                 isVisible: true,
-            };
-
-            widgetService.registerWidget(customerBackInStockSubscriptionsWidget, 'customerDetail1');
-
-            function checkPermissionToReadPrices() {
-                return authService.checkPermission('BackInStock:access');
-            }
+            }, 'customerDetail1');
         }
     ]);

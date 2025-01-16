@@ -17,7 +17,7 @@ namespace VirtoCommerce.BackInStock.Data.MySql.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.8")
+                .HasAnnotation("ProductVersion", "8.0.11")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
@@ -39,6 +39,10 @@ namespace VirtoCommerce.BackInStock.Data.MySql.Migrations
                     b.Property<bool>("IsActive")
                         .HasColumnType("tinyint(1)");
 
+                    b.Property<string>("MemberId")
+                        .HasMaxLength(128)
+                        .HasColumnType("varchar(128)");
+
                     b.Property<string>("ModifiedBy")
                         .HasMaxLength(64)
                         .HasColumnType("varchar(64)");
@@ -51,13 +55,17 @@ namespace VirtoCommerce.BackInStock.Data.MySql.Migrations
                         .HasMaxLength(128)
                         .HasColumnType("varchar(128)");
 
+                    b.Property<string>("ProductName")
+                        .HasMaxLength(1024)
+                        .HasColumnType("varchar(1024)");
+
+                    b.Property<DateTime?>("SentDate")
+                        .HasColumnType("datetime(6)");
+
                     b.Property<string>("StoreId")
                         .IsRequired()
                         .HasMaxLength(128)
                         .HasColumnType("varchar(128)");
-
-                    b.Property<DateTime?>("Triggered")
-                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("UserId")
                         .IsRequired()
@@ -66,12 +74,14 @@ namespace VirtoCommerce.BackInStock.Data.MySql.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProductId");
+                    b.HasIndex("MemberId");
 
-                    b.HasIndex("StoreId", "UserId", "ProductId")
+                    b.HasIndex("ProductId", "IsActive");
+
+                    b.HasIndex("UserId", "ProductId", "StoreId", "IsActive")
                         .IsUnique();
 
-                    b.ToTable("BackInStockSubscriptions", (string)null);
+                    b.ToTable("BackInStockSubscription", (string)null);
                 });
 #pragma warning restore 612, 618
         }

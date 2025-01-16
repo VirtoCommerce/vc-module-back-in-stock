@@ -1,55 +1,44 @@
 using System;
-using System.Collections.Generic;
-using System.Security.Claims;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using VirtoCommerce.BackInStock.ExperienceApi.Commands;
 using VirtoCommerce.BackInStock.ExperienceApi.Queries;
-using VirtoCommerce.Platform.Core;
 using VirtoCommerce.Platform.Core.Common;
 using VirtoCommerce.Platform.Core.Security;
 using VirtoCommerce.StoreModule.Core.Services;
-using static VirtoCommerce.Xapi.Core.ModuleConstants;
 
 namespace VirtoCommerce.BackInStock.ExperienceApi.Authorization;
 
-public class BackInStockAuthorizationHandler : AuthorizationHandler<BackInStockAuthorizationRequirement>
+public class BackInStockAuthorizationRequirement : IAuthorizationRequirement;
+
+public class BackInStockAuthorizationHandler(Func<UserManager<ApplicationUser>> userManagerFactory, IStoreService storeService)
+    : AuthorizationHandler<BackInStockAuthorizationRequirement>
 {
-    private readonly Func<UserManager<ApplicationUser>> _userManagerFactory;
-    private readonly IStoreService _storeService;
-
-    public BackInStockAuthorizationHandler(Func<UserManager<ApplicationUser>> userManagerFactory, IStoreService storeService)
+    protected override async Task HandleRequirementAsync(AuthorizationHandlerContext context, BackInStockAuthorizationRequirement requirement)
     {
-        _userManagerFactory = userManagerFactory;
-        _storeService = storeService;
-    }
+        var authorized = false;
 
-    protected override async Task HandleRequirementAsync(AuthorizationHandlerContext context,
-        BackInStockAuthorizationRequirement requirement)
-    {
-        var result = context.User.IsInRole(PlatformConstants.Security.SystemRoles.Administrator);
-
-        if (!result)
+        // Anonymous users are not allowed to perform any requests
+        var currentUser = await GetCurrentUser(context);
+        if (currentUser != null)
         {
-            var currentUserId = GetUserId(context);
-
             switch (context.Resource)
             {
-                case ActivateBackInStockSubscriptionCommand command:
-                    var userManager = _userManagerFactory();
-                    var currentUser = await userManager.FindByIdAsync(currentUserId);
-                    var store = await _storeService.GetNoCloneAsync(command.StoreId);
-                    var allowedStoreIds = new List<string>(store.TrustedGroups) { store.Id };
-                    result = allowedStoreIds.Contains(currentUser.StoreId) && command.UserId == currentUserId;
+                case BackInStockSubscriptionsQuery query:
+                    authorized = await CanAccessStore(query.StoreId, currentUser);
                     break;
-                case BackInStockSubscriptionsQuery:
-                    result = true;
+                case ActivateBackInStockSubscriptionCommand command:
+                    authorized = await CanAccessStore(command.StoreId, currentUser);
+                    break;
+                case DeactivateBackInStockSubscriptionCommand:
+                    authorized = true;
                     break;
             }
         }
 
-        if (result)
+        if (authorized)
         {
             context.Succeed(requirement);
         }
@@ -59,11 +48,30 @@ public class BackInStockAuthorizationHandler : AuthorizationHandler<BackInStockA
         }
     }
 
-    private static string GetUserId(AuthorizationHandlerContext context)
+
+
+    private async Task<ApplicationUser> GetCurrentUser(AuthorizationHandlerContext context)
     {
-        return
-            context.User.FindFirstValue(ClaimTypes.NameIdentifier) ??
-            context.User.FindFirstValue("name") ??
-            AnonymousUser.UserName;
+        var userId = context.User.GetUserId();
+        if (userId == null)
+        {
+            return null;
+        }
+
+        var userManager = userManagerFactory();
+        var user = await userManager.FindByIdAsync(userId);
+
+        return user;
+    }
+
+    private async Task<bool> CanAccessStore(string storeId, ApplicationUser user)
+    {
+        var store = await storeService.GetNoCloneAsync(storeId);
+        if (store == null)
+        {
+            return false;
+        }
+
+        return user.StoreId.EqualsIgnoreCase(store.Id) || store.TrustedGroups.Any(user.StoreId.EqualsIgnoreCase);
     }
 }

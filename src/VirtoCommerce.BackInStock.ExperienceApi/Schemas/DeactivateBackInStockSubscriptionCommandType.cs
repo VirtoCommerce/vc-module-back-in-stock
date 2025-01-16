@@ -3,8 +3,7 @@ using VirtoCommerce.BackInStock.ExperienceApi.Commands;
 
 namespace VirtoCommerce.BackInStock.ExperienceApi.Schemas;
 
-public class
-    DeactivateBackInStockSubscriptionCommandType : InputObjectGraphType<DeactivateBackInStockSubscriptionCommand>
+public class DeactivateBackInStockSubscriptionCommandType : InputObjectGraphType<DeactivateBackInStockSubscriptionCommand>
 {
     public DeactivateBackInStockSubscriptionCommandType()
     {

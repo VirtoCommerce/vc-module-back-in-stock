@@ -16,17 +16,21 @@ public class DeactivateBackInStockSubscriptionCommandHandler(
     public async Task<BackInStockSubscription> Handle(DeactivateBackInStockSubscriptionCommand request, CancellationToken cancellationToken)
     {
         var searchCriteria = AbstractTypeFactory<BackInStockSubscriptionSearchCriteria>.TryCreateInstance();
-        searchCriteria.ProductIds = [request.ProductId];
         searchCriteria.StoreId = request.StoreId;
+        searchCriteria.ProductIds = [request.ProductId];
         searchCriteria.UserId = request.UserId;
         searchCriteria.Take = 1;
 
-        var subscription = (await searchService.SearchAsync(searchCriteria)).Results.FirstOrDefault();
-        if (subscription != null)
+        var searchResult = await searchService.SearchAsync(searchCriteria);
+
+        var subscription = searchResult.Results.FirstOrDefault();
+        if (subscription == null)
         {
-            subscription.IsActive = false;
-            await crudService.SaveChangesAsync([subscription]);
+            return null;
         }
+
+        subscription.IsActive = false;
+        await crudService.SaveChangesAsync([subscription]);
 
         return subscription;
     }

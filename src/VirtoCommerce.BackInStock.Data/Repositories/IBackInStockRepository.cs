@@ -6,9 +6,9 @@ using VirtoCommerce.Platform.Core.Common;
 
 namespace VirtoCommerce.BackInStock.Data.Repositories;
 
-public interface IBackInStockSubscriptionRepository : IRepository
+public interface IBackInStockRepository : IRepository
 {
     IQueryable<BackInStockSubscriptionEntity> BackInStockSubscriptions { get; }
 
-    Task<IList<BackInStockSubscriptionEntity>> GetByIdsAsync(IList<string> ids);
+    Task<IList<BackInStockSubscriptionEntity>> GetBackInStockSubscriptionsByIdsAsync(IList<string> ids, string responseGroup);
 }

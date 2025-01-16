@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace VirtoCommerce.BackInStock.Data.MySql.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class AddBackInStockSubscription : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -15,19 +15,23 @@ namespace VirtoCommerce.BackInStock.Data.MySql.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "BackInStockSubscriptions",
+                name: "BackInStockSubscription",
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "varchar(128)", maxLength: 128, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    UserId = table.Column<string>(type: "varchar(128)", maxLength: 128, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     StoreId = table.Column<string>(type: "varchar(128)", maxLength: 128, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     ProductId = table.Column<string>(type: "varchar(128)", maxLength: 128, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Triggered = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    ProductName = table.Column<string>(type: "varchar(1024)", maxLength: 1024, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    UserId = table.Column<string>(type: "varchar(128)", maxLength: 128, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    MemberId = table.Column<string>(type: "varchar(128)", maxLength: 128, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     IsActive = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    SentDate = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     CreatedBy = table.Column<string>(type: "varchar(64)", maxLength: 64, nullable: true)
@@ -37,19 +41,24 @@ namespace VirtoCommerce.BackInStock.Data.MySql.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_BackInStockSubscriptions", x => x.Id);
+                    table.PrimaryKey("PK_BackInStockSubscription", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateIndex(
-                name: "IX_BackInStockSubscriptions_ProductId",
-                table: "BackInStockSubscriptions",
-                column: "ProductId");
+                name: "IX_BackInStockSubscription_MemberId",
+                table: "BackInStockSubscription",
+                column: "MemberId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_BackInStockSubscriptions_StoreId_UserId_ProductId",
-                table: "BackInStockSubscriptions",
-                columns: new[] { "StoreId", "UserId", "ProductId" },
+                name: "IX_BackInStockSubscription_ProductId_IsActive",
+                table: "BackInStockSubscription",
+                columns: new[] { "ProductId", "IsActive" });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BackInStockSubscription_UserId_ProductId_StoreId_IsActive",
+                table: "BackInStockSubscription",
+                columns: new[] { "UserId", "ProductId", "StoreId", "IsActive" },
                 unique: true);
         }
 
@@ -57,7 +66,7 @@ namespace VirtoCommerce.BackInStock.Data.MySql.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "BackInStockSubscriptions");
+                name: "BackInStockSubscription");
         }
     }
 }

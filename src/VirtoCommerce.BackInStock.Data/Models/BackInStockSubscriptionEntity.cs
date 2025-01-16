@@ -8,23 +8,29 @@ namespace VirtoCommerce.BackInStock.Data.Models;
 
 public class BackInStockSubscriptionEntity : AuditableEntity, IDataEntity<BackInStockSubscriptionEntity, BackInStockSubscription>
 {
-    [StringLength(128)]
     [Required]
+    [StringLength(128)]
+    public string StoreId { get; set; }
+
+    [Required]
+    [StringLength(128)]
+    public string ProductId { get; set; }
+
+    [StringLength(1024)]
+    public string ProductName { get; set; }
+
+    [Required]
+    [StringLength(128)]
     public string UserId { get; set; }
 
     [StringLength(128)]
-    [Required]
-    public string StoreId { get; set; }
-
-    [StringLength(128)]
-    [Required]
-    public string ProductId { get; set; }
-
-    public DateTime? Triggered { get; set; }
+    public string MemberId { get; set; }
 
     public bool IsActive { get; set; }
 
-    public BackInStockSubscription ToModel(BackInStockSubscription model)
+    public DateTime? SentDate { get; set; }
+
+    public virtual BackInStockSubscription ToModel(BackInStockSubscription model)
     {
         ArgumentNullException.ThrowIfNull(model);
 
@@ -34,16 +40,18 @@ public class BackInStockSubscriptionEntity : AuditableEntity, IDataEntity<BackIn
         model.ModifiedBy = ModifiedBy;
         model.ModifiedDate = ModifiedDate;
 
-        model.UserId = UserId;
         model.StoreId = StoreId;
         model.ProductId = ProductId;
-        model.Triggered = Triggered;
+        model.ProductName = ProductName;
+        model.UserId = UserId;
+        model.MemberId = MemberId;
         model.IsActive = IsActive;
+        model.SentDate = SentDate;
 
         return model;
     }
 
-    public BackInStockSubscriptionEntity FromModel(BackInStockSubscription model, PrimaryKeyResolvingMap pkMap)
+    public virtual BackInStockSubscriptionEntity FromModel(BackInStockSubscription model, PrimaryKeyResolvingMap pkMap)
     {
         ArgumentNullException.ThrowIfNull(model);
 
@@ -55,23 +63,27 @@ public class BackInStockSubscriptionEntity : AuditableEntity, IDataEntity<BackIn
         ModifiedBy = model.ModifiedBy;
         ModifiedDate = model.ModifiedDate;
 
-        UserId = model.UserId;
         StoreId = model.StoreId;
         ProductId = model.ProductId;
-        Triggered = model.Triggered;
+        ProductName = model.ProductName;
+        UserId = model.UserId;
+        MemberId = model.MemberId;
         IsActive = model.IsActive;
+        SentDate = model.SentDate;
 
         return this;
     }
 
-    public void Patch(BackInStockSubscriptionEntity target)
+    public virtual void Patch(BackInStockSubscriptionEntity target)
     {
         ArgumentNullException.ThrowIfNull(target);
 
-        target.UserId = UserId;
         target.StoreId = StoreId;
         target.ProductId = ProductId;
-        target.Triggered = Triggered;
+        target.ProductName = ProductName;
+        target.UserId = UserId;
+        target.MemberId = MemberId;
         target.IsActive = IsActive;
+        target.SentDate = SentDate;
     }
 }

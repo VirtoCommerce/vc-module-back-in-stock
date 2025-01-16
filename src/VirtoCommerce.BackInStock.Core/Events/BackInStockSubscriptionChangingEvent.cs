@@ -4,6 +4,5 @@ using VirtoCommerce.Platform.Core.Events;
 
 namespace VirtoCommerce.BackInStock.Core.Events;
 
-public class BackInStockSubscriptionChangingEvent(
-    IEnumerable<GenericChangedEntry<BackInStockSubscription>> changedEntries)
+public class BackInStockSubscriptionChangingEvent(IEnumerable<GenericChangedEntry<BackInStockSubscription>> changedEntries)
     : GenericChangedEntryEvent<BackInStockSubscription>(changedEntries);

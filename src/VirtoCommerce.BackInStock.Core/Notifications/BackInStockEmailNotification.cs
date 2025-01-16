@@ -4,14 +4,10 @@ using VirtoCommerce.NotificationsModule.Core.Model;
 
 namespace VirtoCommerce.BackInStock.Core.Notifications;
 
-public class BackInStockEmailNotification : EmailNotification
+public class BackInStockEmailNotification()
+    : EmailNotification(nameof(BackInStockEmailNotification))
 {
-    public BackInStockEmailNotification()
-        : base(nameof(BackInStockEmailNotification))
-    {
-    }
+    public virtual CatalogProduct Product { get; set; }
 
     public virtual Member Customer { get; set; }
-
-    public virtual CatalogProduct Item { get; set; }
 }

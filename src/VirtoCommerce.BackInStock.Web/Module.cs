@@ -53,14 +53,15 @@ public class Module : IModule, IHasConfiguration
             }
         });
 
-        serviceCollection.AddTransient<IBackInStockSubscriptionRepository, BackInStockSubscriptionRepository>();
-        serviceCollection.AddSingleton<Func<IBackInStockSubscriptionRepository>>(provider =>
-            () => provider.CreateScope().ServiceProvider.GetRequiredService<IBackInStockSubscriptionRepository>());
+        serviceCollection.AddTransient<IBackInStockRepository, BackInStockRepository>();
+        serviceCollection.AddSingleton<Func<IBackInStockRepository>>(provider => () => provider.CreateScope().ServiceProvider.GetRequiredService<IBackInStockRepository>());
+
         serviceCollection.AddTransient<IBackInStockSubscriptionService, BackInStockSubscriptionService>();
-        serviceCollection
-            .AddTransient<IBackInStockSubscriptionSearchService, BackInStockSubscriptionSearchService>();
+        serviceCollection.AddTransient<IBackInStockSubscriptionSearchService, BackInStockSubscriptionSearchService>();
+
         serviceCollection.AddSingleton<InventoryChangedEventHandler>();
         serviceCollection.AddSingleton<IBackInStockNotificationJobService, BackInStockNotificationJobService>();
+
         serviceCollection.AddExperienceApi();
     }
 
@@ -76,10 +77,14 @@ public class Module : IModule, IHasConfiguration
         var permissionsRegistrar = serviceProvider.GetRequiredService<IPermissionsRegistrar>();
         permissionsRegistrar.RegisterPermissions(ModuleInfo.Id, "BackInStock", ModuleConstants.Security.Permissions.AllPermissions);
 
+        // Register notifications
         var notificationRegistrar = appBuilder.ApplicationServices.GetService<INotificationRegistrar>();
         notificationRegistrar.RegisterNotification<BackInStockEmailNotification>();
 
+        // Register event handlers
         appBuilder.RegisterEventHandler<InventoryChangedEvent, InventoryChangedEventHandler>();
+
+        appBuilder.UseExperienceApi();
 
         // Apply migrations
         using var serviceScope = serviceProvider.CreateScope();
