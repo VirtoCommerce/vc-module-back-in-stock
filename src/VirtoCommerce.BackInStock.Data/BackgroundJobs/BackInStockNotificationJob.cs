@@ -103,12 +103,6 @@ public class BackInStockNotificationJob(
             return null;
         }
 
-        var customer = await memberResolver.ResolveMemberByIdAsync(subscription.UserId);
-        if (customer == null || customer.Emails.Count == 0)
-        {
-            return null;
-        }
-
         var store = await storeService.GetByIdAsync(subscription.StoreId);
         if (store == null)
         {
@@ -117,6 +111,12 @@ public class BackInStockNotificationJob(
 
         var product = await itemService.GetByIdAsync(subscription.ProductId);
         if (product == null)
+        {
+            return null;
+        }
+
+        var customer = await memberResolver.ResolveMemberByIdAsync(subscription.UserId);
+        if (customer == null || customer.Emails.Count == 0)
         {
             return null;
         }

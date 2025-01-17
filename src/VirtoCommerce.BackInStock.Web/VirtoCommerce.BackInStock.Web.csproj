@@ -8,6 +8,9 @@
     <SonarQubeTestProject>false</SonarQubeTestProject>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="VirtoCommerce.NotificationsModule.TemplateLoader.FileSystem" Version="3.816.0" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\VirtoCommerce.BackInStock.Core\VirtoCommerce.BackInStock.Core.csproj" />
     <ProjectReference Include="..\VirtoCommerce.BackInStock.Data.MySql\VirtoCommerce.BackInStock.Data.MySql.csproj" />
     <ProjectReference Include="..\VirtoCommerce.BackInStock.Data.PostgreSql\VirtoCommerce.BackInStock.Data.PostgreSql.csproj" />
@@ -15,4 +18,10 @@
     <ProjectReference Include="..\VirtoCommerce.BackInStock.Data\VirtoCommerce.BackInStock.Data.csproj" />
     <ProjectReference Include="..\VirtoCommerce.BackInStock.ExperienceApi\VirtoCommerce.BackInStock.ExperienceApi.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <NotificationTemplates Include="NotificationTemplates\**" />
+  </ItemGroup>
+  <Target Name="CopyCustomContentOnPublish" AfterTargets="Publish">
+    <Copy SourceFiles="@(NotificationTemplates)" DestinationFiles="$(PublishDir)\..\%(Identity)" />
+  </Target>
 </Project>

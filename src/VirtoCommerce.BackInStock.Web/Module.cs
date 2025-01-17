@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -17,6 +18,7 @@ using VirtoCommerce.BackInStock.Data.SqlServer;
 using VirtoCommerce.BackInStock.ExperienceApi.Extensions;
 using VirtoCommerce.InventoryModule.Core.Events;
 using VirtoCommerce.NotificationsModule.Core.Services;
+using VirtoCommerce.NotificationsModule.TemplateLoader.FileSystem;
 using VirtoCommerce.Platform.Core.Events;
 using VirtoCommerce.Platform.Core.Modularity;
 using VirtoCommerce.Platform.Core.Security;
@@ -83,7 +85,8 @@ public class Module : IModule, IHasConfiguration
 
         // Register notifications
         var notificationRegistrar = appBuilder.ApplicationServices.GetService<INotificationRegistrar>();
-        notificationRegistrar.RegisterNotification<BackInStockEmailNotification>();
+        var templatesDirectory = Path.Combine(ModuleInfo.FullPhysicalPath, "NotificationTemplates");
+        notificationRegistrar.RegisterNotification<BackInStockEmailNotification>().WithTemplatesFromPath(templatesDirectory);
 
         // Register event handlers
         appBuilder.RegisterEventHandler<InventoryChangedEvent, InventoryChangedEventHandler>();

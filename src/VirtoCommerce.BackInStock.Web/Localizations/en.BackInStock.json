@@ -30,5 +30,11 @@
         "description": "The number of back in stock subscriptions to process per one batch"
       }
     }
+  },
+  "notificationTypes": {
+    "BackInStockEmailNotification": {
+      "displayName": "Back in stock notification",
+      "description": "The customer gets an email notification when a product is back in stock"
+    }
   }
 }
