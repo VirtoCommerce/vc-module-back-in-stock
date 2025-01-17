@@ -53,7 +53,7 @@ public class BackInStockNotificationJob(
                 var searchCriteria = AbstractTypeFactory<BackInStockSubscriptionSearchCriteria>.TryCreateInstance();
                 searchCriteria.ProductIds = [productId];
                 searchCriteria.IsActive = true;
-                searchCriteria.Take = await settingsManager.GetValueAsync<int>(BackInStockSettings.JobBatchSize);
+                searchCriteria.Take = await settingsManager.GetValueAsync<int>(BackInStockSettings.BatchSize);
 
                 searchCriteria.Sort = new[]
                     {

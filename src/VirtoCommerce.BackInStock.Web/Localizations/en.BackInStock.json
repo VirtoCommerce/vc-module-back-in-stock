@@ -21,13 +21,13 @@
   },
   "settings": {
     "BackInStock": {
-      "Enabled": {
-        "title": "Enabled",
-        "description": ""
+      "Enable": {
+        "title": "Enable",
+        "description": "Enable back in stock notifications"
       },
-      "JobBatchSize": {
-        "title": "Job batch size",
-        "description": ""
+      "BatchSize": {
+        "title": "Batch size",
+        "description": "The number of back in stock subscriptions to process per one batch"
       }
     }
   }

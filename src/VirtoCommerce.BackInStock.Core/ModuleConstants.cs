@@ -30,18 +30,18 @@ public static class ModuleConstants
     {
         public static class General
         {
-            public static SettingDescriptor BackInStockEnabled { get; } = new()
+            public static SettingDescriptor Enable { get; } = new()
             {
-                Name = "BackInStock.Enabled",
+                Name = "BackInStock.Enable",
                 GroupName = "Back In Stock|General",
                 ValueType = SettingValueType.Boolean,
                 DefaultValue = false,
                 IsPublic = true,
             };
 
-            public static SettingDescriptor JobBatchSize { get; } = new()
+            public static SettingDescriptor BatchSize { get; } = new()
             {
-                Name = "BackInStock.JobBatchSize",
+                Name = "BackInStock.BatchSize",
                 GroupName = "Back In Stock|General",
                 ValueType = SettingValueType.Integer,
                 DefaultValue = 1000,
@@ -51,9 +51,17 @@ public static class ModuleConstants
             {
                 get
                 {
-                    yield return BackInStockEnabled;
-                    yield return JobBatchSize;
+                    yield return Enable;
+                    yield return BatchSize;
                 }
+            }
+        }
+
+        public static IEnumerable<SettingDescriptor> StoreSettings
+        {
+            get
+            {
+                yield return General.Enable;
             }
         }
 

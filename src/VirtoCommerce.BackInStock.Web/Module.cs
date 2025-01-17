@@ -24,6 +24,7 @@ using VirtoCommerce.Platform.Core.Settings;
 using VirtoCommerce.Platform.Data.MySql.Extensions;
 using VirtoCommerce.Platform.Data.PostgreSql.Extensions;
 using VirtoCommerce.Platform.Data.SqlServer.Extensions;
+using VirtoCommerce.StoreModule.Core.Model;
 
 namespace VirtoCommerce.BackInStock.Web;
 
@@ -72,6 +73,9 @@ public class Module : IModule, IHasConfiguration
         // Register settings
         var settingsRegistrar = serviceProvider.GetRequiredService<ISettingsRegistrar>();
         settingsRegistrar.RegisterSettings(ModuleConstants.Settings.AllSettings, ModuleInfo.Id);
+
+        // Register store settings
+        settingsRegistrar.RegisterSettingsForType(ModuleConstants.Settings.StoreSettings, nameof(Store));
 
         // Register permissions
         var permissionsRegistrar = serviceProvider.GetRequiredService<IPermissionsRegistrar>();
