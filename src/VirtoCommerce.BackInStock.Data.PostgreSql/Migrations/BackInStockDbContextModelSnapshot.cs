@@ -59,9 +59,6 @@ namespace VirtoCommerce.BackInStock.Data.PostgreSql.Migrations
                         .HasMaxLength(1024)
                         .HasColumnType("character varying(1024)");
 
-                    b.Property<DateTime?>("SentDate")
-                        .HasColumnType("timestamp with time zone");
-
                     b.Property<string>("StoreId")
                         .IsRequired()
                         .HasMaxLength(128)

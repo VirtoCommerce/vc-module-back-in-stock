@@ -39,7 +39,7 @@ public static class ModuleConstants
                 IsPublic = true,
             };
 
-            public static SettingDescriptor SubscriptionsJobBatchSize { get; } = new()
+            public static SettingDescriptor JobBatchSize { get; } = new()
             {
                 Name = "BackInStock.JobBatchSize",
                 GroupName = "Back In Stock|General",
@@ -52,7 +52,7 @@ public static class ModuleConstants
                 get
                 {
                     yield return BackInStockEnabled;
-                    yield return SubscriptionsJobBatchSize;
+                    yield return JobBatchSize;
                 }
             }
         }

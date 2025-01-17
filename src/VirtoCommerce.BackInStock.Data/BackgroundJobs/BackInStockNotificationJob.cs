@@ -20,22 +20,22 @@ using BackInStockSettings = VirtoCommerce.BackInStock.Core.ModuleConstants.Setti
 
 namespace VirtoCommerce.BackInStock.Data.BackgroundJobs;
 
-public class BackInStockNotificationJobService(
+public class BackInStockNotificationJob(
     ISettingsManager settingsManager,
     INotificationSearchService notificationSearchService,
     INotificationSender notificationSender,
     IMemberResolver memberResolver,
     IItemService itemService,
     IStoreService storeService,
-    IBackInStockSubscriptionSearchService backInStockSubscriptionSearchService,
-    ILogger<BackInStockNotificationJobService> logger)
-    : IBackInStockNotificationJobService
+    IBackInStockSubscriptionSearchService subscriptionSearchService,
+    ILogger<BackInStockNotificationJob> logger)
+    : IBackInStockNotificationJob
 {
     public void EnqueueProductBackInStockNotifications(IList<string> productIds)
     {
         try
         {
-            BackgroundJob.Enqueue(() => EnqueueBatchOfEmailNotificationsForProductIds(productIds));
+            BackgroundJob.Enqueue(() => SendEmailNotificationsForProductIds(productIds));
         }
         catch (Exception ex)
         {
@@ -44,7 +44,7 @@ public class BackInStockNotificationJobService(
         }
     }
 
-    public async Task EnqueueBatchOfEmailNotificationsForProductIds(IList<string> productIds)
+    public async Task SendEmailNotificationsForProductIds(IList<string> productIds)
     {
         foreach (var productId in productIds)
         {
@@ -53,14 +53,20 @@ public class BackInStockNotificationJobService(
                 var searchCriteria = AbstractTypeFactory<BackInStockSubscriptionSearchCriteria>.TryCreateInstance();
                 searchCriteria.ProductIds = [productId];
                 searchCriteria.IsActive = true;
-                searchCriteria.Sort = nameof(BackInStockSubscription.SentDate);
-                searchCriteria.Take = await GetBatchSize();
+                searchCriteria.Take = await settingsManager.GetValueAsync<int>(BackInStockSettings.JobBatchSize);
 
-                await foreach (var searchResult in backInStockSubscriptionSearchService.SearchBatchesAsync(searchCriteria))
-                {
-                    foreach (var backInStockSubscription in searchResult.Results)
+                searchCriteria.Sort = new[]
                     {
-                        await ScheduleNotificationAsync(backInStockSubscription);
+                        new SortInfo { SortColumn = nameof(BackInStockSubscription.CreatedDate) },
+                        new SortInfo { SortColumn = nameof(BackInStockSubscription.Id) },
+                    }
+                    .ToString();
+
+                await foreach (var searchResult in subscriptionSearchService.SearchBatchesAsync(searchCriteria))
+                {
+                    foreach (var subscription in searchResult.Results)
+                    {
+                        await ScheduleNotificationAsync(subscription);
                     }
                 }
             }
@@ -121,10 +127,5 @@ public class BackInStockNotificationJobService(
         notification.To = customer.Emails.First();
 
         return notification;
-    }
-
-    private Task<int> GetBatchSize()
-    {
-        return settingsManager.GetValueAsync<int>(BackInStockSettings.SubscriptionsJobBatchSize);
     }
 }

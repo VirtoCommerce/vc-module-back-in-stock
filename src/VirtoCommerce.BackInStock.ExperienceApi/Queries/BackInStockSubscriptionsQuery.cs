@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using GraphQL;
 using GraphQL.Types;
@@ -10,17 +9,13 @@ namespace VirtoCommerce.BackInStock.ExperienceApi.Queries;
 
 public class BackInStockSubscriptionsQuery : SearchQuery<BackInStockSubscriptionSearchResult>
 {
-    public string UserId { get; set; }
-
     public string StoreId { get; set; }
 
     public IList<string> ProductIds { get; set; }
 
+    public string UserId { get; set; }
+
     public bool? IsActive { get; set; }
-
-    public DateTime? StartSentDate { get; set; }
-
-    public DateTime? EndSentDate { get; set; }
 
     public override IEnumerable<QueryArgument> GetArguments()
     {
@@ -32,8 +27,6 @@ public class BackInStockSubscriptionsQuery : SearchQuery<BackInStockSubscription
         yield return Argument<StringGraphType>(nameof(StoreId));
         yield return Argument<ListGraphType<StringGraphType>>(nameof(ProductIds));
         yield return Argument<BooleanGraphType>(nameof(IsActive));
-        yield return Argument<DateTimeGraphType>(nameof(StartSentDate));
-        yield return Argument<DateTimeGraphType>(nameof(EndSentDate));
     }
 
     public override void Map(IResolveFieldContext context)
@@ -45,7 +38,5 @@ public class BackInStockSubscriptionsQuery : SearchQuery<BackInStockSubscription
         StoreId = context.GetArgument<string>(nameof(StoreId));
         ProductIds = context.GetArgument<IList<string>>(nameof(ProductIds));
         IsActive = context.GetArgument<bool?>(nameof(IsActive));
-        StartSentDate = context.GetArgument<DateTime?>(nameof(StartSentDate));
-        EndSentDate = context.GetArgument<DateTime?>(nameof(EndSentDate));
     }
 }

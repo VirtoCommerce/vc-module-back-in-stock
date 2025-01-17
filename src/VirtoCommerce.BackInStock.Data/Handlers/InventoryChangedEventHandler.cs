@@ -6,7 +6,7 @@ using VirtoCommerce.Platform.Core.Events;
 
 namespace VirtoCommerce.BackInStock.Data.Handlers;
 
-public class InventoryChangedEventHandler(IBackInStockNotificationJobService backInStockNotificationJobService)
+public class InventoryChangedEventHandler(IBackInStockNotificationJob backInStockNotificationJob)
     : IEventHandler<InventoryChangedEvent>
 {
     public Task Handle(InventoryChangedEvent inventoryChangedEvent)
@@ -18,7 +18,7 @@ public class InventoryChangedEventHandler(IBackInStockNotificationJobService bac
 
         if (backInStockProductIds.Count > 0)
         {
-            backInStockNotificationJobService.EnqueueProductBackInStockNotifications(backInStockProductIds);
+            backInStockNotificationJob.EnqueueProductBackInStockNotifications(backInStockProductIds);
         }
 
         return Task.CompletedTask;

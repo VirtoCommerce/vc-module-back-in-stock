@@ -62,9 +62,6 @@ namespace VirtoCommerce.BackInStock.Data.MySql.Migrations
                         .HasMaxLength(1024)
                         .HasColumnType("varchar(1024)");
 
-                    b.Property<DateTime?>("SentDate")
-                        .HasColumnType("datetime(6)");
-
                     b.Property<string>("StoreId")
                         .IsRequired()
                         .HasMaxLength(128)

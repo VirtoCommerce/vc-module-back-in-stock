@@ -22,7 +22,6 @@ namespace VirtoCommerce.BackInStock.Data.PostgreSql.Migrations
                     UserId = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false),
                     MemberId = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: true),
                     IsActive = table.Column<bool>(type: "boolean", nullable: false),
-                    SentDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     CreatedBy = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true),

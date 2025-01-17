@@ -31,7 +31,6 @@ namespace VirtoCommerce.BackInStock.Data.MySql.Migrations
                     MemberId = table.Column<string>(type: "varchar(128)", maxLength: 128, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     IsActive = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    SentDate = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     CreatedBy = table.Column<string>(type: "varchar(64)", maxLength: 64, nullable: true)

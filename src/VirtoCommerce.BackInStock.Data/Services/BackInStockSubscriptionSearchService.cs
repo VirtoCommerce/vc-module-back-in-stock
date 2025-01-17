@@ -53,16 +53,6 @@ public class BackInStockSubscriptionSearchService(
             query = query.Where(x => x.IsActive == criteria.IsActive);
         }
 
-        if (criteria.StartSentDate != null)
-        {
-            query = query.Where(x => x.SentDate >= criteria.StartSentDate);
-        }
-
-        if (criteria.EndSentDate != null)
-        {
-            query = query.Where(x => x.SentDate <= criteria.EndSentDate);
-        }
-
         if (criteria.Keyword != null)
         {
             query = query.Where(x =>

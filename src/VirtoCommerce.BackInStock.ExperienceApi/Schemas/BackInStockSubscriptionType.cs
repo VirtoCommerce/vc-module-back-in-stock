@@ -14,6 +14,5 @@ public class BackInStockSubscriptionType : ExtendableGraphType<BackInStockSubscr
         Field(x => x.UserId);
         Field(x => x.MemberId, nullable: true);
         Field(x => x.IsActive);
-        Field(x => x.SentDate, nullable: true);
     }
 }

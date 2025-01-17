@@ -10,24 +10,16 @@ using VirtoCommerce.Platform.Core.Common;
 namespace VirtoCommerce.BackInStock.Web.Controllers.Api;
 
 [Route("api/back-in-stock/subscriptions")]
-public class BackInStockSubscriptionController : Controller
+public class BackInStockSubscriptionController(
+    IBackInStockSubscriptionService crudService,
+    IBackInStockSubscriptionSearchService searchService)
+    : Controller
 {
-    private readonly IBackInStockSubscriptionService _crudService;
-    private readonly IBackInStockSubscriptionSearchService _searchService;
-
-    public BackInStockSubscriptionController(
-        IBackInStockSubscriptionService crudService,
-        IBackInStockSubscriptionSearchService searchService)
-    {
-        _crudService = crudService;
-        _searchService = searchService;
-    }
-
     [HttpPost("search")]
     [Authorize(ModuleConstants.Security.Permissions.Read)]
     public async Task<ActionResult<BackInStockSubscriptionSearchResult>> Search([FromBody] BackInStockSubscriptionSearchCriteria criteria)
     {
-        var result = await _searchService.SearchNoCloneAsync(criteria);
+        var result = await searchService.SearchNoCloneAsync(criteria);
         return Ok(result);
     }
 
@@ -43,7 +35,7 @@ public class BackInStockSubscriptionController : Controller
     [Authorize(ModuleConstants.Security.Permissions.Update)]
     public async Task<ActionResult<BackInStockSubscription>> Update([FromBody] BackInStockSubscription model)
     {
-        await _crudService.SaveChangesAsync([model]);
+        await crudService.SaveChangesAsync([model]);
         return Ok(model);
     }
 
@@ -51,7 +43,7 @@ public class BackInStockSubscriptionController : Controller
     [Authorize(ModuleConstants.Security.Permissions.Read)]
     public async Task<ActionResult<BackInStockSubscription>> Get([FromRoute] string id, [FromQuery] string responseGroup = null)
     {
-        var model = await _crudService.GetNoCloneAsync(id, responseGroup);
+        var model = await crudService.GetNoCloneAsync(id, responseGroup);
         return Ok(model);
     }
 
@@ -60,7 +52,7 @@ public class BackInStockSubscriptionController : Controller
     [ProducesResponseType(typeof(void), StatusCodes.Status204NoContent)]
     public async Task<ActionResult> Delete([FromQuery] string[] ids)
     {
-        await _crudService.DeleteAsync(ids);
+        await crudService.DeleteAsync(ids);
         return NoContent();
     }
 }

@@ -60,7 +60,7 @@ public class Module : IModule, IHasConfiguration
         serviceCollection.AddTransient<IBackInStockSubscriptionSearchService, BackInStockSubscriptionSearchService>();
 
         serviceCollection.AddSingleton<InventoryChangedEventHandler>();
-        serviceCollection.AddSingleton<IBackInStockNotificationJobService, BackInStockNotificationJobService>();
+        serviceCollection.AddSingleton<IBackInStockNotificationJob, BackInStockNotificationJob>();
 
         serviceCollection.AddExperienceApi();
     }

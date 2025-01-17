@@ -28,8 +28,6 @@ public class BackInStockSubscriptionEntity : AuditableEntity, IDataEntity<BackIn
 
     public bool IsActive { get; set; }
 
-    public DateTime? SentDate { get; set; }
-
     public virtual BackInStockSubscription ToModel(BackInStockSubscription model)
     {
         ArgumentNullException.ThrowIfNull(model);
@@ -46,7 +44,6 @@ public class BackInStockSubscriptionEntity : AuditableEntity, IDataEntity<BackIn
         model.UserId = UserId;
         model.MemberId = MemberId;
         model.IsActive = IsActive;
-        model.SentDate = SentDate;
 
         return model;
     }
@@ -69,7 +66,6 @@ public class BackInStockSubscriptionEntity : AuditableEntity, IDataEntity<BackIn
         UserId = model.UserId;
         MemberId = model.MemberId;
         IsActive = model.IsActive;
-        SentDate = model.SentDate;
 
         return this;
     }
@@ -84,6 +80,5 @@ public class BackInStockSubscriptionEntity : AuditableEntity, IDataEntity<BackIn
         target.UserId = UserId;
         target.MemberId = MemberId;
         target.IsActive = IsActive;
-        target.SentDate = SentDate;
     }
 }

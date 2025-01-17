@@ -22,7 +22,6 @@ namespace VirtoCommerce.BackInStock.Data.SqlServer.Migrations
                     UserId = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
                     MemberId = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: true),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
-                    SentDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: true),

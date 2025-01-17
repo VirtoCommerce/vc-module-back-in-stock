@@ -17,9 +17,6 @@ public class BackInStockSubscription : AuditableEntity, ICloneable
 
     public bool IsActive { get; set; }
 
-    // TODO: Always null
-    public DateTime? SentDate { get; set; }
-
     public object Clone()
     {
         return MemberwiseClone();

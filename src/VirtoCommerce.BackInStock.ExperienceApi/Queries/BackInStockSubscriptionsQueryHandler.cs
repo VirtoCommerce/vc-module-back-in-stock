@@ -3,7 +3,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using VirtoCommerce.BackInStock.Core.Models;
 using VirtoCommerce.BackInStock.Core.Services;
-using VirtoCommerce.BackInStock.ExperienceApi.Extensions;
 using VirtoCommerce.SearchModule.Core.Model;
 using VirtoCommerce.SearchModule.Core.Services;
 using VirtoCommerce.Xapi.Core.Index;
@@ -43,11 +42,6 @@ public class BackInStockQueryHandler(
             {
                 term.MapTo(criteria);
             }
-
-            // Custom DateTime range filter
-            parseResult.Filters
-                .Get<RangeFilter>(nameof(BackInStockSubscription.SentDate))
-                .MapTo(x => criteria.StartSentDate = x, x => criteria.EndSentDate = x);
         }
 
         return criteria;

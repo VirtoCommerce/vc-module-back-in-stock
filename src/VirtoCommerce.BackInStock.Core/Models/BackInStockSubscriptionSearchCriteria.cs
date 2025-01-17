@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using VirtoCommerce.Platform.Core.Common;
 
@@ -15,8 +14,4 @@ public class BackInStockSubscriptionSearchCriteria : SearchCriteriaBase
     public string MemberId { get; set; } = null;
 
     public bool? IsActive { get; set; }
-
-    public DateTime? StartSentDate { get; set; }
-
-    public DateTime? EndSentDate { get; set; }
 }
