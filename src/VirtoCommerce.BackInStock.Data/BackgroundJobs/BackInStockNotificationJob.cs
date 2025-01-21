@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Hangfire;
 using Microsoft.Extensions.Logging;
 using VirtoCommerce.BackInStock.Core.BackgroundJobs;
+using VirtoCommerce.BackInStock.Core.Extensions;
 using VirtoCommerce.BackInStock.Core.Models;
 using VirtoCommerce.BackInStock.Core.Notifications;
 using VirtoCommerce.BackInStock.Core.Services;
@@ -27,15 +28,16 @@ public class BackInStockNotificationJob(
     IMemberResolver memberResolver,
     IItemService itemService,
     IStoreService storeService,
+    IBackInStockSubscriptionService subscriptionService,
     IBackInStockSubscriptionSearchService subscriptionSearchService,
     ILogger<BackInStockNotificationJob> logger)
     : IBackInStockNotificationJob
 {
-    public void EnqueueProductBackInStockNotifications(IList<string> productIds)
+    public void Enqueue(IList<string> productIds)
     {
         try
         {
-            BackgroundJob.Enqueue(() => SendEmailNotificationsForProductIds(productIds));
+            BackgroundJob.Enqueue(() => Run(productIds));
         }
         catch (Exception ex)
         {
@@ -44,41 +46,42 @@ public class BackInStockNotificationJob(
         }
     }
 
-    public async Task SendEmailNotificationsForProductIds(IList<string> productIds)
+    public async Task Run(IList<string> productIds)
     {
         foreach (var productId in productIds)
         {
             try
             {
-                var searchCriteria = AbstractTypeFactory<BackInStockSubscriptionSearchCriteria>.TryCreateInstance();
-                searchCriteria.ProductIds = [productId];
-                searchCriteria.IsActive = true;
-                searchCriteria.Take = await settingsManager.GetValueAsync<int>(BackInStockSettings.BatchSize);
-
-                searchCriteria.Sort = new[]
-                    {
-                        new SortInfo { SortColumn = nameof(BackInStockSubscription.CreatedDate) },
-                        new SortInfo { SortColumn = nameof(BackInStockSubscription.Id) },
-                    }
-                    .ToString();
-
-                await foreach (var searchResult in subscriptionSearchService.SearchBatchesAsync(searchCriteria))
-                {
-                    foreach (var subscription in searchResult.Results)
-                    {
-                        await ScheduleNotificationAsync(subscription);
-                    }
-                }
+                await SendNotifications(productId);
             }
             catch (Exception ex)
             {
                 logger.LogError(ex, "Failed to send notifications for product {ProductId}", productId);
-                throw;
             }
         }
     }
 
-    private async Task ScheduleNotificationAsync(BackInStockSubscription subscription)
+
+    private async Task SendNotifications(string productId)
+    {
+        var searchCriteria = AbstractTypeFactory<BackInStockSubscriptionSearchCriteria>.TryCreateInstance();
+        searchCriteria.ProductIds = [productId];
+        searchCriteria.IsActive = true;
+        searchCriteria.Take = await settingsManager.GetValueAsync<int>(BackInStockSettings.BatchSize);
+
+        await subscriptionSearchService.SearchWhileResultIsNotEmpty(searchCriteria, async searchResult =>
+        {
+            foreach (var subscription in searchResult.Results)
+            {
+                await SendNotification(subscription);
+
+                subscription.IsActive = false;
+                await subscriptionService.SaveChangesAsync([subscription]);
+            }
+        });
+    }
+
+    private async Task SendNotification(BackInStockSubscription subscription)
     {
         try
         {
@@ -104,7 +107,7 @@ public class BackInStockNotificationJob(
         }
 
         var store = await storeService.GetByIdAsync(subscription.StoreId);
-        if (store == null)
+        if (store == null || !store.Settings.GetValue<bool>(BackInStockSettings.Enable))
         {
             return null;
         }

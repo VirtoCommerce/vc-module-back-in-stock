@@ -23,8 +23,8 @@
   "settings": {
     "BackInStock": {
       "Enable": {
-        "title": "Enable",
-        "description": "Enable back in stock notifications"
+        "title": "Back in stock notifications",
+        "description": "Enable or disable back in stock notifications"
       },
       "BatchSize": {
         "title": "Batch size",

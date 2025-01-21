@@ -19,7 +19,7 @@ public class InventoryChangedEventHandler(IBackInStockNotificationJob backInStoc
 
         if (backInStockProductIds.Count > 0)
         {
-            backInStockNotificationJob.EnqueueProductBackInStockNotifications(backInStockProductIds);
+            backInStockNotificationJob.Enqueue(backInStockProductIds);
         }
 
         return Task.CompletedTask;

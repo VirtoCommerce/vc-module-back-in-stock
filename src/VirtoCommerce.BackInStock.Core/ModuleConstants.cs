@@ -35,7 +35,7 @@ public static class ModuleConstants
                 Name = "BackInStock.Enable",
                 GroupName = "Back In Stock|General",
                 ValueType = SettingValueType.Boolean,
-                DefaultValue = false,
+                DefaultValue = true,
                 IsPublic = true,
             };
 
