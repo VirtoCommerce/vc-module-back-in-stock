@@ -3,7 +3,8 @@
     "blades": {
       "subscriptions": {
         "title": "Back in stock subscriptions",
-        "no-subscriptions": "There are no subscriptions"
+        "no-subscriptions": "There are no subscriptions",
+        "view-product-details": "View product details"
       }
     },
     "widgets": {
