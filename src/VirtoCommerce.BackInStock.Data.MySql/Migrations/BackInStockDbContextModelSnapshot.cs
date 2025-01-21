@@ -75,7 +75,7 @@ namespace VirtoCommerce.BackInStock.Data.MySql.Migrations
 
                     b.HasIndex("ProductId", "IsActive");
 
-                    b.HasIndex("UserId", "ProductId", "StoreId", "IsActive")
+                    b.HasIndex("UserId", "ProductId", "StoreId")
                         .IsUnique();
 
                     b.ToTable("BackInStockSubscription", (string)null);

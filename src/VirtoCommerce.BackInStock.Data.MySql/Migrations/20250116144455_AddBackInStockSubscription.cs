@@ -55,9 +55,9 @@ namespace VirtoCommerce.BackInStock.Data.MySql.Migrations
                 columns: new[] { "ProductId", "IsActive" });
 
             migrationBuilder.CreateIndex(
-                name: "IX_BackInStockSubscription_UserId_ProductId_StoreId_IsActive",
+                name: "IX_BackInStockSubscription_UserId_ProductId_StoreId",
                 table: "BackInStockSubscription",
-                columns: new[] { "UserId", "ProductId", "StoreId", "IsActive" },
+                columns: new[] { "UserId", "ProductId", "StoreId" },
                 unique: true);
         }
 
