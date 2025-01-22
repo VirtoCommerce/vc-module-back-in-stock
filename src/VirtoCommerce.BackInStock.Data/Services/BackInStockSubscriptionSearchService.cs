@@ -72,7 +72,7 @@ public class BackInStockSubscriptionSearchService(
         {
             sortInfos =
             [
-                new SortInfo { SortColumn = nameof(BackInStockSubscriptionEntity.CreatedDate), SortDirection = SortDirection.Descending },
+                new SortInfo { SortColumn = nameof(BackInStockSubscriptionEntity.ProductName) },
                 new SortInfo { SortColumn = nameof(BackInStockSubscriptionEntity.Id) },
             ];
         }
