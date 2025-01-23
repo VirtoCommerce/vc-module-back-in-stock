@@ -1,0 +1,41 @@
+{
+  "BackInStock": {
+    "blades": {
+      "subscriptions": {
+        "title": "Assinaturas de volta ao estoque",
+        "no-subscriptions": "Não há assinaturas",
+        "view-product-details": "Ver detalhes do produto"
+      }
+    },
+    "widgets": {
+      "subscriptions": {
+        "title": "Assinaturas de volta ao estoque"
+      }
+    }
+  },
+  "permissions": {
+    "BackInStock:subscription:access": "Abrir menu 'Voltar ao estoque'",
+    "BackInStock:subscription:create": "Criar assinatura 'Voltar ao estoque'",
+    "BackInStock:subscription:read": "Ver assinatura 'Voltar ao estoque'",
+    "BackInStock:subscription:update": "Atualizar assinatura 'Voltar ao estoque'",
+    "BackInStock:subscription:delete": "Excluir assinatura 'Voltar ao estoque'"
+  },
+  "settings": {
+    "BackInStock": {
+      "Enable": {
+        "title": "Notificações de volta ao estoque",
+        "description": "Ativar ou desativar notificações de volta ao estoque"
+      },
+      "BatchSize": {
+        "title": "Tamanho do lote",
+        "description": "O número de assinaturas de volta ao estoque para processar por lote"
+      }
+    }
+  },
+  "notificationTypes": {
+    "BackInStockEmailNotification": {
+      "displayName": "Notificação de volta ao estoque",
+      "description": "O cliente recebe uma notificação por e-mail quando um produto volta ao estoque"
+    }
+  }
+}

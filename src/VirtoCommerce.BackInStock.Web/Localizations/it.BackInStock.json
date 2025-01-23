@@ -1,0 +1,41 @@
+{
+  "BackInStock": {
+    "blades": {
+      "subscriptions": {
+        "title": "Iscrizioni di ritorno in magazzino",
+        "no-subscriptions": "Non ci sono iscrizioni",
+        "view-product-details": "Visualizza dettagli del prodotto"
+      }
+    },
+    "widgets": {
+      "subscriptions": {
+        "title": "Iscrizioni di ritorno in magazzino"
+      }
+    }
+  },
+  "permissions": {
+    "BackInStock:subscription:access": "Apri il menu 'Ritorno in magazzino'",
+    "BackInStock:subscription:create": "Crea iscrizione 'Ritorno in magazzino'",
+    "BackInStock:subscription:read": "Visualizza iscrizione 'Ritorno in magazzino'",
+    "BackInStock:subscription:update": "Aggiorna iscrizione 'Ritorno in magazzino'",
+    "BackInStock:subscription:delete": "Elimina iscrizione 'Ritorno in magazzino'"
+  },
+  "settings": {
+    "BackInStock": {
+      "Enable": {
+        "title": "Notifiche di ritorno in magazzino",
+        "description": "Abilita o disabilita le notifiche di ritorno in magazzino"
+      },
+      "BatchSize": {
+        "title": "Dimensione del lotto",
+        "description": "Il numero di iscrizioni di ritorno in magazzino da elaborare per ogni lotto"
+      }
+    }
+  },
+  "notificationTypes": {
+    "BackInStockEmailNotification": {
+      "displayName": "Notifica di ritorno in magazzino",
+      "description": "Il cliente riceve una notifica via email quando un prodotto torna in magazzino"
+    }
+  }
+}

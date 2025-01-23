@@ -1,0 +1,41 @@
+{
+  "BackInStock": {
+    "blades": {
+      "subscriptions": {
+        "title": "Subskrypcje powiadomień o dostępności",
+        "no-subscriptions": "Brak subskrypcji",
+        "view-product-details": "Zobacz szczegóły produktu"
+      }
+    },
+    "widgets": {
+      "subscriptions": {
+        "title": "Subskrypcje powiadomień o dostępności"
+      }
+    }
+  },
+  "permissions": {
+    "BackInStock:subscription:access": "Otwórz menu 'Powiadomienia o dostępności'",
+    "BackInStock:subscription:create": "Utwórz subskrypcję 'Powiadomienia o dostępności'",
+    "BackInStock:subscription:read": "Zobacz subskrypcję 'Powiadomienia o dostępności'",
+    "BackInStock:subscription:update": "Aktualizuj subskrypcję 'Powiadomienia o dostępności'",
+    "BackInStock:subscription:delete": "Usuń subskrypcję 'Powiadomienia o dostępności'"
+  },
+  "settings": {
+    "BackInStock": {
+      "Enable": {
+        "title": "Powiadomienia o dostępności",
+        "description": "Włącz lub wyłącz powiadomienia o dostępności"
+      },
+      "BatchSize": {
+        "title": "Rozmiar partii",
+        "description": "Liczba subskrypcji powiadomień o dostępności do przetworzenia w jednej partii"
+      }
+    }
+  },
+  "notificationTypes": {
+    "BackInStockEmailNotification": {
+      "displayName": "Powiadomienie o dostępności",
+      "description": "Klient otrzymuje powiadomienie e-mail, gdy produkt jest ponownie dostępny"
+    }
+  }
+}

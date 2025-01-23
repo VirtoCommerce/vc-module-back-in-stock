@@ -14,11 +14,11 @@
     }
   },
   "permissions": {
-    "BackInStock:subscription:access": "Open BackInStock menu",
-    "BackInStock:subscription:create": "Create BackInStock related data",
-    "BackInStock:subscription:read": "View BackInStock related data",
-    "BackInStock:subscription:update": "Update BackInStock related data",
-    "BackInStock:subscription:delete": "Delete BackInStock related data"
+    "BackInStock:subscription:access": "Open 'Back in stock' menu",
+    "BackInStock:subscription:create": "Create 'Back in stock' subscription",
+    "BackInStock:subscription:read": "View 'Back in stock' subscription",
+    "BackInStock:subscription:update": "Update 'Back in stock' subscription",
+    "BackInStock:subscription:delete": "Delete 'Back in stock' subscription"
   },
   "settings": {
     "BackInStock": {

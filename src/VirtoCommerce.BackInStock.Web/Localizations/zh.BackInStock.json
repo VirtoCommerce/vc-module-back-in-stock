@@ -1,0 +1,41 @@
+{
+  "BackInStock": {
+    "blades": {
+      "subscriptions": {
+        "title": "到货订阅",
+        "no-subscriptions": "没有订阅",
+        "view-product-details": "查看产品详情"
+      }
+    },
+    "widgets": {
+      "subscriptions": {
+        "title": "到货订阅"
+      }
+    }
+  },
+  "permissions": {
+    "BackInStock:subscription:access": "打开'到货'菜单",
+    "BackInStock:subscription:create": "创建'到货'订阅",
+    "BackInStock:subscription:read": "查看'到货'订阅",
+    "BackInStock:subscription:update": "更新'到货'订阅",
+    "BackInStock:subscription:delete": "删除'到货'订阅"
+  },
+  "settings": {
+    "BackInStock": {
+      "Enable": {
+        "title": "到货通知",
+        "description": "启用或禁用到货通知"
+      },
+      "BatchSize": {
+        "title": "批处理大小",
+        "description": "每批处理的到货订阅数量"
+      }
+    }
+  },
+  "notificationTypes": {
+    "BackInStockEmailNotification": {
+      "displayName": "到货通知",
+      "description": "当产品到货时，客户会收到电子邮件通知"
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "BackInStock": {
+    "blades": {
+      "subscriptions": {
+        "title": "Benachrichtigungen bei wieder vorrätigen Artikeln",
+        "no-subscriptions": "Es gibt keine Abonnements",
+        "view-product-details": "Produktdetails anzeigen"
+      }
+    },
+    "widgets": {
+      "subscriptions": {
+        "title": "Benachrichtigungen bei wieder vorrätigen Artikeln"
+      }
+    }
+  },
+  "permissions": {
+    "BackInStock:subscription:access": "'Wieder vorrätig' Menü öffnen",
+    "BackInStock:subscription:create": "'Wieder vorrätig' Abonnement erstellen",
+    "BackInStock:subscription:read": "'Wieder vorrätig' Abonnement anzeigen",
+    "BackInStock:subscription:update": "'Wieder vorrätig' Abonnement aktualisieren",
+    "BackInStock:subscription:delete": "'Wieder vorrätig' Abonnement löschen"
+  },
+  "settings": {
+    "BackInStock": {
+      "Enable": {
+        "title": "Benachrichtigungen bei wieder vorrätigen Artikeln",
+        "description": "Benachrichtigungen bei wieder vorrätigen Artikeln aktivieren oder deaktivieren"
+      },
+      "BatchSize": {
+        "title": "Stapelgröße",
+        "description": "Die Anzahl der zu verarbeitenden Abonnements bei wieder vorrätigen Artikeln pro Stapel"
+      }
+    }
+  },
+  "notificationTypes": {
+    "BackInStockEmailNotification": {
+      "displayName": "Benachrichtigung bei wieder vorrätigen Artikeln",
+      "description": "Der Kunde erhält eine E-Mail-Benachrichtigung, wenn ein Produkt wieder vorrätig ist"
+    }
+  }
+}
