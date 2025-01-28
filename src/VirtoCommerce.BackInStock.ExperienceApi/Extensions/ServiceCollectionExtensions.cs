@@ -1,5 +1,4 @@
-using GraphQL.Server;
-using MediatR;
+using GraphQL.MicrosoftDI;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.DependencyInjection;
 using VirtoCommerce.BackInStock.ExperienceApi.Authorization;
@@ -12,14 +11,11 @@ public static class ServiceCollectionExtensions
 {
     public static void AddExperienceApi(this IServiceCollection serviceCollection)
     {
-        var assemblyMarker = typeof(AssemblyMarker);
+        _ = new GraphQLBuilder(serviceCollection, builder =>
+        {
+            builder.AddSchema(serviceCollection, typeof(AssemblyMarker));
+        });
 
-        var graphQlBuilder = new CustomGraphQLBuilder(serviceCollection);
-        graphQlBuilder.AddGraphTypes(assemblyMarker);
-
-        serviceCollection.AddMediatR(assemblyMarker);
-        serviceCollection.AddAutoMapper(assemblyMarker);
-        serviceCollection.AddSchemaBuilders(assemblyMarker);
         serviceCollection.AddSingleton<ScopedSchemaFactory<AssemblyMarker>>();
         serviceCollection.AddSingleton<IAuthorizationHandler, BackInStockAuthorizationHandler>();
     }
