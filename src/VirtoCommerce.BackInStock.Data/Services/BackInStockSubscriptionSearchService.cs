@@ -57,6 +57,7 @@ public class BackInStockSubscriptionSearchService(
         {
             query = query.Where(x =>
                 x.ProductName.Contains(criteria.Keyword) ||
+                x.ProductCode.Contains(criteria.Keyword) ||
                 x.ProductId.Contains(criteria.Keyword) ||
                 x.UserId.Contains(criteria.Keyword) ||
                 x.MemberId.Contains(criteria.Keyword) ||

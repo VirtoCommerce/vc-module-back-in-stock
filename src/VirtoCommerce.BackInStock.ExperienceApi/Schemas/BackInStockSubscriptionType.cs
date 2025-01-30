@@ -10,6 +10,7 @@ public class BackInStockSubscriptionType : ExtendableGraphType<BackInStockSubscr
         Field(x => x.Id);
         Field(x => x.StoreId);
         Field(x => x.ProductId);
+        Field(x => x.ProductCode, nullable: true);
         Field(x => x.ProductName, nullable: true);
         Field(x => x.UserId);
         Field(x => x.MemberId, nullable: true);

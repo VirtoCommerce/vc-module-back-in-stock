@@ -50,6 +50,10 @@ namespace VirtoCommerce.BackInStock.Data.SqlServer.Migrations
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("ProductCode")
+                        .HasMaxLength(64)
+                        .HasColumnType("nvarchar(64)");
+
                     b.Property<string>("ProductId")
                         .IsRequired()
                         .HasMaxLength(128)

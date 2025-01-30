@@ -9,6 +9,8 @@ public class BackInStockSubscription : AuditableEntity, ICloneable
 
     public string ProductId { get; set; }
 
+    public string ProductCode { get; set; }
+
     public string ProductName { get; set; }
 
     public string UserId { get; set; }

@@ -59,6 +59,7 @@ public class ActivateBackInStockSubscriptionCommandHandler(
 
         subscription.StoreId = store.Id;
         subscription.ProductId = product.Id;
+        subscription.ProductCode = product.Code;
         subscription.ProductName = product.Name;
         subscription.UserId = user.Id;
         subscription.MemberId = user.MemberId;

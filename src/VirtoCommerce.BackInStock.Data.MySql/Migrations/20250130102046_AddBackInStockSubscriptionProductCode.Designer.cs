@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VirtoCommerce.BackInStock.Data.Repositories;
 
@@ -11,9 +12,11 @@ using VirtoCommerce.BackInStock.Data.Repositories;
 namespace VirtoCommerce.BackInStock.Data.MySql.Migrations
 {
     [DbContext(typeof(BackInStockDbContext))]
-    partial class BackInStockDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250130102046_AddBackInStockSubscriptionProductCode")]
+    partial class AddBackInStockSubscriptionProductCode
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

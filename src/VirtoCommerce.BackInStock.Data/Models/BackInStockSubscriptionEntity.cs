@@ -16,6 +16,9 @@ public class BackInStockSubscriptionEntity : AuditableEntity, IDataEntity<BackIn
     [StringLength(128)]
     public string ProductId { get; set; }
 
+    [StringLength(64)]
+    public string ProductCode { get; set; }
+
     [StringLength(1024)]
     public string ProductName { get; set; }
 
@@ -40,6 +43,7 @@ public class BackInStockSubscriptionEntity : AuditableEntity, IDataEntity<BackIn
 
         model.StoreId = StoreId;
         model.ProductId = ProductId;
+        model.ProductCode = ProductCode;
         model.ProductName = ProductName;
         model.UserId = UserId;
         model.MemberId = MemberId;
@@ -62,6 +66,7 @@ public class BackInStockSubscriptionEntity : AuditableEntity, IDataEntity<BackIn
 
         StoreId = model.StoreId;
         ProductId = model.ProductId;
+        ProductCode = model.ProductCode;
         ProductName = model.ProductName;
         UserId = model.UserId;
         MemberId = model.MemberId;
@@ -76,6 +81,7 @@ public class BackInStockSubscriptionEntity : AuditableEntity, IDataEntity<BackIn
 
         target.StoreId = StoreId;
         target.ProductId = ProductId;
+        target.ProductCode = ProductCode;
         target.ProductName = ProductName;
         target.UserId = UserId;
         target.MemberId = MemberId;
