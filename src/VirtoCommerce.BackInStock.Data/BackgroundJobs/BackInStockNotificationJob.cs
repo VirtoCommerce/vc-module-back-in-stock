@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Hangfire;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using VirtoCommerce.BackInStock.Core.BackgroundJobs;
 using VirtoCommerce.BackInStock.Core.Extensions;
@@ -14,6 +15,7 @@ using VirtoCommerce.CustomerModule.Core.Services;
 using VirtoCommerce.NotificationsModule.Core.Extensions;
 using VirtoCommerce.NotificationsModule.Core.Services;
 using VirtoCommerce.Platform.Core.Common;
+using VirtoCommerce.Platform.Core.Security;
 using VirtoCommerce.Platform.Core.Settings;
 using VirtoCommerce.StoreModule.Core.Model;
 using VirtoCommerce.StoreModule.Core.Services;
@@ -25,7 +27,8 @@ public class BackInStockNotificationJob(
     ISettingsManager settingsManager,
     INotificationSearchService notificationSearchService,
     INotificationSender notificationSender,
-    IMemberResolver memberResolver,
+    Func<UserManager<ApplicationUser>> userManagerFactory,
+    IMemberService memberService,
     IItemService itemService,
     IStoreService storeService,
     IBackInStockSubscriptionService subscriptionService,
@@ -118,16 +121,27 @@ public class BackInStockNotificationJob(
             return null;
         }
 
-        var customer = await memberResolver.ResolveMemberByIdAsync(subscription.UserId);
-        if (customer == null || customer.Emails.Count == 0)
+        using var userManager = userManagerFactory();
+        var user = await userManager.FindByIdAsync(subscription.UserId);
+        if (user == null)
+        {
+            return null;
+        }
+
+        var member = !string.IsNullOrEmpty(user.MemberId)
+            ? await memberService.GetByIdAsync(user.MemberId)
+            : null;
+
+        var recipientEmail = member?.Emails?.FirstOrDefault() ?? user.Email;
+        if (string.IsNullOrEmpty(recipientEmail))
         {
             return null;
         }
 
         notification.Product = product;
-        notification.Customer = customer;
+        notification.Customer = member;
         notification.From = store.EmailWithName;
-        notification.To = customer.Emails.First();
+        notification.To = recipientEmail;
 
         return notification;
     }
