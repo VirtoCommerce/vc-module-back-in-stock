@@ -138,6 +138,7 @@ public class BackInStockNotificationJob(
             return null;
         }
 
+        notification.StoreUrl = store.Url?.TrimEnd('/');
         notification.Product = product;
         notification.Customer = member;
         notification.From = store.EmailWithName;
