@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using VirtoCommerce.BackInStock.Core.BackgroundJobs;
 using VirtoCommerce.InventoryModule.Core.Events;
 using VirtoCommerce.InventoryModule.Core.Model;
+using VirtoCommerce.Platform.Core.Common;
 using VirtoCommerce.Platform.Core.Events;
 
 namespace VirtoCommerce.BackInStock.Data.Handlers;
@@ -13,8 +14,11 @@ public class InventoryChangedEventHandler(IBackInStockNotificationJob backInStoc
     public Task Handle(InventoryChangedEvent inventoryChangedEvent)
     {
         var backInStockProductIds = inventoryChangedEvent.ChangedEntries
-            .Where(x => !IsInStock(x.OldEntry) && IsInStock(x.NewEntry) && !string.IsNullOrEmpty(x.NewEntry.ProductId))
+            .Where(x => !string.IsNullOrEmpty(x.NewEntry.ProductId) && IsInStock(x.NewEntry) && (
+                x.EntryState == EntryState.Added ||
+                x.EntryState == EntryState.Modified && !IsInStock(x.OldEntry)))
             .Select(x => x.NewEntry.ProductId)
+            .Distinct()
             .ToList();
 
         if (backInStockProductIds.Count > 0)
