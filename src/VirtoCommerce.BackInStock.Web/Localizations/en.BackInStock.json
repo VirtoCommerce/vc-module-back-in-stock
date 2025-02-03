@@ -1,28 +1,41 @@
 {
   "BackInStock": {
     "blades": {
-      "hello-world": {
-        "title": "Hello world blade"
+      "subscriptions": {
+        "title": "Back in stock subscriptions",
+        "no-subscriptions": "There are no subscriptions",
+        "view-product-details": "View product details"
+      }
+    },
+    "widgets": {
+      "subscriptions": {
+        "title": "Back in stock subscriptions"
       }
     }
   },
   "permissions": {
-    "BackInStock:access": "Open BackInStock menu",
-    "BackInStock:create": "Create BackInStock related data",
-    "BackInStock:read": "View BackInStock related data",
-    "BackInStock:update": "Update BackInStock related data",
-    "BackInStock:delete": "Delete BackInStock related data"
+    "BackInStock:subscription:access": "Open 'Back in stock' menu",
+    "BackInStock:subscription:create": "Create 'Back in stock' subscription",
+    "BackInStock:subscription:read": "View 'Back in stock' subscription",
+    "BackInStock:subscription:update": "Update 'Back in stock' subscription",
+    "BackInStock:subscription:delete": "Delete 'Back in stock' subscription"
   },
   "settings": {
     "BackInStock": {
-      "BackInStockEnabled": {
-        "title": "BackInStock Enabled",
-        "description": "BackInStock Enabled setting"
+      "Enable": {
+        "title": "Back in stock notifications",
+        "description": "Enable or disable back in stock notifications"
       },
-      "BackInStockPassword": {
-        "title": "BackInStock Password",
-        "description": "BackInStock Password setting"
+      "BatchSize": {
+        "title": "Batch size",
+        "description": "The number of back in stock subscriptions to process per one batch"
       }
+    }
+  },
+  "notificationTypes": {
+    "BackInStockEmailNotification": {
+      "displayName": "Back in stock notification",
+      "description": "The customer gets an email notification when a product is back in stock"
     }
   }
 }

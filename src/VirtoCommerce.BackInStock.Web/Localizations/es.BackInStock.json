@@ -1,0 +1,41 @@
+{
+  "BackInStock": {
+    "blades": {
+      "subscriptions": {
+        "title": "Suscripciones de productos en stock",
+        "no-subscriptions": "No hay suscripciones",
+        "view-product-details": "Ver detalles del producto"
+      }
+    },
+    "widgets": {
+      "subscriptions": {
+        "title": "Suscripciones de productos en stock"
+      }
+    }
+  },
+  "permissions": {
+    "BackInStock:subscription:access": "Abrir menú 'Productos en stock'",
+    "BackInStock:subscription:create": "Crear suscripción de 'Productos en stock'",
+    "BackInStock:subscription:read": "Ver suscripción de 'Productos en stock'",
+    "BackInStock:subscription:update": "Actualizar suscripción de 'Productos en stock'",
+    "BackInStock:subscription:delete": "Eliminar suscripción de 'Productos en stock'"
+  },
+  "settings": {
+    "BackInStock": {
+      "Enable": {
+        "title": "Notificaciones de productos en stock",
+        "description": "Habilitar o deshabilitar notificaciones de productos en stock"
+      },
+      "BatchSize": {
+        "title": "Tamaño del lote",
+        "description": "El número de suscripciones de productos en stock a procesar por lote"
+      }
+    }
+  },
+  "notificationTypes": {
+    "BackInStockEmailNotification": {
+      "displayName": "Notificación de productos en stock",
+      "description": "El cliente recibe una notificación por correo electrónico cuando un producto vuelve a estar en stock"
+    }
+  }
+}

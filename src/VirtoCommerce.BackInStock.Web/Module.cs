@@ -1,18 +1,32 @@
+using System;
+using System.IO;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using VirtoCommerce.BackInStock.Core;
+using VirtoCommerce.BackInStock.Core.BackgroundJobs;
+using VirtoCommerce.BackInStock.Core.Notifications;
+using VirtoCommerce.BackInStock.Core.Services;
+using VirtoCommerce.BackInStock.Data.BackgroundJobs;
+using VirtoCommerce.BackInStock.Data.Handlers;
 using VirtoCommerce.BackInStock.Data.MySql;
 using VirtoCommerce.BackInStock.Data.PostgreSql;
 using VirtoCommerce.BackInStock.Data.Repositories;
+using VirtoCommerce.BackInStock.Data.Services;
 using VirtoCommerce.BackInStock.Data.SqlServer;
+using VirtoCommerce.BackInStock.ExperienceApi.Extensions;
+using VirtoCommerce.InventoryModule.Core.Events;
+using VirtoCommerce.NotificationsModule.Core.Services;
+using VirtoCommerce.NotificationsModule.TemplateLoader.FileSystem;
+using VirtoCommerce.Platform.Core.Events;
 using VirtoCommerce.Platform.Core.Modularity;
 using VirtoCommerce.Platform.Core.Security;
 using VirtoCommerce.Platform.Core.Settings;
 using VirtoCommerce.Platform.Data.MySql.Extensions;
 using VirtoCommerce.Platform.Data.PostgreSql.Extensions;
 using VirtoCommerce.Platform.Data.SqlServer.Extensions;
+using VirtoCommerce.StoreModule.Core.Model;
 
 namespace VirtoCommerce.BackInStock.Web;
 
@@ -42,12 +56,16 @@ public class Module : IModule, IHasConfiguration
             }
         });
 
-        // Override models
-        //AbstractTypeFactory<OriginalModel>.OverrideType<OriginalModel, ExtendedModel>().MapToType<ExtendedEntity>();
-        //AbstractTypeFactory<OriginalEntity>.OverrideType<OriginalEntity, ExtendedEntity>();
+        serviceCollection.AddTransient<IBackInStockRepository, BackInStockRepository>();
+        serviceCollection.AddSingleton<Func<IBackInStockRepository>>(provider => () => provider.CreateScope().ServiceProvider.GetRequiredService<IBackInStockRepository>());
 
-        // Register services
-        //serviceCollection.AddTransient<IMyService, MyService>();
+        serviceCollection.AddTransient<IBackInStockSubscriptionService, BackInStockSubscriptionService>();
+        serviceCollection.AddTransient<IBackInStockSubscriptionSearchService, BackInStockSubscriptionSearchService>();
+
+        serviceCollection.AddSingleton<InventoryChangedEventHandler>();
+        serviceCollection.AddSingleton<IBackInStockNotificationJob, BackInStockNotificationJob>();
+
+        serviceCollection.AddExperienceApi();
     }
 
     public void PostInitialize(IApplicationBuilder appBuilder)
@@ -58,9 +76,22 @@ public class Module : IModule, IHasConfiguration
         var settingsRegistrar = serviceProvider.GetRequiredService<ISettingsRegistrar>();
         settingsRegistrar.RegisterSettings(ModuleConstants.Settings.AllSettings, ModuleInfo.Id);
 
+        // Register store settings
+        settingsRegistrar.RegisterSettingsForType(ModuleConstants.Settings.StoreSettings, nameof(Store));
+
         // Register permissions
         var permissionsRegistrar = serviceProvider.GetRequiredService<IPermissionsRegistrar>();
         permissionsRegistrar.RegisterPermissions(ModuleInfo.Id, "BackInStock", ModuleConstants.Security.Permissions.AllPermissions);
+
+        // Register notifications
+        var notificationRegistrar = appBuilder.ApplicationServices.GetService<INotificationRegistrar>();
+        var templatesDirectory = Path.Combine(ModuleInfo.FullPhysicalPath, "NotificationTemplates");
+        notificationRegistrar.RegisterNotification<BackInStockEmailNotification>().WithTemplatesFromPath(templatesDirectory);
+
+        // Register event handlers
+        appBuilder.RegisterEventHandler<InventoryChangedEvent, InventoryChangedEventHandler>();
+
+        appBuilder.UseExperienceApi();
 
         // Apply migrations
         using var serviceScope = serviceProvider.CreateScope();

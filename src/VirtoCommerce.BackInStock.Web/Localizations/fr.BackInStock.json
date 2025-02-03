@@ -1,0 +1,41 @@
+{
+  "BackInStock": {
+    "blades": {
+      "subscriptions": {
+        "title": "Abonnements de retour en stock",
+        "no-subscriptions": "Il n'y a pas d'abonnements",
+        "view-product-details": "Voir les détails du produit"
+      }
+    },
+    "widgets": {
+      "subscriptions": {
+        "title": "Abonnements de retour en stock"
+      }
+    }
+  },
+  "permissions": {
+    "BackInStock:subscription:access": "Ouvrir le menu 'Retour en stock'",
+    "BackInStock:subscription:create": "Créer un abonnement 'Retour en stock'",
+    "BackInStock:subscription:read": "Voir l'abonnement 'Retour en stock'",
+    "BackInStock:subscription:update": "Mettre à jour l'abonnement 'Retour en stock'",
+    "BackInStock:subscription:delete": "Supprimer l'abonnement 'Retour en stock'"
+  },
+  "settings": {
+    "BackInStock": {
+      "Enable": {
+        "title": "Notifications de retour en stock",
+        "description": "Activer ou désactiver les notifications de retour en stock"
+      },
+      "BatchSize": {
+        "title": "Taille du lot",
+        "description": "Le nombre d'abonnements de retour en stock à traiter par lot"
+      }
+    }
+  },
+  "notificationTypes": {
+    "BackInStockEmailNotification": {
+      "displayName": "Notification de retour en stock",
+      "description": "Le client reçoit une notification par e-mail lorsqu'un produit est de nouveau en stock"
+    }
+  }
+}

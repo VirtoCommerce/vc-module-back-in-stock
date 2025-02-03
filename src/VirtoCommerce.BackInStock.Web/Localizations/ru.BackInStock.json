@@ -1,0 +1,41 @@
+{
+  "BackInStock": {
+    "blades": {
+      "subscriptions": {
+        "title": "Подписки на наличие товара",
+        "no-subscriptions": "Подписок нет",
+        "view-product-details": "Посмотреть детали товара"
+      }
+    },
+    "widgets": {
+      "subscriptions": {
+        "title": "Подписки на наличие товара"
+      }
+    }
+  },
+  "permissions": {
+    "BackInStock:subscription:access": "Открыть меню 'Подписки на наличие товара'",
+    "BackInStock:subscription:create": "Создать подписку на наличие товара",
+    "BackInStock:subscription:read": "Просмотреть подписку на наличие товара",
+    "BackInStock:subscription:update": "Обновить подписку на наличие товара",
+    "BackInStock:subscription:delete": "Удалить подписку на наличие товара"
+  },
+  "settings": {
+    "BackInStock": {
+      "Enable": {
+        "title": "Уведомления о наличии товара",
+        "description": "Включить или отключить уведомления о наличии товара"
+      },
+      "BatchSize": {
+        "title": "Размер партии",
+        "description": "Количество подписок на наличие товара для обработки за один раз"
+      }
+    }
+  },
+  "notificationTypes": {
+    "BackInStockEmailNotification": {
+      "displayName": "Уведомление о наличии товара",
+      "description": "Клиент получает уведомление по электронной почте, когда товар снова в наличии"
+    }
+  }
+}

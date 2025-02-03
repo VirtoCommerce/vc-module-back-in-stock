@@ -1,0 +1,41 @@
+{
+  "BackInStock": {
+    "blades": {
+      "subscriptions": {
+        "title": "在庫復活のサブスクリプション",
+        "no-subscriptions": "サブスクリプションがありません",
+        "view-product-details": "製品の詳細を表示"
+      }
+    },
+    "widgets": {
+      "subscriptions": {
+        "title": "在庫復活のサブスクリプション"
+      }
+    }
+  },
+  "permissions": {
+    "BackInStock:subscription:access": "「在庫復活」メニューを開く",
+    "BackInStock:subscription:create": "「在庫復活」サブスクリプションを作成",
+    "BackInStock:subscription:read": "「在庫復活」サブスクリプションを表示",
+    "BackInStock:subscription:update": "「在庫復活」サブスクリプションを更新",
+    "BackInStock:subscription:delete": "「在庫復活」サブスクリプションを削除"
+  },
+  "settings": {
+    "BackInStock": {
+      "Enable": {
+        "title": "在庫復活通知",
+        "description": "在庫復活通知を有効または無効にする"
+      },
+      "BatchSize": {
+        "title": "バッチサイズ",
+        "description": "1バッチあたり処理する在庫復活サブスクリプションの数"
+      }
+    }
+  },
+  "notificationTypes": {
+    "BackInStockEmailNotification": {
+      "displayName": "在庫復活通知",
+      "description": "製品が在庫復活したときに顧客がメール通知を受け取る"
+    }
+  }
+}

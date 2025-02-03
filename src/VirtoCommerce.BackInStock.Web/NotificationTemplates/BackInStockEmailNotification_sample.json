@@ -1,0 +1,13 @@
+{
+  "store_url": "https://localhost:4173/",
+  "product": {
+    "id": "1486f5a1a25f48a999189c081792a379",
+    "name": "Microsoft Lumia 640 XL RM-1065 8GB Dual SIM",
+    "code": "MIL640X4GLWH",
+    "imgSrc": "https://localhost:5001/assets/catalog/MIL640X4GLWH/1432753636000_1148740.jpg"
+  },
+  "customer": {
+    "id": "5002a7b4-d51c-4e07-a95f-b0f5486f4fe3",
+    "name": "b2b employee"
+  }
+}

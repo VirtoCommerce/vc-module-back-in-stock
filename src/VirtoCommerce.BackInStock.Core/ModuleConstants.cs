@@ -9,20 +9,20 @@ public static class ModuleConstants
     {
         public static class Permissions
         {
-            public const string Access = "BackInStock:access";
-            public const string Create = "BackInStock:create";
-            public const string Read = "BackInStock:read";
-            public const string Update = "BackInStock:update";
-            public const string Delete = "BackInStock:delete";
+            public const string Access = "BackInStock:subscription:access";
+            public const string Create = "BackInStock:subscription:create";
+            public const string Read = "BackInStock:subscription:read";
+            public const string Update = "BackInStock:subscription:update";
+            public const string Delete = "BackInStock:subscription:delete";
 
             public static string[] AllPermissions { get; } =
-            {
+            [
                 Access,
                 Create,
                 Read,
                 Update,
                 Delete,
-            };
+            ];
         }
     }
 
@@ -30,29 +30,38 @@ public static class ModuleConstants
     {
         public static class General
         {
-            public static SettingDescriptor BackInStockEnabled { get; } = new()
+            public static SettingDescriptor Enable { get; } = new()
             {
-                Name = "BackInStock.BackInStockEnabled",
-                GroupName = "BackInStock|General",
+                Name = "BackInStock.Enable",
+                GroupName = "Back In Stock|General",
                 ValueType = SettingValueType.Boolean,
-                DefaultValue = false,
+                DefaultValue = true,
+                IsPublic = true,
             };
 
-            public static SettingDescriptor BackInStockPassword { get; } = new()
+            public static SettingDescriptor BatchSize { get; } = new()
             {
-                Name = "BackInStock.BackInStockPassword",
-                GroupName = "BackInStock|Advanced",
-                ValueType = SettingValueType.SecureString,
-                DefaultValue = "qwerty",
+                Name = "BackInStock.BatchSize",
+                GroupName = "Back In Stock|General",
+                ValueType = SettingValueType.Integer,
+                DefaultValue = 1000,
             };
 
             public static IEnumerable<SettingDescriptor> AllGeneralSettings
             {
                 get
                 {
-                    yield return BackInStockEnabled;
-                    yield return BackInStockPassword;
+                    yield return Enable;
+                    yield return BatchSize;
                 }
+            }
+        }
+
+        public static IEnumerable<SettingDescriptor> StoreSettings
+        {
+            get
+            {
+                yield return General.Enable;
             }
         }
 
