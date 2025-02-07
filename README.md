@@ -1,58 +1,41 @@
-# BackInStock
+# Back In Stock
 
 ## Overview
+The Back In Stock Module empowers customers to stay informed about product availability while enabling merchants to retain potential sales for out-of-stock items. This module allows customers to subscribe to real-time notifications when products are restocked, improving customer satisfaction and reducing abandoned purchases. Merchants gain visibility into customer demand through a centralized back office interface, helping inform inventory planning.
 
-Short overview of what the new module is.
+## Features
+1. **Native Integration with Virto Commerce Frontend.**
+1. **"Notify Me When In Stock" Button.** Automatically displays a subscription button on product detail pages when inventory reaches zero. Customers can opt into notifications without leaving the page.
+1. **Self-Service Subscription Management.** Authenticated customers can view and manage their active subscriptions in a dedicated "Back In Stock" list. They can remove subscriptions for products they no longer wish to track.
+1. **Real-Time Email Notifications. **Triggers email notifications immediately when product inventory is updated from zero to a positive value. Notifications include product details and direct links to the product page.
+1. **Automatic Subscription Cleanup.**
+1. **Back Office Subscription Management.**
+1. **Ready for Export & Analysis.**
 
-- What is the new or updated experience?
+## Configurations
+1. Open Stores, select store, and open Settings.
+2. Enable "Back in stock notifications" for enabling or disabling back-in-stock notifications for the store.
 
-- Does this module replace an existing module/experience? If yes, what is the transition plan?
+![image](https://github.com/user-attachments/assets/92e00890-84ec-4297-91c1-d18b4bab1665)
 
-- Does this module has dependency on other ? If yes, list/explain the dependencies.
+## Screenshots
 
-- List the key deployment scenarios - why would people use this module?
+![image](https://github.com/user-attachments/assets/440b208b-f30e-4c58-8e80-5a839b8b9425)
 
-## Functional Requirements
+![image](https://github.com/user-attachments/assets/e35ef836-4409-49f5-9708-d80df79c7328)
 
-Short description of the new module functional requirements.
+![image](https://github.com/user-attachments/assets/bfc53e4d-57ab-4120-83cb-b74e667df68e)
 
-## Scenarios
 
-List of scenarios that the new module implements
-
-1. [Scenario 1](/doc/scenario-name1.md)
-1. [Scenario 2](/doc/scenario-name2.md)
-1. [Scenario 3](/doc/scenario-name3.md)
-    1. [Scenario 3.1](/doc/scenario-name31.md)
-    1. [Scenario 3.2](/doc/scenario-name32.md)
-1. [Scenario 4](/doc/scenario-name4.md)
-
-## Web API
-
-Web API documentation for each module is built out automatically and can be accessed by following the link bellow:
-<https://link-to-swager-api>
-
-## Database Model
-
-![DB model](./docs/media/diagram-db-model.png)
-
-## Related topics
-
-[Some Article1](some-article1.md)
-
-[Some Article2](some-article2.md)
+## References
+For further assistance, please refer to the [Virto Commerce documentation](https://docs.virtocommerce.org/) or [contact support](https://help.virtocommerce.com/).
 
 ## License
 
-Copyright (c) Virto Solutions LTD.  All rights reserved.
+Copyright (c) Virto Solutions LTD. All rights reserved.
 
-Licensed under the Virto Commerce Open Software License (the "License"); you
-may not use this file except in compliance with the License. You may
-obtain a copy of the License at
+Licensed under the Virto Commerce Open Software License (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
 
-<https://virtocommerce.com/open-source-license>
+http://virtocommerce.com/opensourcelicense
 
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
-implied.
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
