@@ -7,7 +7,7 @@ The Back In Stock Module empowers customers to stay informed about product avail
 1. **Native Integration with Virto Commerce Frontend.**
 1. **"Notify Me When In Stock" Button.** Automatically displays a subscription button on product detail pages when inventory reaches zero. Customers can opt into notifications without leaving the page.
 1. **Self-Service Subscription Management.** Authenticated customers can view and manage their active subscriptions in a dedicated "Back In Stock" list. They can remove subscriptions for products they no longer wish to track.
-1. **Real-Time Email Notifications. **Triggers email notifications immediately when product inventory is updated from zero to a positive value. Notifications include product details and direct links to the product page.
+1. **Real-Time Email Notifications.** Triggers email notifications immediately when product inventory is updated from zero to a positive value. Notifications include product details and direct links to the product page.
 1. **Automatic Subscription Cleanup.**
 1. **Back Office Subscription Management.**
 1. **Ready for Export & Analysis.**
