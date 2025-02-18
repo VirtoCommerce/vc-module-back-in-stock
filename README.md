@@ -1,16 +1,16 @@
 # Back In Stock
 
-## Overview
-The Back In Stock Module empowers customers to stay informed about product availability while enabling merchants to retain potential sales for out-of-stock items. This module allows customers to subscribe to real-time notifications when products are restocked, improving customer satisfaction and reducing abandoned purchases. Merchants gain visibility into customer demand through a centralized back office interface, helping inform inventory planning.
+The Back In Stock module empowers customers to stay informed about product availability while enabling merchants to retain potential sales for out-of-stock items. This module allows customers to subscribe to real-time notifications when products are restocked, improving customer satisfaction and reducing abandoned purchases. Merchants gain visibility into customer demand through a centralized back office interface, helping inform inventory planning.
 
-## Features
-1. **Native Integration with Virto Commerce Frontend.**
-1. **"Notify Me When In Stock" Button.** Automatically displays a subscription button on product detail pages when inventory reaches zero. Customers can opt into notifications without leaving the page.
-1. **Self-Service Subscription Management.** Authenticated customers can view and manage their active subscriptions in a dedicated "Back In Stock" list. They can remove subscriptions for products they no longer wish to track.
-1. **Real-Time Email Notifications.** Triggers email notifications immediately when product inventory is updated from zero to a positive value. Notifications include product details and direct links to the product page.
-1. **Automatic Subscription Cleanup.**
-1. **Back Office Subscription Management.**
-1. **Ready for Export & Analysis.**
+## Key features
+
+* **Native Integration with Virto Commerce Frontend.**
+* **"Notify Me When In Stock" Button.** Automatically displays a subscription button on product detail pages when inventory reaches zero. Customers can opt into notifications without leaving the page.
+* **Self-Service Subscription Management.** Authenticated customers can view and manage their active subscriptions in a dedicated "Back In Stock" list. They can remove subscriptions for products they no longer wish to track.
+* **Real-Time Email Notifications.** Triggers email notifications immediately when product inventory is updated from zero to a positive value. Notifications include product details and direct links to the product page.
+* **Automatic Subscription Cleanup.**
+* **Back Office Subscription Management.**
+* **Ready for Export & Analysis.**
 
 ## Configurations
 1. Open Stores, select store, and open Settings.
@@ -26,9 +26,21 @@ The Back In Stock Module empowers customers to stay informed about product avail
 
 ![image](https://github.com/user-attachments/assets/bfc53e4d-57ab-4120-83cb-b74e667df68e)
 
+## Documentation
+
+* [Back-in-stock module user documentation](https://docs.virtocommerce.org/platform/user-guide/back-in-stock/overview/)
+* [REST API](https://virtostart-demo-admin.govirto.com/docs/index.html?urls.primaryName=VirtoCommerce.BackInStock)
+* [GraphQL API documentation](https://docs.virtocommerce.org/platform/developer-guide/GraphQL-Storefront-API-Reference-xAPI/Back-in-stock/overview/)
+* [Back-in-stock notifications in the Frontend Application](https://docs.virtocommerce.org/storefront/user-guide/shopping/back-in-stock-notifications/)
+* [View on GitHub](https://github.com/VirtoCommerce/vc-module-back-in-stock)
 
 ## References
-For further assistance, please refer to the [Virto Commerce documentation](https://docs.virtocommerce.org/platform/user-guide/back-in-stock/overview/) or [contact support](https://help.virtocommerce.com/).
+* [Deployment](https://docs.virtocommerce.org/platform/developer-guide/Tutorials-and-How-tos/Tutorials/deploy-module-from-source-code/)
+* [Installation](https://docs.virtocommerce.org/platform/user-guide/modules-installation/)
+* [Home](https://virtocommerce.com)
+* [Community](https://www.virtocommerce.org)
+* [Support](https://help.virtocommerce.com)
+* [Download latest release](https://github.com/VirtoCommerce/vc-module-back-in-stock/releases/latest)
 
 ## License
 
