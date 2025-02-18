@@ -28,7 +28,7 @@ The Back In Stock Module empowers customers to stay informed about product avail
 
 
 ## References
-For further assistance, please refer to the [Virto Commerce documentation](https://docs.virtocommerce.org/) or [contact support](https://help.virtocommerce.com/).
+For further assistance, please refer to the [Virto Commerce documentation](https://docs.virtocommerce.org/platform/user-guide/back-in-stock/overview/) or [contact support](https://help.virtocommerce.com/).
 
 ## License
 
