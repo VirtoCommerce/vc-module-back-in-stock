@@ -1,4 +1,4 @@
-# Back In Stock
+# Virto Commerce Back-In-Stock Module
 
 The Back In Stock module empowers customers to stay informed about product availability while enabling merchants to retain potential sales for out-of-stock items. This module allows customers to subscribe to real-time notifications when products are restocked, improving customer satisfaction and reducing abandoned purchases. Merchants gain visibility into customer demand through a centralized back office interface, helping inform inventory planning.
 
