@@ -1,0 +1,41 @@
+{
+  "BackInStock": {
+    "blades": {
+      "subscriptions": {
+        "title": "Abonnementer for tilbake på lager",
+        "no-subscriptions": "Det finnes ingen abonnementer",
+        "view-product-details": "Vis produktdetaljer"
+      }
+    },
+    "widgets": {
+      "subscriptions": {
+        "title": "Abonnementer for tilbake på lager"
+      }
+    }
+  },
+  "permissions": {
+    "BackInStock:subscription:access": "Åpne menyen 'Tilbake på lager'",
+    "BackInStock:subscription:create": "Opprett abonnement for 'Tilbake på lager'",
+    "BackInStock:subscription:read": "Vis abonnement for 'Tilbake på lager'",
+    "BackInStock:subscription:update": "Oppdater abonnement for 'Tilbake på lager'",
+    "BackInStock:subscription:delete": "Slett abonnement for 'Tilbake på lager'"
+  },
+  "settings": {
+    "BackInStock": {
+      "Enable": {
+        "title": "Varsler om tilbake på lager",
+        "description": "Aktiver eller deaktiver varsler om tilbake på lager"
+      },
+      "BatchSize": {
+        "title": "Partistørrelse",
+        "description": "Antall abonnementer for tilbake på lager som skal behandles per parti"
+      }
+    }
+  },
+  "notificationTypes": {
+    "BackInStockEmailNotification": {
+      "displayName": "Varsel om tilbake på lager",
+      "description": "Kunden mottar et e-postvarsel når et produkt er tilbake på lager"
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "BackInStock": {
+    "blades": {
+      "subscriptions": {
+        "title": "Prenumerationer för tillbaka i lager",
+        "no-subscriptions": "Det finns inga prenumerationer",
+        "view-product-details": "Visa produktdetaljer"
+      }
+    },
+    "widgets": {
+      "subscriptions": {
+        "title": "Prenumerationer för tillbaka i lager"
+      }
+    }
+  },
+  "permissions": {
+    "BackInStock:subscription:access": "Öppna menyn 'Tillbaka i lager'",
+    "BackInStock:subscription:create": "Skapa prenumeration för 'Tillbaka i lager'",
+    "BackInStock:subscription:read": "Visa prenumeration för 'Tillbaka i lager'",
+    "BackInStock:subscription:update": "Uppdatera prenumeration för 'Tillbaka i lager'",
+    "BackInStock:subscription:delete": "Radera prenumeration för 'Tillbaka i lager'"
+  },
+  "settings": {
+    "BackInStock": {
+      "Enable": {
+        "title": "Meddelanden om tillbaka i lager",
+        "description": "Aktivera eller inaktivera meddelanden om tillbaka i lager"
+      },
+      "BatchSize": {
+        "title": "Batchstorlek",
+        "description": "Antalet prenumerationer för tillbaka i lager som ska bearbetas per batch"
+      }
+    }
+  },
+  "notificationTypes": {
+    "BackInStockEmailNotification": {
+      "displayName": "Meddelande om tillbaka i lager",
+      "description": "Kunden får ett e-postmeddelande när en produkt är tillbaka i lager"
+    }
+  }
+}
