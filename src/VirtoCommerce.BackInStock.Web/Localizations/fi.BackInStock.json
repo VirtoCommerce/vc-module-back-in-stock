@@ -1,0 +1,41 @@
+{
+  "BackInStock": {
+    "blades": {
+      "subscriptions": {
+        "title": "Varastossa jälleen -tilaukset",
+        "no-subscriptions": "Ei ole tilauksia",
+        "view-product-details": "Näytä tuotetiedot"
+      }
+    },
+    "widgets": {
+      "subscriptions": {
+        "title": "Varastossa jälleen -tilaukset"
+      }
+    }
+  },
+  "permissions": {
+    "BackInStock:subscription:access": "Avaa 'Varastossa jälleen' -valikko",
+    "BackInStock:subscription:create": "Luo 'Varastossa jälleen' -tilaus",
+    "BackInStock:subscription:read": "Näytä 'Varastossa jälleen' -tilaus",
+    "BackInStock:subscription:update": "Päivitä 'Varastossa jälleen' -tilaus",
+    "BackInStock:subscription:delete": "Poista 'Varastossa jälleen' -tilaus"
+  },
+  "settings": {
+    "BackInStock": {
+      "Enable": {
+        "title": "Varastossa jälleen -ilmoitukset",
+        "description": "Ota käyttöön tai poista käytöstä varastossa jälleen -ilmoitukset"
+      },
+      "BatchSize": {
+        "title": "Eräkoko",
+        "description": "Käsiteltävien varastossa jälleen -tilausten määrä yhtä erää kohden"
+      }
+    }
+  },
+  "notificationTypes": {
+    "BackInStockEmailNotification": {
+      "displayName": "Varastossa jälleen -ilmoitus",
+      "description": "Asiakas saa sähköposti-ilmoituksen, kun tuote on jälleen varastossa"
+    }
+  }
+}
