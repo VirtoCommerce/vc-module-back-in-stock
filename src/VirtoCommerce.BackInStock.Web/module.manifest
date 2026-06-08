@@ -26,7 +26,7 @@
   </owners>
 
   <projectUrl>https://github.com/VirtoCommerce/vc-module-back-in-stock</projectUrl>
-  <iconUrl>Modules/$(VirtoCommerce.BackInStock)/Content/logo.png</iconUrl>
+  <iconUrl>Modules/$(VirtoCommerce.BackInStock)/Content/logo.svg</iconUrl>
   <requireLicenseAcceptance>false</requireLicenseAcceptance>
 
   <assemblyFile>VirtoCommerce.BackInStock.Web.dll</assemblyFile>
