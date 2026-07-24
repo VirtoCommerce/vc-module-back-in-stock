@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using GraphQL;
 using MediatR;
@@ -10,10 +11,16 @@ using VirtoCommerce.Xapi.Core.Extensions;
 
 namespace VirtoCommerce.BackInStock.ExperienceApi.Commands;
 
-public class ActivateBackInStockSubscriptionCommandBuilder(IMediator mediator, IAuthorizationService authorizationService)
+public class ActivateBackInStockSubscriptionCommandBuilder(IAuthorizationService authorizationService)
     : CommandBuilder<ActivateBackInStockSubscriptionCommand, BackInStockSubscription, ActivateBackInStockSubscriptionCommandType, BackInStockSubscriptionType>
-        (mediator, authorizationService)
+        (authorizationService)
 {
+    [Obsolete("Use the constructor without IMediator. The mediator is resolved from context.RequestServices per request.", DiagnosticId = "VC0015", UrlFormat = "https://docs.virtocommerce.org/products/products-virto3-versions")]
+    public ActivateBackInStockSubscriptionCommandBuilder(IMediator mediator, IAuthorizationService authorizationService)
+        : this(authorizationService)
+    {
+    }
+
     protected override string Name => "activateBackInStockSubscription";
 
     protected override async Task BeforeMediatorSend(IResolveFieldContext<object> context, ActivateBackInStockSubscriptionCommand request)
