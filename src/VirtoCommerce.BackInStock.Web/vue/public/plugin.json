@@ -1,4 +1,3 @@
 {
-  // Back in stock subscriptions (Admin Shell Module Federation remote): a widget on the Customer module's contact blade, no menu item
   "remote": { "name": "backinstock_admin", "exposed": "./Module" }
 }
