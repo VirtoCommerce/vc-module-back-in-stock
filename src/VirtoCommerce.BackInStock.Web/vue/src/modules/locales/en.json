@@ -1,0 +1,19 @@
+{
+  "BACK_IN_STOCK": {
+    "WIDGET": "Back in stock subscriptions",
+    "LIST": {
+      "TITLE": "Back in stock subscriptions",
+      "EMPTY": "There are no subscriptions",
+      "REFRESH": "Refresh",
+      "PRODUCT_UNAVAILABLE": "The product can't be opened: the Catalog admin UI isn't available",
+      "COLUMNS": {
+        "PRODUCT_NAME": "Product name",
+        "PRODUCT_CODE": "Product code",
+        "STORE": "Store",
+        "STATUS": "Status"
+      },
+      "ACTIVE": "Active",
+      "INACTIVE": "Inactive"
+    }
+  }
+}
