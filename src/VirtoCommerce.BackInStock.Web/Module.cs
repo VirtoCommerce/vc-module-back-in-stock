@@ -20,6 +20,7 @@ using VirtoCommerce.InventoryModule.Core.Events;
 using VirtoCommerce.NotificationsModule.Core.Services;
 using VirtoCommerce.NotificationsModule.TemplateLoader.FileSystem;
 using VirtoCommerce.Platform.Core.Events;
+using VirtoCommerce.Platform.Core.Jobs;
 using VirtoCommerce.Platform.Core.Modularity;
 using VirtoCommerce.Platform.Core.Security;
 using VirtoCommerce.Platform.Core.Settings;
@@ -64,6 +65,9 @@ public class Module : IModule, IHasConfiguration
 
         serviceCollection.AddSingleton<InventoryChangedEventHandler>();
         serviceCollection.AddSingleton<IBackInStockNotificationJob, BackInStockNotificationJob>();
+
+        // Not triggerable by name: the job sends emails to subscribers of caller-supplied products and deactivates their subscriptions.
+        serviceCollection.AddBackgroundJob<BackInStockNotificationJobHandler, BackInStockNotificationJobPayload>(triggerable: false);
 
         serviceCollection.AddExperienceApi();
     }
