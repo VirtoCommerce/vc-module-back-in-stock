@@ -1,23 +1,15 @@
 using System;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using VirtoCommerce.BackInStock.Core.Extensions;
 using VirtoCommerce.BackInStock.Core.Models;
 using VirtoCommerce.BackInStock.Core.Notifications;
 using VirtoCommerce.BackInStock.Core.Services;
-using VirtoCommerce.CatalogModule.Core.Services;
-using VirtoCommerce.CustomerModule.Core.Services;
-using VirtoCommerce.NotificationsModule.Core.Extensions;
 using VirtoCommerce.NotificationsModule.Core.Services;
 using VirtoCommerce.Platform.Core.Common;
 using VirtoCommerce.Platform.Core.Jobs;
-using VirtoCommerce.Platform.Core.Security;
 using VirtoCommerce.Platform.Core.Settings;
-using VirtoCommerce.StoreModule.Core.Model;
-using VirtoCommerce.StoreModule.Core.Services;
 using BackInStockSettings = VirtoCommerce.BackInStock.Core.ModuleConstants.Settings.General;
 
 namespace VirtoCommerce.BackInStock.Data.BackgroundJobs;
@@ -27,12 +19,8 @@ namespace VirtoCommerce.BackInStock.Data.BackgroundJobs;
 /// </summary>
 public class BackInStockNotificationJobHandler(
     ISettingsManager settingsManager,
-    INotificationSearchService notificationSearchService,
+    BackInStockNotificationBuilder notificationBuilder,
     INotificationSender notificationSender,
-    Func<UserManager<ApplicationUser>> userManagerFactory,
-    IMemberService memberService,
-    IItemService itemService,
-    IStoreService storeService,
     IBackInStockSubscriptionService subscriptionService,
     IBackInStockSubscriptionSearchService subscriptionSearchService,
     ILogger<BackInStockNotificationJobHandler> logger)
@@ -79,7 +67,7 @@ public class BackInStockNotificationJobHandler(
     {
         try
         {
-            var notification = await PrepareNotification(subscription);
+            var notification = await notificationBuilder.BuildAsync(subscription);
             if (notification != null)
             {
                 await notificationSender.ScheduleSendNotificationAsync(notification);
@@ -90,51 +78,5 @@ public class BackInStockNotificationJobHandler(
             logger.LogError(ex, "Failed to send notification {NotificationType}", nameof(BackInStockEmailNotification));
             throw;
         }
-    }
-
-    private async Task<BackInStockEmailNotification> PrepareNotification(BackInStockSubscription subscription)
-    {
-        var notification = await notificationSearchService.GetNotificationAsync<BackInStockEmailNotification>(new TenantIdentity(subscription.StoreId, nameof(Store)));
-        if (notification == null)
-        {
-            return null;
-        }
-
-        var store = await storeService.GetByIdAsync(subscription.StoreId);
-        if (store == null || !store.Settings.GetValue<bool>(BackInStockSettings.Enable))
-        {
-            return null;
-        }
-
-        var product = await itemService.GetByIdAsync(subscription.ProductId);
-        if (product == null)
-        {
-            return null;
-        }
-
-        using var userManager = userManagerFactory();
-        var user = await userManager.FindByIdAsync(subscription.UserId);
-        if (user == null)
-        {
-            return null;
-        }
-
-        var member = !string.IsNullOrEmpty(user.MemberId)
-            ? await memberService.GetByIdAsync(user.MemberId)
-            : null;
-
-        var recipientEmail = member?.Emails?.FirstOrDefault() ?? user.Email;
-        if (string.IsNullOrEmpty(recipientEmail))
-        {
-            return null;
-        }
-
-        notification.StoreUrl = store.Url?.TrimEnd('/');
-        notification.Product = product;
-        notification.Customer = member;
-        notification.From = store.EmailWithName;
-        notification.To = recipientEmail;
-
-        return notification;
     }
 }

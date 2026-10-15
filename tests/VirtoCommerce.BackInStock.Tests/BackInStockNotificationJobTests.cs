@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Moq;
@@ -17,7 +16,6 @@ using VirtoCommerce.NotificationsModule.Core.Services;
 using VirtoCommerce.Platform.Core.Common;
 using VirtoCommerce.Platform.Core.Events;
 using VirtoCommerce.Platform.Core.Jobs;
-using VirtoCommerce.Platform.Core.Security;
 using VirtoCommerce.Platform.Core.Settings;
 using VirtoCommerce.StoreModule.Core.Services;
 using Xunit;
@@ -117,14 +115,17 @@ public class BackInStockNotificationJobTests
 
     private static Mock<BackInStockNotificationJobHandler> CreateJobHandlerMock()
     {
+        var notificationBuilder = new BackInStockNotificationBuilder(
+            Mock.Of<INotificationSearchService>(),
+            Mock.Of<IStoreService>(),
+            Mock.Of<IItemService>(),
+            () => null,
+            Mock.Of<IMemberService>());
+
         var jobHandlerMock = new Mock<BackInStockNotificationJobHandler>(
             Mock.Of<ISettingsManager>(),
-            Mock.Of<INotificationSearchService>(),
+            notificationBuilder,
             Mock.Of<INotificationSender>(),
-            (Func<UserManager<ApplicationUser>>)(() => null),
-            Mock.Of<IMemberService>(),
-            Mock.Of<IItemService>(),
-            Mock.Of<IStoreService>(),
             Mock.Of<IBackInStockSubscriptionService>(),
             Mock.Of<IBackInStockSubscriptionSearchService>(),
             Mock.Of<ILogger<BackInStockNotificationJobHandler>>());

@@ -64,6 +64,7 @@ public class Module : IModule, IHasConfiguration
         serviceCollection.AddTransient<IBackInStockSubscriptionSearchService, BackInStockSubscriptionSearchService>();
 
         serviceCollection.AddSingleton<InventoryChangedEventHandler>();
+        serviceCollection.AddTransient<BackInStockNotificationBuilder>();
         serviceCollection.AddSingleton<IBackInStockNotificationJob, BackInStockNotificationJob>();
 
         // Not triggerable by name: the job sends emails to subscribers of caller-supplied products and deactivates their subscriptions.
