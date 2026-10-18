@@ -1,0 +1,19 @@
+{
+  "BACK_IN_STOCK": {
+    "WIDGET": "Assinaturas de volta ao estoque",
+    "LIST": {
+      "TITLE": "Assinaturas de volta ao estoque",
+      "EMPTY": "Não há assinaturas",
+      "REFRESH": "Atualizar",
+      "PRODUCT_UNAVAILABLE": "Não é possível abrir o produto: a interface de administração do catálogo não está disponível",
+      "COLUMNS": {
+        "PRODUCT_NAME": "Nome do produto",
+        "PRODUCT_CODE": "Código do produto",
+        "STORE": "Loja",
+        "STATUS": "Status"
+      },
+      "ACTIVE": "Ativa",
+      "INACTIVE": "Inativa"
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "BACK_IN_STOCK": {
+    "WIDGET": "Benachrichtigungen bei wieder vorrätigen Artikeln",
+    "LIST": {
+      "TITLE": "Benachrichtigungen bei wieder vorrätigen Artikeln",
+      "EMPTY": "Es gibt keine Abonnements",
+      "REFRESH": "Aktualisieren",
+      "PRODUCT_UNAVAILABLE": "Das Produkt kann nicht geöffnet werden: Die Katalog-Verwaltungsoberfläche ist nicht verfügbar",
+      "COLUMNS": {
+        "PRODUCT_NAME": "Produktname",
+        "PRODUCT_CODE": "Produktcode",
+        "STORE": "Shop",
+        "STATUS": "Status"
+      },
+      "ACTIVE": "Aktiv",
+      "INACTIVE": "Inaktiv"
+    }
+  }
+}

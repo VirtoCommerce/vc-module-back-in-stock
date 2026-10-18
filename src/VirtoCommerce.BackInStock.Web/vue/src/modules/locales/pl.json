@@ -1,0 +1,19 @@
+{
+  "BACK_IN_STOCK": {
+    "WIDGET": "Subskrypcje powiadomień o dostępności",
+    "LIST": {
+      "TITLE": "Subskrypcje powiadomień o dostępności",
+      "EMPTY": "Brak subskrypcji",
+      "REFRESH": "Odśwież",
+      "PRODUCT_UNAVAILABLE": "Nie można otworzyć produktu: interfejs administracyjny katalogu jest niedostępny",
+      "COLUMNS": {
+        "PRODUCT_NAME": "Nazwa produktu",
+        "PRODUCT_CODE": "Kod produktu",
+        "STORE": "Sklep",
+        "STATUS": "Status"
+      },
+      "ACTIVE": "Aktywna",
+      "INACTIVE": "Nieaktywna"
+    }
+  }
+}

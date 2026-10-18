@@ -1,0 +1,19 @@
+{
+  "BACK_IN_STOCK": {
+    "WIDGET": "到货订阅",
+    "LIST": {
+      "TITLE": "到货订阅",
+      "EMPTY": "没有订阅",
+      "REFRESH": "刷新",
+      "PRODUCT_UNAVAILABLE": "无法打开产品：目录管理界面不可用",
+      "COLUMNS": {
+        "PRODUCT_NAME": "产品名称",
+        "PRODUCT_CODE": "产品代码",
+        "STORE": "商店",
+        "STATUS": "状态"
+      },
+      "ACTIVE": "有效",
+      "INACTIVE": "无效"
+    }
+  }
+}
