@@ -1,0 +1,19 @@
+{
+  "BACK_IN_STOCK": {
+    "WIDGET": "Prenumerationer för tillbaka i lager",
+    "LIST": {
+      "TITLE": "Prenumerationer för tillbaka i lager",
+      "EMPTY": "Det finns inga prenumerationer",
+      "REFRESH": "Uppdatera",
+      "PRODUCT_UNAVAILABLE": "Produkten kan inte öppnas: katalogens administrationsgränssnitt är inte tillgängligt",
+      "COLUMNS": {
+        "PRODUCT_NAME": "Produktnamn",
+        "PRODUCT_CODE": "Produktkod",
+        "STORE": "Butik",
+        "STATUS": "Status"
+      },
+      "ACTIVE": "Aktiv",
+      "INACTIVE": "Inaktiv"
+    }
+  }
+}
