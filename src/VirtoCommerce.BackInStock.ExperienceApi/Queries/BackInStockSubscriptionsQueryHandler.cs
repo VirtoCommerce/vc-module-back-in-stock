@@ -26,10 +26,6 @@ public class BackInStockQueryHandler(
     protected virtual BackInStockSubscriptionSearchCriteria GetSearchCriteria(BackInStockSubscriptionsQuery request)
     {
         var criteria = request.GetSearchCriteria<BackInStockSubscriptionSearchCriteria>();
-        criteria.StoreId = request.StoreId;
-        criteria.ProductIds = request.ProductIds;
-        criteria.UserId = request.UserId;
-        criteria.IsActive = request.IsActive;
 
         if (!string.IsNullOrEmpty(request.Keyword))
         {
@@ -43,6 +39,11 @@ public class BackInStockQueryHandler(
                 term.MapTo(criteria);
             }
         }
+
+        criteria.StoreId = request.StoreId;
+        criteria.ProductIds = request.ProductIds;
+        criteria.UserId = request.UserId;
+        criteria.IsActive = request.IsActive;
 
         return criteria;
     }
