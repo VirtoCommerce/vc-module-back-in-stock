@@ -29,15 +29,7 @@ public class BackInStockQueryHandler(
 
         if (!string.IsNullOrEmpty(request.Keyword))
         {
-            var parseResult = phraseParser.Parse(request.Keyword);
-
-            criteria.Keyword = parseResult.Keyword;
-
-            // Term filters
-            foreach (var term in parseResult.Filters.OfType<TermFilter>())
-            {
-                term.MapTo(criteria);
-            }
+            ApplyFilter(criteria, request.Keyword);
         }
 
         criteria.StoreId = request.StoreId;
@@ -46,5 +38,18 @@ public class BackInStockQueryHandler(
         criteria.IsActive = request.IsActive;
 
         return criteria;
+    }
+
+    protected virtual void ApplyFilter(BackInStockSubscriptionSearchCriteria criteria, string filter)
+    {
+        var parseResult = phraseParser.Parse(filter);
+
+        criteria.Keyword = parseResult.Keyword;
+
+        // Term filters
+        foreach (var term in parseResult.Filters.OfType<TermFilter>())
+        {
+            term.MapTo(criteria);
+        }
     }
 }
