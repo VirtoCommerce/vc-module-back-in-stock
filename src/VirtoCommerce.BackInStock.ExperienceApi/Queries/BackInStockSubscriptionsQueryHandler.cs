@@ -26,24 +26,30 @@ public class BackInStockQueryHandler(
     protected virtual BackInStockSubscriptionSearchCriteria GetSearchCriteria(BackInStockSubscriptionsQuery request)
     {
         var criteria = request.GetSearchCriteria<BackInStockSubscriptionSearchCriteria>();
+
+        if (!string.IsNullOrEmpty(request.Keyword))
+        {
+            ApplyFilter(criteria, request.Keyword);
+        }
+
         criteria.StoreId = request.StoreId;
         criteria.ProductIds = request.ProductIds;
         criteria.UserId = request.UserId;
         criteria.IsActive = request.IsActive;
 
-        if (!string.IsNullOrEmpty(request.Keyword))
-        {
-            var parseResult = phraseParser.Parse(request.Keyword);
-
-            criteria.Keyword = parseResult.Keyword;
-
-            // Term filters
-            foreach (var term in parseResult.Filters.OfType<TermFilter>())
-            {
-                term.MapTo(criteria);
-            }
-        }
-
         return criteria;
+    }
+
+    protected virtual void ApplyFilter(BackInStockSubscriptionSearchCriteria criteria, string filter)
+    {
+        var parseResult = phraseParser.Parse(filter);
+
+        criteria.Keyword = parseResult.Keyword;
+
+        // Term filters
+        foreach (var term in parseResult.Filters.OfType<TermFilter>())
+        {
+            term.MapTo(criteria);
+        }
     }
 }
