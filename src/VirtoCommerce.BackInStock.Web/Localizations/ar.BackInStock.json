@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "BackInStock:subscription:access": "فتح قائمة «التنبيه بالتوفر»",
+    "BackInStock:subscription:create": "إنشاء اشتراك «التنبيه بالتوفر»",
+    "BackInStock:subscription:read": "عرض اشتراك «التنبيه بالتوفر»",
+    "BackInStock:subscription:update": "تحديث اشتراك «التنبيه بالتوفر»",
+    "BackInStock:subscription:delete": "حذف اشتراك «التنبيه بالتوفر»"
+  },
+  "settings": {
+    "BackInStock": {
+      "Enable": {
+        "title": "إشعارات التنبيه بالتوفر",
+        "description": "تفعيل إشعارات التنبيه بالتوفر أو تعطيلها"
+      },
+      "BatchSize": {
+        "title": "حجم دفعة المعالجة",
+        "description": "تحديد عدد اشتراكات التنبيه بالتوفر التي تتم معالجتها في كل دفعة"
+      }
+    }
+  }
+}

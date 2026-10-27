@@ -1,0 +1,19 @@
+{
+  "BACK_IN_STOCK": {
+    "WIDGET": "Varastossa jälleen -tilaukset",
+    "LIST": {
+      "TITLE": "Varastossa jälleen -tilaukset",
+      "EMPTY": "Ei ole tilauksia",
+      "REFRESH": "Päivitä",
+      "PRODUCT_UNAVAILABLE": "Tuotetta ei voi avata: luettelon hallintakäyttöliittymä ei ole käytettävissä",
+      "COLUMNS": {
+        "PRODUCT_NAME": "Tuotteen nimi",
+        "PRODUCT_CODE": "Tuotekoodi",
+        "STORE": "Kauppa",
+        "STATUS": "Tila"
+      },
+      "ACTIVE": "Aktiivinen",
+      "INACTIVE": "Ei aktiivinen"
+    }
+  }
+}

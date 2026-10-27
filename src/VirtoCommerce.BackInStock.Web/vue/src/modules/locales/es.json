@@ -1,0 +1,19 @@
+{
+  "BACK_IN_STOCK": {
+    "WIDGET": "Suscripciones de productos en stock",
+    "LIST": {
+      "TITLE": "Suscripciones de productos en stock",
+      "EMPTY": "No hay suscripciones",
+      "REFRESH": "Actualizar",
+      "PRODUCT_UNAVAILABLE": "No se puede abrir el producto: la interfaz de administración del catálogo no está disponible",
+      "COLUMNS": {
+        "PRODUCT_NAME": "Nombre del producto",
+        "PRODUCT_CODE": "Código del producto",
+        "STORE": "Tienda",
+        "STATUS": "Estado"
+      },
+      "ACTIVE": "Activa",
+      "INACTIVE": "Inactiva"
+    }
+  }
+}
