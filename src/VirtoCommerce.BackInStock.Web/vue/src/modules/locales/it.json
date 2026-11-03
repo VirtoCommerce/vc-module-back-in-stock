@@ -1,0 +1,19 @@
+{
+  "BACK_IN_STOCK": {
+    "WIDGET": "Iscrizioni di ritorno in magazzino",
+    "LIST": {
+      "TITLE": "Iscrizioni di ritorno in magazzino",
+      "EMPTY": "Non ci sono iscrizioni",
+      "REFRESH": "Aggiorna",
+      "PRODUCT_UNAVAILABLE": "Impossibile aprire il prodotto: l'interfaccia di amministrazione del catalogo non è disponibile",
+      "COLUMNS": {
+        "PRODUCT_NAME": "Nome del prodotto",
+        "PRODUCT_CODE": "Codice del prodotto",
+        "STORE": "Negozio",
+        "STATUS": "Stato"
+      },
+      "ACTIVE": "Attiva",
+      "INACTIVE": "Inattiva"
+    }
+  }
+}

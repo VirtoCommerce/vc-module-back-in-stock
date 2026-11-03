@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "BackInStock:subscription:access": "פתיחת התפריט 'חזרה למלאי'",
+    "BackInStock:subscription:create": "יצירת מנוי 'חזרה למלאי'",
+    "BackInStock:subscription:read": "צפייה במנוי 'חזרה למלאי'",
+    "BackInStock:subscription:update": "עדכון מנוי 'חזרה למלאי'",
+    "BackInStock:subscription:delete": "מחיקת מנוי 'חזרה למלאי'"
+  },
+  "settings": {
+    "BackInStock": {
+      "Enable": {
+        "title": "התראות על חזרה למלאי",
+        "description": "הפעלה/השבתה של התראות על חזרה למלאי"
+      },
+      "BatchSize": {
+        "title": "גודל אצווה",
+        "description": "הגדרת מספר המנויים לחזרה למלאי שיעובדו בכל אצווה"
+      }
+    }
+  }
+}

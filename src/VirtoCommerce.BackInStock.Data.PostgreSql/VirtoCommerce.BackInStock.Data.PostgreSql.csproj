@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
@@ -14,7 +14,7 @@
       <IncludeAssets>runtime; build; native; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     
-    <PackageReference Include="VirtoCommerce.Platform.Data.PostgreSql" Version="3.1083.0" />
+    <PackageReference Include="VirtoCommerce.Platform.Data.PostgreSql" Version="3.1091.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\VirtoCommerce.BackInStock.Data\VirtoCommerce.BackInStock.Data.csproj" />

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <module>
   <id>VirtoCommerce.BackInStock</id>
-  <version>3.1003.0</version>
+  <version>3.1004.0</version>
   <version-tag></version-tag>
 
-  <platformVersion>3.1083.0</platformVersion>
+  <platformVersion>3.1091.0</platformVersion>
   <dependencies>
     <dependency id="VirtoCommerce.Catalog" version="3.1000.0" />
     <dependency id="VirtoCommerce.Customer" version="3.1000.0" />

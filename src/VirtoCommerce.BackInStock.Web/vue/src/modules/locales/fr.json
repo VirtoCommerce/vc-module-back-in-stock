@@ -1,0 +1,19 @@
+{
+  "BACK_IN_STOCK": {
+    "WIDGET": "Abonnements de retour en stock",
+    "LIST": {
+      "TITLE": "Abonnements de retour en stock",
+      "EMPTY": "Il n'y a pas d'abonnements",
+      "REFRESH": "Actualiser",
+      "PRODUCT_UNAVAILABLE": "Impossible d'ouvrir le produit : l'interface d'administration du catalogue n'est pas disponible",
+      "COLUMNS": {
+        "PRODUCT_NAME": "Nom du produit",
+        "PRODUCT_CODE": "Code du produit",
+        "STORE": "Boutique",
+        "STATUS": "Statut"
+      },
+      "ACTIVE": "Actif",
+      "INACTIVE": "Inactif"
+    }
+  }
+}
