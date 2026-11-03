@@ -1,0 +1,19 @@
+{
+  "BACK_IN_STOCK": {
+    "WIDGET": "Abonnementer for tilbake på lager",
+    "LIST": {
+      "TITLE": "Abonnementer for tilbake på lager",
+      "EMPTY": "Det finnes ingen abonnementer",
+      "REFRESH": "Oppdater",
+      "PRODUCT_UNAVAILABLE": "Produktet kan ikke åpnes: administrasjonsgrensesnittet for katalogen er ikke tilgjengelig",
+      "COLUMNS": {
+        "PRODUCT_NAME": "Produktnavn",
+        "PRODUCT_CODE": "Produktkode",
+        "STORE": "Butikk",
+        "STATUS": "Status"
+      },
+      "ACTIVE": "Aktiv",
+      "INACTIVE": "Inaktiv"
+    }
+  }
+}

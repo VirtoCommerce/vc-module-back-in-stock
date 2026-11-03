@@ -1,0 +1,3 @@
+{
+  "remote": { "name": "backinstock_admin", "exposed": "./Module" }
+}

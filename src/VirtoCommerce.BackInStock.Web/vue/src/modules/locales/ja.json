@@ -1,0 +1,19 @@
+{
+  "BACK_IN_STOCK": {
+    "WIDGET": "在庫復活のサブスクリプション",
+    "LIST": {
+      "TITLE": "在庫復活のサブスクリプション",
+      "EMPTY": "サブスクリプションがありません",
+      "REFRESH": "更新",
+      "PRODUCT_UNAVAILABLE": "製品を開けません: カタログ管理画面を利用できません",
+      "COLUMNS": {
+        "PRODUCT_NAME": "製品名",
+        "PRODUCT_CODE": "製品コード",
+        "STORE": "ストア",
+        "STATUS": "ステータス"
+      },
+      "ACTIVE": "有効",
+      "INACTIVE": "無効"
+    }
+  }
+}
