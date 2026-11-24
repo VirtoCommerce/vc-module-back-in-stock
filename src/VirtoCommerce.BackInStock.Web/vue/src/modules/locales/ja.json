@@ -13,7 +13,8 @@
         "STATUS": "ステータス"
       },
       "ACTIVE": "有効",
-      "INACTIVE": "無効"
+      "INACTIVE": "無効",
+      "ACTIVE_ONLY": "有効のみ"
     }
   }
 }

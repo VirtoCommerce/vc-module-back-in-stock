@@ -13,7 +13,8 @@
         "STATUS": "Tila"
       },
       "ACTIVE": "Aktiivinen",
-      "INACTIVE": "Ei aktiivinen"
+      "INACTIVE": "Ei aktiivinen",
+      "ACTIVE_ONLY": "Vain aktiiviset"
     }
   }
 }
