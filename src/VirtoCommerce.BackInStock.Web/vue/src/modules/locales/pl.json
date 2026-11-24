@@ -13,7 +13,8 @@
         "STATUS": "Status"
       },
       "ACTIVE": "Aktywna",
-      "INACTIVE": "Nieaktywna"
+      "INACTIVE": "Nieaktywna",
+      "ACTIVE_ONLY": "Tylko aktywne"
     }
   }
 }

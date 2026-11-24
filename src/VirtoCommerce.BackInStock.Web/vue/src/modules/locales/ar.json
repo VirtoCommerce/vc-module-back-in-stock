@@ -13,7 +13,8 @@
         "STATUS": "الحالة"
       },
       "ACTIVE": "نشط",
-      "INACTIVE": "غير نشط"
+      "INACTIVE": "غير نشط",
+      "ACTIVE_ONLY": "النشطة فقط"
     }
   }
 }

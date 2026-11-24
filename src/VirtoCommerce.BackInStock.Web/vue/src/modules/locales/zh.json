@@ -13,7 +13,8 @@
         "STATUS": "状态"
       },
       "ACTIVE": "有效",
-      "INACTIVE": "无效"
+      "INACTIVE": "无效",
+      "ACTIVE_ONLY": "仅有效"
     }
   }
 }

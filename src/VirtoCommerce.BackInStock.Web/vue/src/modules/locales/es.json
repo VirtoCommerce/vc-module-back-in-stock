@@ -13,7 +13,8 @@
         "STATUS": "Estado"
       },
       "ACTIVE": "Activa",
-      "INACTIVE": "Inactiva"
+      "INACTIVE": "Inactiva",
+      "ACTIVE_ONLY": "Solo activas"
     }
   }
 }
